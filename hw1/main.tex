@@ -43,22 +43,22 @@
 
 \section{Problem 1}
 \subsection{Proof for \(r + x\)}
-We will use proof by contradiction here. Suppose that \(r + x\) is a rational number. By the definition of rational numbers, \(r + x\) can be written as \(m / n\) where \(m, n \in \mathbb{Z}\) and \(n \not= 0\). Then, \(x\) can be written as \(m / n - r\). Since the set of rational number is a field, the additive inverse of \(r\), \(-r\) is a rational number. Also, \(m / n - r\) is a rational number because of axioms for addition, which is a contradiction. Thus, \(r + x\) is not a rational number. By the definition of irrational number, \(r + x\) is irrational since it is a real number but not a rational number.
+We will use proof by contradiction here. Suppose that \(r + x\) is a rational number. By the definition of rational numbers, \(r + x\) can be written as \(m / n\) where \(m, n \in \mathbb{Z}\) and \(n \not= 0\). Then, \(x\) can be written as \(m / n - r\). Since the set of rational number is a field, the additive inverse of \(r\), \(-r\) is a rational number. By this, \(x = m / n - r\) is a rational number because of axioms for additions, which is a contradiction. Thus, \(r + x\) is not a rational number. \(r + x\) is irrational since it is a real number but not a rational number.
 
 \subsection{Proof for \(rx\)}
-Use the similar argument as \(r + x\) case. Suppose that \(rx\) is a rational number. By the definition of rational numbers, \(rx\) can be written as \(m / n\) where \(m, n \in \mathbb{Z}\) and \(n \not= 0\). Then, \(x\) can be written as \((m / n)(1 / r)\). Since the set of rational number is a field, the multiplicative inverse of \(r\), \(1 / r\) is a rational number. Also, \((m / n)(1 / r)\) is a rational number because of axioms for multiplication, which is a contradiction. Thus, \(rx\) is not a rational number. By the definition of irrational number, \(rx\) is irrational since it is a real number but not a rational number.
+Use the similar argument as \(r + x\) case. Suppose that \(rx\) is a rational number. By the definition of rational numbers, \(rx\) can be written as \(m / n\) where \(m, n \in \mathbb{Z}\) and \(n \not= 0\). Then, \(x\) can be written as \((m / n)(1 / r)\). Since the set of rational number is a field, the multiplicative inverse of \(r\), \(1 / r\) is a rational number. By this, \(x = (m / n)(1 / r)\) is a rational number because of axioms for multiplications, which is a contradiction. Thus, \(rx\) is not a rational number. \(rx\) is irrational since it is a real number but not a rational number.
 
 \section{Problem 2}
-Let \(x\) be a real number where \(x^2 = 12\), and \(y\) be a real number where \(2y = x\). Then, \(y^2 = 3\). Let's prove that \(y\) cannot be a rational number using proof by contradiction. Suppose that there exists \(p \in \mathbb{Q}\) where \(p^2 = 3\). By the definition of rational numbers, \(p\) can be written as \(m / n\) where \(m, n \in \mathbb{Z}\) are not both multiples of 3. Let's assume that this is done. Then the following holds:
+Let \(x\) be a real number where \(x^2 = 12\), and \(y\) be a real number where \(2y = x\). Then, \(y^2 = 3\). Let's prove that \(y\) cannot be a rational number using proof by contradiction. Suppose that there exists \(p \in \mathbb{Q}\) where \(p^2 = 3\). \(p\) can be written as \(m / n\) where \(m, n \in \mathbb{Z}\) are not both multiples of 3. Let's assume that this is done. Then the following holds:
 
 \[
   3n^2 = m^2
 \]
 
-This shows that \(m\) is a multiple of 3, and \(m^2\) is divisible by 9. By this, the left side \(3n^2\) is divisible by 9. Thus, \(n^2\) is divisible by 3 and it implies that \(n\) is divisible by 3. This leads to the conclusion that \(m\) and \(n\) are both multiples of 3, which is a contradiction. Since \(y\) cannot be a rational number, \(x\) also cannot be rational using the result proven in problem 1, since \(x = 2y\).
+This shows that \(m\) is a multiple of 3, and \(m^2\) is divisible by 9. By this, the left side \(3n^2\) is divisible by 9. Thus, \(n^2\) is divisible by 3 and it implies that \(n\) is divisible by 3. This leads to the conclusion that \(m\) and \(n\) are both multiples of 3, which is a contradiction. Since \(y\) cannot be a rational number, it can be shown that \(x = 2y\) also cannot be rational using the result proven in problem 1.
 
 \section{Problem 3}
-First, prove (a) using the axioms (M).
+First, prove (a) using the axioms for multiplications.
 \begin{align*}
   y &= 1 \cdot y = ((1 / x) x) y = (1 / x) (xy) \\
     &= (1 / x) (xz) = ((1 / x) x) z = 1 \cdot z = z
@@ -67,7 +67,7 @@ First, prove (a) using the axioms (M).
 Take \(z = 1\) in (a) to obtain (b), and take \(z = 1 / x\) in (a) to obtain (c). Since \(x (1 / x) = 1\), (c) (with \(1 / x\), \(x\) in place of \(x\) and \(y\), respectively) gives (d).
 
 \section{Problem 4}
-Suppose that there exists a subset \(E'\) where \(\alpha' > \beta'\) holds for its lower bound \(\alpha'\) and upper bound \(\beta'\). By definition, \(x \geq \alpha' \; \forall x \in E'\) and \(x \leq \beta' \; \forall x \in E'\), so there exists an element \(z\) such that \(z \geq \alpha'\) and \(z \leq \beta'\). There are three possibilities:
+Suppose that there exists a nonempty subset \(E'\) where \(\alpha' > \beta'\) holds for its lower bound \(\alpha'\) and upper bound \(\beta'\). By definition, \(x \geq \alpha' \; \forall x \in E'\) and \(x \leq \beta' \; \forall x \in E'\), so there exists an element \(z \in E'\) such that \(z \geq \alpha'\) and \(z \leq \beta'\). There are three possibilities:
 
 \begin{enumerate}
   \item \(z = \alpha'\)
@@ -75,9 +75,9 @@ Suppose that there exists a subset \(E'\) where \(\alpha' > \beta'\) holds for i
   \item \(z \not = \alpha'\) and \(z \not = \beta'\)
 \end{enumerate}
 
-For \(z = \alpha'\) case, \(z > \beta'\) because we assumed that \(\alpha' > \beta'\), but it contradicts with \(z \leq \beta'\). \(z = \beta'\) case is similar because it implies \(\alpha' > z\), but it contradicts with \(z \geq \alpha'\). For the final case, \(z \not = \alpha'\) and \(z \not = \beta'\) implies \(z > \alpha'\) and \(z < \beta'\), so \(\alpha' < \beta'\) according to the axioms of ordered sets. In conclusion, such subset \(E'\) cannot exist, meaning that for all subset \(E\) with lower bound \(\alpha\) and upper bound \(\beta\), \(\alpha \leq \beta\) holds.
+For \(z = \alpha'\) case, \(z > \beta'\) because we assumed that \(\alpha' > \beta'\), but it contradicts with \(z \leq \beta'\), so it is impossible. \(z = \beta'\) case is similarly impossible because it implies \(\alpha' > z\), but it contradicts with \(z \geq \alpha'\). For the final case, \(z \not = \alpha'\) and \(z \not = \beta'\) implies \(z > \alpha'\) and \(z < \beta'\), so \(\alpha' < \beta'\) according to the axioms of ordered sets, which is contrary to the assumption. In conclusion, such subset \(E'\) cannot exist, meaning that for all subset \(E\) with lower bound \(\alpha\) and upper bound \(\beta\), \(\alpha \leq \beta\) holds.
 
 \section{Problem 5}
-Let \(\alpha := \inf A\). By the definition of lower bound, \(x \geq \alpha \; \forall x \in A\). According to axioms of ordered fields, \(-x \leq -\alpha \; \forall x \in A\). By the definition of \(-A\), \(y \leq -\alpha \; \forall y \in -A\). This implies that \(-A\) is bounded above, and \(-\alpha\) is an upper bound of \(-A\). Since \(A\) is a set of real numbers, so \(-A\) is also a set of real numbers and it has the least upper bound, \(\beta := \sup (-A)\). Suppose that \(\beta < -\alpha\). By the definition of upper bound, \(y \leq \beta \; \forall y \in -A\). Using axioms of ordered fields again, \(-y \geq -\beta \; \forall y \in -A\), and the proposition 1.14 in the book implies that \(x \geq -\beta \; \forall x \in A\), so \(-\beta\) is a lower bound of \(A\). However the assumption we made earlier implies that \(-\beta > \alpha\), and it contradicts with the definition of \(\alpha\) since lower bound greater than the greatest lower bound must not exist. Thus, \(\beta \geq -\alpha\) holds, and since \(-\alpha\) is an upper bound of \(-A\), it becomes the least upper bound of \(-A\). This means that \(\alpha = \inf A = -\beta = -\sup(-A)\).
+Let \(\alpha := \inf A\). By the definition of lower bound, \(x \geq \alpha \; \forall x \in A\). According to axioms of ordered fields, \(-x \leq -\alpha \; \forall x \in A\). By the definition of \(-A\), \(y \leq -\alpha \; \forall y \in -A\). This implies that \(-A\) is bounded above, and \(-\alpha\) is an upper bound of \(-A\). Since \(A\) is a set of real numbers, \(-A\) is also a set of real numbers and it has the least upper bound, \(\beta := \sup (-A)\). Suppose that \(\beta < -\alpha\). By the definition of upper bound, \(y \leq \beta \; \forall y \in -A\). Using axioms of ordered fields again, \(-y \geq -\beta \; \forall y \in -A\), and the proposition 1.14 in the book implies that \(x \geq -\beta \; \forall x \in A\), so \(-\beta\) is a lower bound of \(A\). However the assumption we made earlier implies that \(-\beta > \alpha\), and it contradicts with the definition of \(\alpha\) since lower bound greater than the greatest lower bound must not exist. Thus, \(\beta \geq -\alpha\) holds, and since \(-\alpha\) is an upper bound of \(-A\), it becomes the least upper bound of \(-A\). This means that \(\alpha = \inf A = -\beta = -\sup(-A)\).
 
 \end{document}
