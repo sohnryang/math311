@@ -1,0 +1,226 @@
+\documentclass{scrartcl}
+\usepackage[margin=3cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{blindtext}
+\usepackage{datetime}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage{kotex}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{pgf,tikz,pgfplots}
+
+\pgfplotsset{compat=1.15}
+\usetikzlibrary{arrows}
+\newtheorem{theorem}{Theorem}
+
+\setmainhangulfont{Noto Serif CJK KR}[
+  UprightFont=* Light, BoldFont=* Bold,
+  Script=Hangul, Language=Korean, AutoFakeSlant,
+]
+\setsanshangulfont{Noto Sans CJK KR}[
+  UprightFont=* DemiLight, BoldFont=* Medium,
+  Script=Hangul, Language=Korean
+]
+\setmathhangulfont{Noto Sans CJK KR}[
+  SizeFeatures={
+    {Size=-6,  Font=* Medium},
+    {Size=6-9, Font=*},
+    {Size=9-,  Font=* DemiLight},
+  },
+  Script=Hangul, Language=Korean
+]
+\title{Homework 2 (due Mar. 7)}
+\author{손량(20220323)}
+\date{Last compiled on: \today, \currenttime}
+
+\newcommand{\un}[1]{\ensuremath{\ \mathrm{#1}}}
+
+\begin{document}
+\maketitle
+
+\section{Problem 6}
+\subsection{Solution for (a)}
+If \(m = 0\) and \(p = 0\), \(b^m = b^p = 1\) and the equality holds.
+Let's prove for \(m, p \not = 0\) case.
+
+Let \(x := (b^m)^{1 / n}, y := (b^p)^{1 / q}\). We can obtain
+
+\[
+  x^{np} = (x^n)^p = (b^m)^p = b^{mp},\quad y^{mq} = (y^q)^m = (b^p)^m = b^{mp}
+\]
+
+\(x, y\) can be written as follows, by the theorem 1.21 in the book.
+
+\[
+  x = (b^{mp})^{1 / (np)}, \quad y = (b^{mp})^{1 / (mq)}
+\]
+
+Since \(np = mq\), \(x = (b^{mp})^{1 / (np)} = (b^{mp})^{1 / (mq)} = y\) holds.
+
+\subsection{Solution for (b)}
+Let \(r := m / n, s = p / q\). \(b^{r + s}\) can be written as:
+
+\[
+  b^{r + s} = b^{(mq + np) / (nq)} = (b^{mq + np})^{1 / (nq)}
+\]
+
+By corollary of theorem 1.21,
+
+\[
+  (b^{mq} b^{np})^{1 / (nq)} = (b^{mq})^{1 / (nq)} (b^{np})^{1 / (nq)}
+\]
+
+Using the fact we proved in (a),
+
+\[
+  (b^{mq})^{1 / (nq)} (b^{np})^{1 / (nq)} = (b^m)^{1 / n} (b^p)^{1 / q} = b^r b^s
+\]
+
+\subsection{Solution for (c)}
+First, let's show that \(b^r\) is an upper bound of \(B(r)\).
+Suppose that there exists an element \(b^u\) such that \(u \leq r\) and \(b^u > b^r\).
+Using the result from (b),
+
+\[
+  b^r = b^{r - u + u} = b^{r - u} b^u < b^u
+\]
+
+If we write \(u = m / n\) for integers \(m\) and \(n\), it can be shown that \(b^u = (b^m)^{1 / n} > 0\) using the theorem 1.21 in the book and the fact that \(b^m > 0\).
+Thus, \(b^{r - u} < 1\) should hold. Since \(r \geq u\), \(r - u\) can be written as \(p / q\) where \(p\) is a nonnegative integer, and \(q\) is a positive integer.
+Then \(b^{r - u} = (b^p)^{1 / q} > 0\), so \(0 < (b^p)^{1 / q} < 1\) implies \(b^p < 1\).
+However, since \(b > 1\), it implies \(b^p \geq 1\) for nonnegative integer \(p\), which is a contradiction.
+Thus, \(b^u\) cannot exist.
+
+Since \(B(r)\) is a set of reals with an upper bound, it has the least upper bound, \(\sup B(r)\).
+Suppose that there exists \(b^v\) where \(v\) is rational, such that \(b^v < b^r\) and \(b^v \geq y \; \forall y \in B(r)\).
+It is evident that such \(b^v\) cannot exist since \(b^r\) is also an element of \(B(r)\).
+In conclusion, no upper bound smaller than \(b^r\) cannot exist and \(b^r = \sup B(r)\).
+
+\subsection{Solution for (d)}
+First, let's show that \(\sup B(x)\sup B(y)\) is an upper bound of \(B(x + y)\).
+For all elements in \(b^t \in B(x + y)\) where \(t \leq x + y\) is a rational, there are two possibilities:
+
+\begin{enumerate}
+  \item \(t < x + y\)
+  \item \(t = x + y\)
+\end{enumerate}
+
+If there exists an element \(b^t\) such that \(t = x + y\), \(x + y\) is a rational and \(\sup B(x + y) = b^{x + y}\) as we proved in (c).
+If there are only elements \(b^t\) such that \(t < x + y\), there exists a rational \(r\) such that \(t - y < r < x\) by theorem 1.20.
+Then, we can let \(s = t - r\) and \(s < y\) holds.
+In other words, \(t\) can be written as \(r + s\) where \(r, s\) are rationals such that \(r < x\) and \(s < y\).
+As proven in (b), \(b^t = b^{r + s} = b^r b^s\) and \(b^r \in B(x), b^s \in B(y)\) holds.
+By the definition in (c), \(b^r \leq \sup B(x) = b^x\) and \(b^s \leq \sup B(y) = b^y\).
+This implies that for all \(b^t \in B(x + y)\),
+
+\[
+  b^t = b^{r + s} = b^r b^s \leq \sup B(x) \sup B(y)
+\]
+
+Thus, \(\sup B(x) \sup B(y)\) is an upper bound of \(B(x + y)\).
+Now we have to show that \(\sup B(x + y) = \sup B(x) \sup B(y)\).
+Suppose that there exists an upper bound of \(B(x + y)\) that is smaller than \(\sup B(x) \sup B(y)\) and call it \(c\).
+The following holds:
+
+\[
+  \frac{c}{\sup B(x)} < \sup B(y)
+\]
+
+Since \(\sup B(y)\) is the least upper bound of \(B(y)\), there exists \(b^v \in B(y)\) such that \(c / \sup B(x) < b^v \leq \sup B(y)\).
+In the same vein, there exists \(b^u \in B(x)\) such that \(c / b^v < b^u \leq \sup B(x)\).
+Now, we get \(c < b^u b^v\) and \(b^u b^v \in B(x + y)\) which is a contradiction.
+Such lower bound \(c\) does not exist, so \(\sup B(x) \sup B(y) = \sup B(x + y)\) and \(b^{x + y} = b^x b^y\).
+
+\section{Problem 7}
+\subsection{Solution for (a)}
+\(b^n - 1\) can be written as follows:
+
+\[
+  b^n - 1 = (b - 1)(b^{n - 1} + b^{n - 2} + \dots + b + 1)
+\]
+
+Since \(b > 1\), we know \(b^{n - 1} > b^{n - 2} > \dots > b > 1\).
+The polynomial \(b^{n - 1} + b^{n - 2} + \dots + b + 1\) has \(n\) terms, and each term is greater or equal to 1.
+So we get
+
+\[
+  b^i \geq 1 (i = 0, 1, \dots, n - 1) \Longrightarrow b^{n - 1} + b^{n - 2} + \dots + b + 1 \geq n
+\]
+
+And we obtain the inequality \(b^n - 1 \geq n(b - 1)\).
+
+\subsection{Solution for (b)}
+Let \(c := b^{1 / n}\). By theorem 1.21, \(c > 0\). Suppose that \(c \leq 1\).
+Then \(1 \geq c \geq c^2 \geq \dots \geq c^n = (b^{1 / n})^n = b\), and it is a contradiction.
+Hence, \(c > 1\). Plugging \(c\) to the inequality we obtained in (a), we get
+
+\[
+  c^n - 1 \geq n(c - 1) \Longleftrightarrow b - 1 \geq n(b^{1 / n} - 1)
+\]
+
+\subsection{Solution for (c)}
+Since \(t > 1\), \(n > (b - 1) / (t - 1)\) can be written as \(n(t - 1) > b - 1\).
+By the inequality from (b), we can write
+
+\[
+  n(t - 1) > b - 1 \geq n(b^{1 / n} - 1)
+\]
+
+Since \(n\) is positive, \(b^{1 / n} < t\) holds.
+
+\subsection{Solution for (d)}
+Since \(b > 0\), \(b^w > 0\) and \(t := y \cdot b^{-w} > 1\) holds.
+By the archimedean property, there exists a positive interger \(n\) such that \(n(t - 1) > b - 1\).
+From the result from (c), \(b^{1 / n} < t = y \cdot b^{-w}\) and \(b^{w + (1 / n)} < y\) holds for a sufficiently large integer \(n\).
+
+\subsection{Solution for (e)}
+Since \(y > 0\), \(t := b^w / y > 1\) holds.
+By the archimedean property, there exists a positive integer \(n\) such that \(n(t - 1) > b - 1\).
+From the result from (c), \(b^{1 / n} < t = b^w / y\) and \(b^{w - (1 / n)} < y\) holds for a sufficiently large integer \(n\).
+
+\subsection{Solution for (f)}
+Suppose that \(b^x > y\).
+By the result from (e), there exists a positive integer \(n\) such that \(b^{x - (1 / n)} > y\).
+This means that \(x - (1 / n)\) is also an upper bound of \(A\), and since \(b^{x - (1 / n)} < b^x\), it is a contradiction.
+Thus, \(b^x \leq y\) holds.
+
+Suppose that \(b^x < y\).
+By the result from (d), there exists a positive integer \(n\) such that \(b^{x + (1 / n)} < y\).
+This means that \(x\) cannot be an upper bound of \(A\), because there exists an \(b^{x + (1 / n)}\) is also an element of \(A\).
+Thus, \(b^x \geq y\) holds.
+In conclusion, \(b^x\) should satisfy both \(b^x \leq y\) and \(b^x \geq y\), so \(b^x = y\).
+
+\subsection{Solution for (g)}
+Suppose that there exists a real \(z \not = x\) such that \(b^z = y\).
+There are two possibilities:
+
+\begin{enumerate}
+  \item \(z > x\)
+  \item \(z < x\)
+\end{enumerate}
+
+In \(z > x\) case, \(b^z = b^{z - x + x} = b^{z - x} b^x > b^x = y\), so it is a contradiction.
+
+In \(z < x\) case, \(b^x = b^{x - z + z} = b^{x - z} b^z > b^z = y\), so it is also a contradiction. In conclusion, such \(z\) cannot exist and thus \(x\) is unique.
+
+\section{Problem 8}
+Suppose that a relation \(<\) is defined for complex field, and it satsifies all axioms for ordered field. Then, one of the statements is true.
+
+\[
+  i < 0, \quad i = 0, \quad i > 0
+\]
+
+\(i = 0\) is impossible because \(i \cdot i = -1 \not = 0\), by definition.
+
+If \(i < 0\), we can multiply both sides with \(i\) and obtain \(-1 > 0\).
+Multiplying both sides with \(i\) agian, we obtain \(-i < 0\), which contradicts with \(i < 0\).
+
+If \(i > 0\), the same operations can be done like the \(i < 0\) case, and we obtain \(-i > 0\), which also contradicts with \(i > 0\).
+In conclusion, the assumed relation \(<\) cannot exist.
+
+\section{Problem 20}
+
+\end{document}
