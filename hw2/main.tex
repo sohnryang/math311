@@ -222,5 +222,61 @@ If \(i > 0\), the same operations can be done like the \(i < 0\) case, and we ob
 In conclusion, the assumed relation \(<\) cannot exist.
 
 \section{Problem 20}
+\subsection{Proof for the least-upper-bound property}
+Let \(A\) be a nonempty subset of \(\mathbb{R}\) and assume that \(\beta \in \mathbb{R}\) is an upper bound of \(A\).
+Define \(\gamma\) as the union of all \(\alpha \in A\).
+In other words, \(p \in \gamma\) if and only if \(p \in \alpha\) for some \(\alpha \in A\).
+Let's prove that \(\gamma \in \mathbb{R}\) and \(y = \sup A\).
+
+Since \(A\) is nonempty, there exists a nonempty \(\alpha_0 \in A\).
+From \(\alpha_0 \subset \gamma\), \(\gamma\) is not empty.
+For all \(\alpha \in A\), \(\alpha \subset \beta\).
+This means \(\gamma \subset \beta\) and \(\gamma \not = \mathbb{Q}\), so \(\gamma\) satsifies property (I).
+To prove (II), pick \(p \in \gamma\) and we can see that \(p \in \alpha_1\) for some \(\alpha_1 \in A\).
+If \(q < p\), then \(q \in \alpha_1\) and \(q \in \gamma\) holds, proving (II).
+Thus \(\gamma \in \mathbb{R}\) and \(\alpha \leq \gamma\) by the definition of \(\gamma\), so \(\gamma\) is an upper bound of \(A\).
+
+Now, suppose that \(\delta < \gamma\) where \(\delta\) is also an upper bound of \(A\).
+Then there exists \(s \in \gamma\) such that \(s \not = \delta\).
+Since \(s \in \gamma\), \(s \in \alpha\) for some \(\alpha \in A\), so \(\delta \geq \alpha\) is impossible.
+In conclusion, such \(\delta\) cannot exist, so we get the desired result: \(\gamma = \sup A\).
+
+\subsection{Proof for addition axioms}
+Define \(0^*\) to be the set of all nonpositive rational numbers.
+\(0^*\) is a cut because it satisfies property (I) and (II).
+
+\subsubsection{Proof for (A1)}
+For all \(\alpha, \beta \in \mathbb{R}\), the sum of two cuts \(\alpha + \beta\) is a nonempty subset of \(\mathbb{Q}\) by the definition of addition.
+Take \(r' \not \in \alpha, s' \not \in \beta\), and \(r' + s' > r + s\) for all \(r \in \alpha, s \in \beta\) holds as \(\mathbb{Q}\) is an ordered field.
+Thus \(r' + s' \not \in \alpha + \beta\) and \(\alpha + \beta \not = \mathbb{Q}\), so \(\alpha + \beta\) satisfies property (I).
+
+For \(p \in \alpha + \beta\), then \(p = r + s\) where \(r \in \alpha, s \in \beta\).
+If \(q < p\), \(q - s < p - s = r\) holds, so \(q - s \in \alpha\) and \(q = (q - s) + s \in \alpha + \beta\).
+Thus property (II) holds and \(\alpha + \beta\) is a cut.
+
+\subsubsection{Proof for (A2)}
+By definition, for all \(\alpha, \beta \in \mathbb{R}\), \(\alpha + \beta\) is the set of all \(r + s\) where \(r \in \alpha, s \in \beta\).
+Similarly, \(\beta + \alpha\) is the set of all \(s + r\), and \(r + s = s + r\) for all \(r \in \alpha, s \in \beta\)  as \(\mathbb{Q}\) is a field.
+So \(\alpha + \beta = \beta + \alpha\) holds.
+
+\subsubsection{Proof for (A3)}
+Similar to the proof for (A2), for all \(\alpha, \beta, \gamma \in \mathbb{R}\), \((\alpha + \beta) + \gamma\) is the set of all \((r + s) + t\) where \(r \in \alpha, s \in \beta, t \in \gamma\).
+Likewise, \(\alpha + (\beta + \gamma)\) is the set of all \(r + (s + t)\), and \(r + (s + t) = (r + s) + t\) for all \(r \in \alpha, s \in \beta, t \in \gamma\) as \(\mathbb{Q}\) is a field.
+Thus, \((\alpha + \beta) + \gamma = \alpha + (\beta + \gamma)\) holds.
+
+\subsubsection{Proof for (A4)}
+For \(r \in \alpha\) and \(s \in 0^*\), \(r + s \leq r\), so \(r + s \in \alpha\) and \(\alpha + 0^* \subset \alpha\) holds.
+
+For all \(p, r \in \alpha\) where \(r \geq p\), \(p - r \in 0^*\) and \(p = r + (p - r) \in \alpha + 0^*\) holds.
+Thus \(\alpha \subset \alpha + 0^*\) and we obtain the desired result: \(\alpha + 0^* = \alpha\).
+
+\subsubsection{Proof for failure of (A5)}
+Suppose that (A5) holds in this particular construction of \(\mathbb{R}\).
+Let \(\alpha\) be a set of negative rationals, then \(\alpha\) is a cut by definition, and \(\beta \in \mathbb{R}\) such that \(\alpha + \beta = 0^*\) exists.
+From \(0 \in 0^* \subset \alpha + \beta\), \(0 \in \alpha + \beta\) holds.
+By the definition of addition, there exists \(r \in \alpha, s \in \beta\) such that \(r + s = 0\).
+Since \(r < 0\) for all \(r \in \alpha\), there exists \(s' \in \beta\) such that \(s' > 0\).
+However, \(-s' / 2 \in \alpha\) by definition, and \(-s' / 2 + s' = s' / 2 \in \alpha + \beta = 0^*\), but it is a contradiction because \(s' / 2 > 0\).
+Thus, this particular construction of \(\mathbb{R}\) without property (III) of cuts cannot satisfy the axiom (A5).
 
 \end{document}
