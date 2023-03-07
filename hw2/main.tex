@@ -97,7 +97,7 @@ Thus, \(b^u\) cannot exist.
 Since \(B(r)\) is a set of reals with an upper bound, it has the least upper bound, \(\sup B(r)\).
 Suppose that there exists \(b^v\) where \(v\) is rational, such that \(b^v < b^r\) and \(b^v \geq y \; \forall y \in B(r)\).
 It is evident that such \(b^v\) cannot exist since \(b^r\) is also an element of \(B(r)\).
-In conclusion, no upper bound smaller than \(b^r\) cannot exist and \(b^r = \sup B(r)\).
+In conclusion, upper bound smaller than \(b^r\) cannot exist and \(b^r = \sup B(r)\).
 
 \subsection{Solution for (d)}
 First, let's show that \(\sup B(x)\sup B(y)\) is an upper bound of \(B(x + y)\).
@@ -108,9 +108,11 @@ For all elements in \(b^t \in B(x + y)\) where \(t \leq x + y\) is a rational, t
   \item \(t = x + y\)
 \end{enumerate}
 
-If there exists an element \(b^t\) such that \(t = x + y\), \(x + y\) is a rational and \(\sup B(x + y) = b^{x + y}\) as we proved in (c).
-If there are only elements \(b^t\) such that \(t < x + y\), there exists a rational \(r\) such that \(t - y < r < x\) by theorem 1.20.
-Then, we can let \(s = t - r\) and \(s < y\) holds.
+If there exists an element \(b^t\) such that \(t = x + y\), \(x + y\) is a rational so \(\sup B(x + y) = b^{x + y}\) as we proved in (c).
+
+Let's consider the case where \(t < x + y\) holds for all \(b^t \in B(x + y)\).
+There exists a rational \(r\) such that \(t - y < r < x\) by theorem 1.20.
+Then, we can let \(s := t - r\) and \(s < y\) holds.
 In other words, \(t\) can be written as \(r + s\) where \(r, s\) are rationals such that \(r < x\) and \(s < y\).
 As proven in (b), \(b^t = b^{r + s} = b^r b^s\) and \(b^r \in B(x), b^s \in B(y)\) holds.
 By the definition in (c), \(b^r \leq \sup B(x) = b^x\) and \(b^s \leq \sup B(y) = b^y\).
@@ -129,10 +131,16 @@ The following holds:
   \frac{c}{\sup B(x)} < \sup B(y)
 \]
 
-Since \(\sup B(y)\) is the least upper bound of \(B(y)\), there exists \(b^v \in B(y)\) such that \(c / \sup B(x) < b^v \leq \sup B(y)\).
-In the same vein, there exists \(b^u \in B(x)\) such that \(c / b^v < b^u \leq \sup B(x)\).
+Since \(\sup B(y)\) is the least upper bound of \(B(y)\), there exists \(b^v \in B(y)\) such that \(c / \sup B(x) < b^v \leq \sup B(y)\).\footnote{If such \(b^v\) did not exist, then \(\sup B(y)\) cannot be the least upper bound of \(B(y)\).}
+Now, the following holds since \(\sup B(x), b^v > 0\):
+
+\[
+  \frac{c}{b^v} < \sup B(x)
+\]
+
+There exists \(b^u \in B(x)\) such that \(c / b^v < b^u \leq \sup B(x)\).
 Now, we get \(c < b^u b^v\) and \(b^u b^v \in B(x + y)\) which is a contradiction.
-Such lower bound \(c\) does not exist, so \(\sup B(x) \sup B(y) = \sup B(x + y)\) and \(b^{x + y} = b^x b^y\).
+Such lower bound \(c\) does not exist, so \(b^x b^y = \sup B(x) \sup B(y) = \sup B(x + y) = b^{x + y}\).
 
 \section{Problem 7}
 \subsection{Solution for (a)}
@@ -147,7 +155,7 @@ The polynomial \(b^{n - 1} + b^{n - 2} + \dots + b + 1\) has \(n\) terms, and ea
 So we get
 
 \[
-  b^i \geq 1 (i = 0, 1, \dots, n - 1) \Longrightarrow b^{n - 1} + b^{n - 2} + \dots + b + 1 \geq n
+  b^i \geq 1 \; (i = 0, 1, \dots, n - 1) \Longrightarrow b^{n - 1} + b^{n - 2} + \dots + b + 1 \geq n
 \]
 
 And we obtain the inequality \(b^n - 1 \geq n(b - 1)\).
@@ -158,7 +166,7 @@ Then \(1 \geq c \geq c^2 \geq \dots \geq c^n = (b^{1 / n})^n = b\), and it is a 
 Hence, \(c > 1\). Plugging \(c\) to the inequality we obtained in (a), we get
 
 \[
-  c^n - 1 \geq n(c - 1) \Longleftrightarrow b - 1 \geq n(b^{1 / n} - 1)
+  c^n - 1 \geq n(c - 1) \Longrightarrow b - 1 \geq n(b^{1 / n} - 1)
 \]
 
 \subsection{Solution for (c)}
@@ -172,14 +180,14 @@ By the inequality from (b), we can write
 Since \(n\) is positive, \(b^{1 / n} < t\) holds.
 
 \subsection{Solution for (d)}
-Since \(b > 0\), \(b^w > 0\) and \(t := y \cdot b^{-w} > 1\) holds.
+Since \(b > 0\), \(b^w > 0\) and \(t := y \cdot b^{-w} > 1\) holds by the definition we made in problem 6(c).
 By the archimedean property, there exists a positive interger \(n\) such that \(n(t - 1) > b - 1\).
 From the result from (c), \(b^{1 / n} < t = y \cdot b^{-w}\) and \(b^{w + (1 / n)} < y\) holds for a sufficiently large integer \(n\).
 
 \subsection{Solution for (e)}
 Since \(y > 0\), \(t := b^w / y > 1\) holds.
 By the archimedean property, there exists a positive integer \(n\) such that \(n(t - 1) > b - 1\).
-From the result from (c), \(b^{1 / n} < t = b^w / y\) and \(b^{w - (1 / n)} < y\) holds for a sufficiently large integer \(n\).
+From the result from (c), \(b^{1 / n} < t = b^w / y\) and \(b^{w - (1 / n)} > y\) holds for a sufficiently large integer \(n\).
 
 \subsection{Solution for (f)}
 Suppose that \(b^x > y\).
@@ -202,7 +210,11 @@ There are two possibilities:
   \item \(z < x\)
 \end{enumerate}
 
-In \(z > x\) case, \(b^z = b^{z - x + x} = b^{z - x} b^x > b^x = y\), so it is a contradiction.
+In \(z > x\) case, \(b^z = b^{z - x + x} = b^{z - x} b^x > b^x = y\), so it is a contradiction.\footnote{
+  In general, \(b^w > 0\) where \(w > 0, b > 1\) holds because a positive rational \(r = m / n\) exists with \(0 < r < w\) and \(b^r = (b^m)^{1 / n}\).
+  Then \(b^m > 1\) and \(b^r = (b^m)^{1 / n} > 1\) holds.
+  By the definition we made in problem 6(c), \(b^w \geq b^r > 1\).
+}
 
 In \(z < x\) case, \(b^x = b^{x - z + z} = b^{x - z} b^z > b^z = y\), so it is also a contradiction. In conclusion, such \(z\) cannot exist and thus \(x\) is unique.
 
@@ -239,7 +251,7 @@ Thus \(\gamma \in \mathbb{R}\) and \(\alpha \leq \gamma\) by the definition of \
 Now, suppose that \(\delta < \gamma\) where \(\delta\) is also an upper bound of \(A\).
 Then there exists \(s \in \gamma\) such that \(s \not = \delta\).
 Since \(s \in \gamma\), \(s \in \alpha\) for some \(\alpha \in A\), so \(\delta \geq \alpha\) is impossible.
-In conclusion, such \(\delta\) cannot exist, so we get the desired result: \(\gamma = \sup A\).
+In conclusion, such upper bound \(\delta\) cannot exist, so we get the desired result: \(\gamma = \sup A\).
 
 \subsection{Proof for addition axioms}
 Define \(0^*\) to be the set of all nonpositive rational numbers.
