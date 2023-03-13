@@ -1,0 +1,235 @@
+\documentclass{scrartcl}
+\usepackage[margin=3cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{blindtext}
+\usepackage{datetime}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage{kotex}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{pgf,tikz,pgfplots}
+
+\pgfplotsset{compat=1.15}
+\usetikzlibrary{arrows}
+\newcommand\Overline[2][0.8pt]{%
+  \begin{tikzpicture}[baseline=(a.base)]
+    \node[inner xsep=0pt,inner ysep=1.5pt] (a) {$#2$};
+    \draw[line width= #1] (a.north west) -- (a.north east);
+  \end{tikzpicture}
+}
+\newtheorem{theorem}{Theorem}
+
+\setmainhangulfont{Noto Serif CJK KR}[
+  UprightFont=* Light, BoldFont=* Bold,
+  Script=Hangul, Language=Korean, AutoFakeSlant,
+]
+\setsanshangulfont{Noto Sans CJK KR}[
+  UprightFont=* DemiLight, BoldFont=* Medium,
+  Script=Hangul, Language=Korean
+]
+\setmathhangulfont{Noto Sans CJK KR}[
+  SizeFeatures={
+    {Size=-6,  Font=* Medium},
+    {Size=6-9, Font=*},
+    {Size=9-,  Font=* DemiLight},
+  },
+  Script=Hangul, Language=Korean
+]
+\title{MATH311: Homework 3 (due Mar. 14)}
+\author{손량(20220323)}
+\date{Last compiled on: \today, \currenttime}
+
+\newcommand{\un}[1]{\ensuremath{\ \mathrm{#1}}}
+
+\begin{document}
+\maketitle
+
+\section{Section 1 \#9}
+For all \(z, w\) in \(\mathbb{C}\), if \(z = w\) then \(z > w\) or \(z < w\) is impossible because \(a < c\), \(a > c\), \(b < d\), \(b > d\) are all false as the set of reals is an ordered set.
+Likewise, if \(z < w\) then \(z = w\) is impossible because if \(a < c\), then \(a = c\) is false by orderedness of the set of reals.
+If \(a = c\) but \(b < d\), then \(b = d\) is false by similar reason.
+\(z > w\) is also impossible because \(a > c\) is false as one of \(a < c\) or \(a = c\) is true.
+By similar argument, it can be proved that \(z = w\) and \(z < w\) is false if \(z > w\).
+
+Let \(z = a + bi, w = c + di, v = e + fi\) where \(z < w\), and \(w < v\).
+By the definition of the lexicographic order, \(a \leq c\) and \(c \leq e\) holds.
+If \(a = c = e\), then \(b < d\) and \(d < f\) holds by the definition of the order, and \(b < f\) is true since the set of reals is an ordered set, so \(z < v\) holds by the definition.
+Otherwise, \(a < e\) holds since the set of reals is an ordered set, and \(z < v\) also holds by the definition.
+
+Let \(A\) be a set of complex numbers \(z = x + yi\) where \(x < 0\).
+Since \(x < 0\), \(z < 0\) holds for all \(z \in A\), by the definition of lexicographic order.
+Thus, \(A\) is bounded above since it has an upper bound.
+Let \(L\) be a set of upper bounds of \(A\).
+For all \(B = a + bi\) in \(L\), \(B \geq z\) for all \(z\) in \(A\), thus \(a \geq x\) should hold where \(z = x + yi\) by definition.
+If \(a < 0\), then \(a / 2 \in A\), and \(a / 2 > a + bi\) by the definition of lexicographic order.
+Thus, \(a \geq 0\) should hold for all \(a + bi \in L\).
+On the other hand, for all \(a' + b'i\) where \(a' \geq 0\), \(a' + b'i > z\) by the definition of lexicographic order.
+This implies that \(L\) is a set of complex numbers with nonnegative real part.
+Suppose that there exists a minimum element \(u + vi\) in \(L\).
+Since \(0 \in L\), \(u \leq 0\) holds because \(u + vi > 0\) is false, thus \(u > 0\) is also false.
+We know that \(u\) is nonnegative, so \(u = 0\).
+However, \(u + vi\) for all \(v \in \mathbb{R}\) cannot be the least element of \(L\) since \(u + (v - 1)i < u + vi\), which is a contradiction.
+Therefore, such \(u + vi\) cannot exist and \(A\) does not have the least upper bound.
+Since a subset of our ordered set, \(A\) does not have the least upper bound, this ordered set does not have the least-upper-bound property.
+
+\section{Section 1 \#15}
+Let \(A = \sum |a_j|^2, B = \sum |b_j|^2, C = \sum a_j \Overline{b_j}\).
+Then we can write the following:
+\[
+  \sum_{j=1}^n \left| a_j \right|^2 \sum_{j=1}^n \left| b_j \right|^2 - \left| \sum_{j=1}^n a_j \Overline{b_j} \right|^2 = AB - |C|^2 \geq 0
+\]
+
+If \(b_1 = \dots = b_n = 0\), then \(B = 0\) and the equality holds.
+Assume that \(B > 0\), by theorem 1.31 we can write
+\begin{align*}
+  AB - |C|^2 &= \frac{B(AB - |C|^2)}{B} = \frac{B^2 A - B|C|^2}{B} \\
+             &= \frac{1}{B} \left( B^2 \sum_{j=1}^n |a_j|^2 - B\Overline{C} \sum_{j=1}^n a_j \Overline{b_j} - BC \sum_{j=1}^n \Overline{a_j}b_j + |C|^2 \sum_{j=1}^n |b_j|^2 \right) \\
+             &= \frac{1}{B} \sum_{j=1}^n (Ba_j - Cb_j)(B\Overline{a_j} - \Overline{Cb_j}) = \frac{1}{B} \sum_{j=1}^n |Ba_j - Cb_j|^2
+\end{align*}
+
+If the equality holds, then \(|Ba_j - Cb_j|^2 = 0\) for \(j = 1, 2, \dots, n\), thus \(Ba_j - Cb_j = 0\) by theorem 1.33.
+In other words, there exists some ratio \(r \in \mathbb{C}\) where \(a_j - rb_j = 0\) if the equality holds.
+We can prove the converse: suppose that there exists some \(r \in \mathbb{C}\) where \(a_j - rb_j = 0\) for \(j = 1, 2, \dots, n\).
+Then we can write
+\begin{align*}
+  A &= \sum_{j=1}^n |a_j|^2 = \sum_{j=1}^n |rb_j|^2 = \sum_{j=1}^n r^2 |b_j|^2 = r^2 \sum_{j=1}^n |b_j|^2 = r^2 B \\
+  C &= \sum_{j=1}^n a_j \Overline{b_j} = \sum_{j=1}^n rb_j\Overline{b_j} = r\sum_{j=1}^n |b_j|^2 = rB
+\end{align*}
+and \(AB - |C|^2 = r^2 B^2 - |rB|^2 = 0\) by theorem 1.33, so the equality holds.
+
+In conclusion, the equality holds in the Schwarz inequality iff \(b_1 = \dots = b_n =0\) or there exists some \(r \in \mathbb{C}\) such that \(a_j = rb_j\) for \(j = 1, 2, \dots, n\).
+
+\section{Section 1 \#17}
+By the definition of norm, we can write
+\begin{align*}
+  |\mathbf{x} + \mathbf{y}|^2 + |\mathbf{x} - \mathbf{y}|^2 &= (\mathbf{x} + \mathbf{y}) \cdot (\mathbf{x} + \mathbf{y}) + (\mathbf{x} - \mathbf{y}) \cdot (\mathbf{x} - \mathbf{y}) \\
+                                                            &= |\mathbf{x}|^2 + |\mathbf{y}|^2 + 2\mathbf{x} \cdot \mathbf{y} + |\mathbf{x}|^2 + |\mathbf{y}|^2 - 2\mathbf{x} \cdot \mathbf{y} \\
+                                                            &= 2|\mathbf{x}|^2 + 2|\mathbf{y}|^2
+\end{align*}
+
+Consider \(\mathbf{x}, \mathbf{y}\) as the adjacent sides of a parallelogram.
+Then \(\mathbf{x + y}, \mathbf{x - y}\) can be considered as two diagonals of the parallelogram.
+From the equation, we can know that the sum of squares of the length of sides of parallelogram is equal to the sum of square of the length of diagonals.
+
+\section{Section 2 \#2}
+Let \(A_m\) be a set of equations \(a_0 z^n + a_1 z^{n - 1} + \dots + a_{n - 1} z + a_n = 0\), where \(a_0, a_1, \dots, a_n\) are integers and not all zero, and \(n + |a_0| + |a_1| + \dots + |a_n| = m\).
+For all \(a_0 z^n + a_1 z^{n - 1} + \dots + a_{n - 1} z + a_n = 0\), there exists a set \(A_m\) which has \(a_0 z^n + a_1 z^{n - 1} + \dots + a_{n - 1} z + a_n = 0\) as an element.
+Let \(B_m\) be a set of solutions of equations in \(A_m\).
+Since \(A_m\) is a finite set, and every equation in \(A_m\) has finite number of solutions by the fundamental theorem of algebra, \(B_m\) is also a finite set.
+So the union \(\bigcup_{i = 1}^\infty B_i\) is a countable set by the theorem~2.12.
+
+\section{Section 2 \#9}
+\subsection{Proof for (a)}
+Suppose that there exists a point \(q \in E^\circ\) such that all of its neighborhood contains a point \(r\) which is not in \(E^\circ\).
+Since \(q\) is an interrior point of \(E\), there exists a neighborhood \(N\) of \(q\) such that \(N \subset E\).
+By the assumption, there exists a point \(r \in N\) such that \(r \not \in E^\circ\).
+By the theorem 2.19, \(N\) is an open set so \(r\) is an interrior point of \(N\).
+Then, there exists a neighborhood \(M\) of \(r\) such that \(M \subset N\).
+Since \(N \subset E\), \(M \subset E\) holds and \(r\) is also an interrior point of \(E\), which is a contradiction.
+Thus, such \(q\) cannot exist, so for all \(p \in E^\circ\), there exists a neighborhood \(N\) of \(p\) such that \(N \subset E^\circ\), which means that \(p\) is an interrior point.
+In conclusion, every point of \(E^\circ\) is an interrior point of \(E^\circ\), so \(E^\circ\) is an open set by definition.
+
+\subsection{Proof for (b)}
+By definition, \(E\) is open iff its points is an interrior point, so it is same as saying that \(E = E^\circ\).
+
+\subsection{Proof for (c)}
+Suppose that there exist a point \(q \in G\) such that \(q \not \in E^\circ\).
+Since \(G\) is an open set, \(q\) is an interrior point of \(G\), so there exists a neighborhood \(N\) of \(q\) such that \(N \subset G\).
+However, \(G \subset E\) implies that \(N \subset E\), thus \(q\) is an interrior point of \(E\) by definition, so \(q \in E^\circ\) which is a contradiction.
+In conclusion, such \(q\) does not exist, and for all \(p \in G\), \(p \in E^\circ\), so \(G \subset E^\circ\).
+
+\section{Section 2 \#10}
+\begin{theorem}
+  All subset of \(X\) are open set.
+\end{theorem}
+\begin{proof}
+  Let \(A\) be a subset of \(X\).
+  For all \(p \in A\), consider a neighborhood \(N = \{q \in A;\; d(p, q) < 1\}\).
+  Since \(d(p, q)\) is 0 or 1 for all \(p, q \in X\), \(d(p, q) < 1\) is equivalent to \(d(p, q) = 0\).
+  Thus, \(N = \{q \in A | p = q\}\), so \(N \subset A\) since \(p \in A\) and \(p\) is interrior point of \(A\).
+  In conclusion, since every point in \(A\) is interrior point, \(A\) is an open set.
+\end{proof}
+
+\begin{theorem}
+  All subset of \(X\) are closed set.
+\end{theorem}
+\begin{proof}
+  Let \(A\) be as subset of \(X\).
+  As we proved earlier, \(A^C \subset X\) is open.
+  By the collorary of theorem 2.23, \(A\) is closed since its complement is open.
+\end{proof}
+
+\section{Section 2 \#11}
+\begin{theorem}
+  \(d_1(x, y) = (x - y)^2\) is not a metric.
+\end{theorem}
+\begin{proof}
+  For all \(x, y, z \in \mathbb{R}\), \(d_1(x, z) + d_1(z, y) - d_1(x, y)\) can be written as
+  \begin{align*}
+    d_1(x, z) + d_1(z, y) - d_1(x, y) &= (x - z)^2 + (z - y)^2 - (x - y)^2 \\
+                                      &= x^2 - 2xz + z^2 + z^2 - 2zy + y^2 - (x^2 - 2xy + y^2) \\
+                                      &= 2z^2 - 2xz - 2zy + 2xy = 2(z - x)(z - y)
+  \end{align*}
+  If \(x < z < y\) then \(d_1(x, z) + d_1(z, u) - d_1(x, y) = 2(z - x)(z - y) < 0\), so \(d_1\) does not satisfy the condition~(c) of definition~2.15.
+  Thus, \(d_1\) is not a metric.
+\end{proof}
+
+\begin{theorem}
+  \(d_2(x, y) = \sqrt{|x - y|}\) is a metric.
+\end{theorem}
+\begin{proof}
+  For all \(x, y, z \in \mathbb{R}\), \(d_2(x, x) = \sqrt{|x - x|} = 0\) and \(d_2(x, y) = \sqrt{|x - y|} = \sqrt{|y - x|} = d_2(y, x)\) holds.
+  If \(x \not = y\), then \(d_2(x, y) = \sqrt{|x - y|}\) and \(|x - y| > 0\), so \(\sqrt{|x - y|} > 0\).
+  \((d_2(x, z) + d_2(z, y))^2 - (d_2(x, y))^2\) can be written as
+  \begin{align*}
+    (d_2(x, z) + d_2(z, y))^2 - (d_2(x, y))^2 &= \left(\sqrt{|x - z|} + \sqrt{|z - y|}\right)^2 - |x - y| \\
+                                              &= |x - z| + |z - y| + 2\sqrt{|x - z||z - y|} - |x - y| \\
+  \end{align*}
+  Since \(|x - z| + |z - y| \geq |x - y|\) by theorem 1.37 and \(\sqrt{|x - z||z - y|} \geq 0\), \((d_2(x, z) + d_2(z, y))^2 - (d_2(x, y))^2 \geq 0\) holds.
+  From \(d_2(x, y) \geq 0\), we can conclude that \(d_2(x, z) + d_2(z, y) \geq d_2(x, y)\), thus \(d_2\) is a metric.
+\end{proof}
+
+\begin{theorem}
+  \(d_3(x, y) = |x^2 - y^2|\) is not a metric.
+\end{theorem}
+\begin{proof}
+  Let \(x\) be a nonzero real number.
+  Since \(2x \not = 0\), we can say that \(x \not = -x\).
+  However, \(d_3(x, -x) = |x^2 - (-x)^2| = |x^2 - x^2| = 0\) holds, so \(d_3\) does not satisfy the condition~(a) of definition~2.15.
+  Thus, \(d_3\) is not a metric.
+\end{proof}
+
+\begin{theorem}
+  \(d_4(x, y) = |x - 2y|\) is not a metric.
+\end{theorem}
+\begin{proof}
+  Let \(x\) be a nonzero real number.
+  \(d_4(x, x) = |x - 2x| = |-x| = |x| \not = 0\) holds, so \(d_4\) does not satisfy the condition~(a) of definition~2.15.
+  Thus, \(d_4\) is not a metric.
+\end{proof}
+
+\begin{theorem}
+  \(d_5(x, y) = |x - y| / (1 + |x - y|)\) is a metric.
+\end{theorem}
+\begin{proof}
+  For all \(x, y, z \in \mathbb{R}\), \(d_5(x, x) = |x - x| / (1 + |x - x|) = 0\) and \(d_5(x, y) = |x - y| / (1 + |x - y|) = |y - x| / (1 + |y - x|) = d_5(y, x)\) holds.
+  If \(x \not = y\), then \(d_5(x, y) = |x - y| / (1 + |x - y|)\) and \(|x - y| > 0\), so \(|x - y| / (1 + |x - y|) > 0\).
+  We can write
+  \begin{align*}
+    d_5(x, z) + d_5(z, y) &= \frac{|x - z|}{1 + |x - z|} + \frac{|z - y|}{1 + |z - y|} \\
+                          &= \frac{|x - z|(1 + |z - y|) + |z - y|(1 + |x - z|)}{(1 + |x - z|)(1 + |z - y|)} \\
+                          &= \frac{|x - z| + |z - y| + 2|x - z||z - y|}{1 + |x - z| + |z - y| + |x - z||z - y|} \\
+                          &= 1 - \frac{1 - |x - z||z - y|}{1 + |x - z| + |z - y| + |x - z||z - y|}
+  \end{align*}
+  We can also write
+  \begin{align*}
+    1 - d_5(x, y) &= \frac{1}{1 + |x - y|} \geq \frac{1}{1 + |x - z| + |z - y|} \geq \frac{1}{1 + |x - z| + |z - y| + |x - z||z - y|} \\
+                  &\geq \frac{1 - |x - z||z - y|}{1 + |x - z| + |z - y| + |x - z||z - y|} = 1 - (d_5(x, z) + d_5(z, y))
+  \end{align*}
+  Thus, \(d_5(x, z) + d_5(z, y) \geq d_5(x, y)\) holds and we can conclude that \(d_5\) is a metric.
+\end{proof}
+
+\end{document}
