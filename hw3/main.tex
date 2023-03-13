@@ -83,14 +83,14 @@ Then we can write the following:
 \]
 
 If \(b_1 = \dots = b_n = 0\), then \(B = 0\) and the equality holds.
-Assume that \(B > 0\), by theorem 1.31 we can write
+Assume that \(B > 0\), by theorem~1.31 we can write
 \begin{align*}
   AB - |C|^2 &= \frac{B(AB - |C|^2)}{B} = \frac{B^2 A - B|C|^2}{B} \\
              &= \frac{1}{B} \left( B^2 \sum_{j=1}^n |a_j|^2 - B\Overline{C} \sum_{j=1}^n a_j \Overline{b_j} - BC \sum_{j=1}^n \Overline{a_j}b_j + |C|^2 \sum_{j=1}^n |b_j|^2 \right) \\
              &= \frac{1}{B} \sum_{j=1}^n (Ba_j - Cb_j)(B\Overline{a_j} - \Overline{Cb_j}) = \frac{1}{B} \sum_{j=1}^n |Ba_j - Cb_j|^2
 \end{align*}
 
-If the equality holds, then \(|Ba_j - Cb_j|^2 = 0\) for \(j = 1, 2, \dots, n\), thus \(Ba_j - Cb_j = 0\) by theorem 1.33.
+If the equality holds, then \(|Ba_j - Cb_j|^2 = 0\) for \(j = 1, 2, \dots, n\), thus \(Ba_j - Cb_j = 0\) by theorem~1.33.
 In other words, there exists some ratio \(r \in \mathbb{C}\) where \(a_j - rb_j = 0\) if the equality holds.
 We can prove the converse: suppose that there exists some \(r \in \mathbb{C}\) where \(a_j - rb_j = 0\) for \(j = 1, 2, \dots, n\).
 Then we can write
@@ -98,7 +98,7 @@ Then we can write
   A &= \sum_{j=1}^n |a_j|^2 = \sum_{j=1}^n |rb_j|^2 = \sum_{j=1}^n r^2 |b_j|^2 = r^2 \sum_{j=1}^n |b_j|^2 = r^2 B \\
   C &= \sum_{j=1}^n a_j \Overline{b_j} = \sum_{j=1}^n rb_j\Overline{b_j} = r\sum_{j=1}^n |b_j|^2 = rB
 \end{align*}
-and \(AB - |C|^2 = r^2 B^2 - |rB|^2 = 0\) by theorem 1.33, so the equality holds.
+and \(AB - |C|^2 = r^2 B^2 - |rB|^2 = 0\) by theorem~1.33, so the equality holds.
 
 In conclusion, the equality holds in the Schwarz inequality iff \(b_1 = \dots = b_n =0\) or there exists some \(r \in \mathbb{C}\) such that \(a_j = rb_j\) for \(j = 1, 2, \dots, n\).
 
@@ -126,7 +126,7 @@ So the union \(\bigcup_{i = 1}^\infty B_i\) is a countable set by the theorem~2.
 Suppose that there exists a point \(q \in E^\circ\) such that all of its neighborhood contains a point \(r\) which is not in \(E^\circ\).
 Since \(q\) is an interrior point of \(E\), there exists a neighborhood \(N\) of \(q\) such that \(N \subset E\).
 By the assumption, there exists a point \(r \in N\) such that \(r \not \in E^\circ\).
-By the theorem 2.19, \(N\) is an open set so \(r\) is an interrior point of \(N\).
+By the theorem~2.19, \(N\) is an open set so \(r\) is an interrior point of \(N\).
 Then, there exists a neighborhood \(M\) of \(r\) such that \(M \subset N\).
 Since \(N \subset E\), \(M \subset E\) holds and \(r\) is also an interrior point of \(E\), which is a contradiction.
 Thus, such \(q\) cannot exist, so for all \(p \in E^\circ\), there exists a neighborhood \(N\) of \(p\) such that \(N \subset E^\circ\), which means that \(p\) is an interrior point.
@@ -159,7 +159,7 @@ In conclusion, such \(q\) does not exist, and for all \(p \in G\), \(p \in E^\ci
 \begin{proof}
   Let \(A\) be as subset of \(X\).
   As we proved earlier, \(A^C \subset X\) is open.
-  By the collorary of theorem 2.23, \(A\) is closed since its complement is open.
+  By the collorary of theorem~2.23, \(A\) is closed since its complement is open.
 \end{proof}
 
 \section{Section 2 \#11}
@@ -188,7 +188,7 @@ In conclusion, such \(q\) does not exist, and for all \(p \in G\), \(p \in E^\ci
     (d_2(x, z) + d_2(z, y))^2 - (d_2(x, y))^2 &= \left(\sqrt{|x - z|} + \sqrt{|z - y|}\right)^2 - |x - y| \\
                                               &= |x - z| + |z - y| + 2\sqrt{|x - z||z - y|} - |x - y| \\
   \end{align*}
-  Since \(|x - z| + |z - y| \geq |x - y|\) by theorem 1.37 and \(\sqrt{|x - z||z - y|} \geq 0\), \((d_2(x, z) + d_2(z, y))^2 - (d_2(x, y))^2 \geq 0\) holds.
+  Since \(|x - z| + |z - y| \geq |x - y|\) by theorem~1.37 and \(\sqrt{|x - z||z - y|} \geq 0\), \((d_2(x, z) + d_2(z, y))^2 - (d_2(x, y))^2 \geq 0\) holds.
   From \(d_2(x, y) \geq 0\), we can conclude that \(d_2(x, z) + d_2(z, y) \geq d_2(x, y)\), thus \(d_2\) is a metric.
 \end{proof}
 
