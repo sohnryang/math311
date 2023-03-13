@@ -158,9 +158,10 @@ In conclusion, \(d\) is a metric since it satisfies all the conditions of defini
 \end{theorem}
 \begin{proof}
   Let \(A\) be a subset of \(X\).
-  For all \(p \in A\), consider a neighborhood \(N = \{q \in A;\; d(p, q) < 1\}\).
+  For all \(p \in A\), consider a neighborhood \(N = \{q \in X;\; d(p, q) < 1\}\) of \(p\).
   Since \(d(p, q)\) is 0 or 1 for all \(p, q \in X\), \(d(p, q) < 1\) is equivalent to \(d(p, q) = 0\).
-  Thus, \(N = \{q \in A | p = q\}\), so \(N \subset A\) since \(p \in A\) and \(p\) is interrior point of \(A\).
+  Thus, \(N = \{q \in X;\; p = q\}\), so \(N \subset A\) since \(p \in A\).
+  So, \(p\) is interrior point of \(A\).
   In conclusion, since every point in \(A\) is interrior point, \(A\) is an open set.
 \end{proof}
 
