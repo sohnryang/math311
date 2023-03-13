@@ -144,6 +144,15 @@ However, \(G \subset E\) implies that \(N \subset E\), thus \(q\) is an interrio
 In conclusion, such \(q\) does not exist, and for all \(p \in G\), \(p \in E^\circ\), so \(G \subset E^\circ\).
 
 \section{Section 2 \#10}
+\subsection{Proof for metric}
+For all \(x, y, z \in X\), \(d(x, x) = 0\) and \(d(x, y) = d(y, x)\) is evident from its definition.
+Also, if \(x \not = y\), then \(d(x, y) = 1 > 0\).
+Let's show that the triangle inequality \(d(x, z) + d(z, y) \geq d(x, y)\) holds.
+Since the right hand side is at most 1 and it can be 1 only if \(x \not = y\), \(z\) cannot be equal to both \(x\) and \(y\).
+Thus, at least one of \(d(x, z)\) and \(d(z, y)\) is 1, so the left hand side is at least 1 and the equality holds.
+In conclusion, \(d\) is a metric since it satisfies all the conditions of definition~2.15.
+
+\subsection{Open and closed subsets}
 \begin{theorem}
   All subset of \(X\) are open set.
 \end{theorem}
