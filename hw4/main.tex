@@ -67,7 +67,8 @@ By triangular inequality, \(d(s, t) \leq d(s, u) + d(t, u) < d(s, u) + r'' < r'\
 Since \(r'' \leq d(s, u)\) by definition, \(d(s, u) - d(t, u) > d(s, u) - r'' \geq 0\), so \(d(s, t) > 0\), so we get the desired \(t\).
 Thus, \((\bar{E})' \subset E'\) also holds, and \(E\) and \(\bar{E}\) has the same limit points.
 
-(TODO: compare limit points)
+\(E\) and \(E'\) generally does not share the same limit points.
+Consider \(E = \{0\} \subset \mathbb{R}\), then \(E' = \varnothing\) since for all \(x \in \mathbb{R}\), \(B_r(x) \cap E = \varnothing\) if \(0 < r < d(0, x)\) and \(x\) cannot be a limit point of \(E\).
 
 \section{Problem \#9}
 \subsection{Proof for (d)}
@@ -132,4 +133,7 @@ Since \(G_n\) is open, there exists \(r > 0\) where \(B_r(z) \subset G_n\).
 Then, \(x_m \not \in B_r(z)\) if \(m \geq n\), since \(x_m \not \in G_1 \cup \dots \cup G_m\), so \(z\) cannot be a limit point of \(E\), which is a contradiction.
 
 \section{Problem \#29}
+Let \(E \subset \mathbb{R}\) be such open subset.
+
+
 \end{document}
