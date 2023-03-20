@@ -110,7 +110,20 @@ Thus, \(E^C\) is open in \(\mathbb{Q}\), so \(E\) is a closed in \(\mathbb{Q}\).
 
 For all \(p \in E\), \(d(p, 0) = |p| < 2\) so \(E\) is bounded.
 
-(TODO: compactness \& openness)
+Consider a collection of sets \(\{G_n\} = \{p \in \mathbb{Q};\; 2 < p^2 < 3 - 1 / n\}\).
+We can write
+\[
+  G_n = [(\sqrt{2}, \sqrt{3 - 1 / n}) \cap \mathbb{Q}] \cup [(-\sqrt{3 - 1 / n}, -\sqrt{2}) \cap \mathbb{Q}]
+\]
+and since \(\mathbb{Q}\) is a open set, \(G_n\) is open by (a) and (c) of theorem~2.24.
+Thus, \(\{G_n\}\) is an open cover of \(E\).
+\(G_n\) cover \(E\) since \(\mathbb{Q}\) is dense in \(\mathbb{R}\), but no finite collection of \(\{G_n\}\) covers \(E\).
+Thus, \(E\) is not compact.
+Since \(E\) can be written as
+\[
+  E = [(\sqrt{2}, \sqrt{3}) \cap \mathbb{Q}] \cup [(-\sqrt{3}, -\sqrt{2}) \cap \mathbb{Q}]
+\]
+and by (a) and (c) of theorem~2.24, \(E\) is also open.
 
 \section{Problem \#22}
 By corollary of theorem~2.13, \(\mathbb{Q}\) is countable and \(\mathbb{Q}^k\) is also countable by theorem~2.13.
