@@ -147,6 +147,16 @@ Then, \(x_m \not \in B_r(z)\) if \(m \geq n\), since \(x_m \not \in G_1 \cup \do
 
 \section{Problem \#29}
 Let \(E \subset \mathbb{R}\) be such open subset.
-
+Consider a collection \(\{G_\alpha\}\) consisting of \((\alpha - r, \alpha + r)\), where \(\alpha, r \in \mathbb{Q}\) and \(r > 0\).
+For all \(x \in E\), there exists \(r > 0\) such that \((x - r, x + r) \subset E\) since \(E\) is open.
+Since \(\mathbb{Q}\) is dense in \(\mathbb{R}\), there exists \(s \in \mathbb{Q}\) such that \(0 < s < r\), and \(\beta \in \mathbb{Q}\) such that \(x < \beta < x + s / 2\).
+Then, \((\beta - s / 2, \beta + s / 2) \subset (x - s, x + s) \subset (x - r, x + r)\) and \(x \in (\beta - s / 2, \beta + s / 2)\) holds, and \((\beta - s / 2, \beta + s / 2) \subset \{G_\alpha\}\) so \(\{G_\alpha\}\) is a base of \(\mathbb{R}\).
+By definition, every open set in \(\mathbb{R}\) is the union of a subcollection of \(\{G_\alpha\}\).
+Fix a subcollection \(\{V_\alpha\}\) of \(\{G_\alpha\}\), where \(E = \cup_\alpha V_\alpha\).
+Let \(I_x\) be the union of sets \(A \in \{V_\alpha\}\) such that \(A\) intersects an open interval in \(\{V_\alpha\}\) that contains \(x\).
+\(I_x\) is also a segment and \(I_x \subset E\).
+If \(y \in E\) then \(I_x = I_y\) or they are disjoint.
+The collection \(\{I_x\}\) where \(x \in E\) covers \(E\).
+Since \(\mathbb{R}\) is separable, it can be reduced to a countable subcover and we get the desired result.
 
 \end{document}
