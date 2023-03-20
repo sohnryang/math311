@@ -1,0 +1,135 @@
+\documentclass{scrartcl}
+\usepackage[margin=3cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{blindtext}
+\usepackage{datetime}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage{kotex}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{pgf,tikz,pgfplots}
+
+\pgfplotsset{compat=1.15}
+\usetikzlibrary{arrows}
+\newtheorem{theorem}{Theorem}
+
+\setmainhangulfont{Noto Serif CJK KR}[
+  UprightFont=* Light, BoldFont=* Bold,
+  Script=Hangul, Language=Korean, AutoFakeSlant,
+]
+\setsanshangulfont{Noto Sans CJK KR}[
+  UprightFont=* DemiLight, BoldFont=* Medium,
+  Script=Hangul, Language=Korean
+]
+\setmathhangulfont{Noto Sans CJK KR}[
+  SizeFeatures={
+    {Size=-6,  Font=* Medium},
+    {Size=6-9, Font=*},
+    {Size=9-,  Font=* DemiLight},
+  },
+  Script=Hangul, Language=Korean
+]
+\title{MATH311: Homework 4 (due Mar. 21)}
+\author{Insert Author Here}
+\date{Last compiled on: \today, \currenttime}
+
+\newcommand{\un}[1]{\ensuremath{\ \mathrm{#1}}}
+
+\begin{document}
+\maketitle
+
+\section{Problem \#6}
+First, let's prove that \(E'\) is closed.
+Consider a limit point \(p\) of \(E'\).
+We need to show that \(p \in E'\).
+Let \(r > 0\), then we need to find a point \(q \in E\) such that \(p \not = q\) and \(d(p, q) < r\).
+Since \(p\) is a limit point of \(E'\), there exists a point \(t \in E'\) such that \(p \not = t\) and \(d(p, t) < r\).
+There exists \(q \in E\) with \(q \not = t\) and \(d(t, q) < s\), where \(s = \min(r - d(p, t), d(p, t))\) since \(t \in E'\).
+By triangular inequality, \(d(p, q) \leq d(p, t) + d(t, q) < d(p, t) + s \leq r\) and \(d(p, q) \geq d(p, t) - d(t, q)\).
+Since \(s \leq d(p, t)\) by definition, \(d(p, t) - d(t, q) > d(p, t) - s \geq 0\), so \(d(p, q) > 0\).
+Thus, by definition of limit points, every limit point \(p\) of \(E'\) is a limit point of \(E\), so \((E')' \subset E'\) and \(E'\) is closed.
+
+Let's show that \(E' = (\bar{E})'\).
+Consider \(p \in E'\).
+For all \(r > 0\), there exists a point \(q \in E\) such that \(p \not = q\) and \(d(p, q) < r\) since \(p \in E'\).
+Since \(\bar{E} = E \cup E'\), \(q \in \bar{E}\) and it is evident that \(p \in (\bar{E})'\), by the definition of limit points.
+Thus, \(E' \subset (\bar{E})'\) holds.
+Now consider \(s \in (\bar{E})'\).
+Let \(r' > 0\), we need to find a point \(t \in E\) such that \(s \not = t\) and \(d(s, t) < r'\) to show that \(s\) is a limit point of \(E\),
+There exists a point \(u \in \bar{E}\) such that \(s \not = u\) and \(d(s, u) < r'\) since \(s \in (\bar{E})'\).
+Since \(\bar{E} = E \cup E'\), \(u \in E\) or \(u \in E'\).
+If \(u \in E\), we can take \(t = u\) and done.
+If \(u \not \in E\), then \(u \in E'\) and there exists \(t \in E\) with \(t \not = u\) and \(d(t, u) < r''\), where \(r'' = \min(r' - d(s, u), d(s, u))\).
+By triangular inequality, \(d(s, t) \leq d(s, u) + d(t, u) < d(s, u) + r'' < r'\) and \(d(s, t) \geq d(s, u) - d(t, u)\).
+Since \(r'' \leq d(s, u)\) by definition, \(d(s, u) - d(t, u) > d(s, u) - r'' \geq 0\), so \(d(s, t) > 0\), so we get the desired \(t\).
+Thus, \((\bar{E})' \subset E'\) also holds, and \(E\) and \(\bar{E}\) has the same limit points.
+
+(TODO: compare limit points)
+
+\section{Problem \#9}
+\subsection{Proof for (d)}
+From (c), we can see that \(E^\circ\) is the union of all open sets contained in \(E\).
+Thus, its complement is the intersection of all closed sets contained in \(E^C\), by theorem~2.22.
+Then, by theorem~2.27, \((E^\circ)^C\) is the closure of \(E^C\).
+
+\subsection{Solution for (e)}
+If \(E\) is \(\mathbb{Q}\) in \(\mathbb{R}\), for all \(x \in \mathbb{R} \setminus \mathbb{Q}\) and \(r > 0\), there exists \(y \in \mathbb{Q}\) such that \(x - r < y < x\) because \(\mathbb{Q}\) is dense in \(\mathbb{R}\).
+Thus, \(x \in E'\) so \(\mathbb{R} \setminus \mathbb{Q} \subset E'\), and \(\bar{E} = E \cup E' \supset \mathbb{Q} \cup (\mathbb{R} \setminus \mathbb{Q}) = \mathbb{R}\).
+Since \(\bar{E} \subset \mathbb{R}\), \(\bar{E} = \mathbb{R}\) holds.
+Then, \(\bar{E}\) is an open set, so \(x\) is an interrior point of \(\bar{E}\) but it isn't for \(E\) since \(x \not \in E\), and we can conclude that it is generally false.
+
+\subsection{Solution for (f)}
+If \(E = \{0\}\) in \(\mathbb{R}\), then \(\bar{E} = \{0\}\) since \(E' = \varnothing\), but \(E^\circ = \varnothing\) so \(\bar{E^\circ} = \varnothing\).
+Thus, it is generally false.
+
+\section{Problem \#16}
+\(E^C\) can be written as follows:
+\begin{align*}
+  E^C &= \{p \in \mathbb{Q};\; p^2 \leq 2\} \cup \{p \in \mathbb{Q};\; p^2 \geq 3\} \\
+      &= \{p \in \mathbb{Q};\; -\sqrt{2} \leq p \leq \sqrt{2}\} \cup \{p \in \mathbb{Q};\; p \geq \sqrt{3}\} \cup \{p \in \mathbb{Q};\; p \leq -\sqrt{3}\}
+\end{align*}
+Let's show that \(E^C\) is open.
+Suppose \(x \in \mathbb{Q} \setminus E\).
+If \(x^2 \leq 2\), then \(x^2 < 2\), so \(-\sqrt{2} < x < \sqrt{2}\) since there is no rational number whose square is 2.
+Since \(\mathbb{Q}\) is dense in \(\mathbb{R}\), there exists \(y, z \in \mathbb{Q}\) such that \(-\sqrt{2} < y < x\) and \(x < z < \sqrt{2}\).
+Let \(r = \min(x - y, z - x)\), and consider \(w \in (x - r, x + r)\).
+If \(r = x - y\), then \(w \in (y, 2x - y)\), and \(2x - y \leq z\) so \(w \in (y, z)\), thus \(-\sqrt{2} < w < \sqrt{2}\) and \(w^2 < 2\) holds.
+Otherwise, then \(w \in (2x - z, z)\), and \(2x - z \geq y\) so \(w \in (y, z)\), thus \(-\sqrt{2} < w < \sqrt{2}\) and \(w^2 < 2\) also holds.
+If \(x^2 \geq 3\), then \(x^2 > 3\), so \(x > \sqrt{3}\) or \(x < -\sqrt{3}\) since there is no rational number whose square is 3.
+If \(x > \sqrt{3}\) then there exists \(t \in \mathbb{Q}\) such that \(\sqrt{3} < t < x\) since \(\mathbb{Q}\) is dense in \(\mathbb{R}\).
+Let \(s = x - t\), and consider \(w \in (x - s, x + s)\).
+Since \(x - s = t > \sqrt{3}\), \(w^2 > t^2 > 3\) holds.
+If \(x < -\sqrt{3}\) then there exists \(u \in \mathbb{Q}\) such that \(x < u < -\sqrt{3}\) since \(\mathbb{Q}\) is dense in \(\mathbb{R}\).
+Let \(v = u - x\), and consider \(w \in (x - v, x + v)\).
+Since \(x + v = u < -\sqrt{3}\), \(w^2 > u^2 > 3\) holds.
+Thus, \(E^C\) is open in \(\mathbb{Q}\), so \(E\) is a closed in \(\mathbb{Q}\).
+
+For all \(p \in E\), \(d(p, 0) = |p| < 2\) so \(E\) is bounded.
+
+(TODO: compactness \& openness)
+
+\section{Problem \#22}
+By corollary of theorem~2.13, \(\mathbb{Q}\) is countable and \(\mathbb{Q}^k\) is also countable by theorem~2.13.
+For all \(x = (x_1, x_2, \dots, x_k) \in \mathbb{R}^k\), \(x \in \mathbb{Q}^k\) or \(x \not \in \mathbb{Q}^k\).
+Let \(r > 0\).
+If \(x \not \in \mathbb{Q}^k\), then there exists some \(y = (y_1, y_2, \dots, y_k) \in \mathbb{Q}^k\) such that \(x_i < y_i < x_i + \sqrt{r^2 / k},\, (i = 1, 2, \dots, k)\) since \(\mathbb{Q}\) is dense in \(\mathbb{R}\).
+Then, \(0 < y_i - x_i < \sqrt{r^2 / k}, (i = 1, 2, \dots, k)\) holds.
+We can write
+\begin{align*}
+  d(x, y) &= \sqrt{(x_1 - y_1)^2 + (x_2 - y_2)^2 + \dots + (x_k - y_k)^2} < \sqrt{k \cdot \left( \sqrt{\frac{r^2}{k}} \right)^2} = r
+\end{align*}
+From this, we can conclude that \(x\) is a limit point of \(\mathbb{Q}^k\), so \(\mathbb{Q}^k\) is dense in \(\mathbb{R}^k\) by the definition of dense sets.
+Thus, \(\mathbb{R}^k\) contains a countable dense subset \(\mathbb{Q}^k\), so it is separable.
+
+\section{Problem \#26}
+Using the hint, let \(E\) be a set of \(x_n\) where \(x_n \not \in G_1 \cup G_2 \cup \dots \cup G_n\).
+There are infinitely many finite unions of \(G_1, \dots, G_n\) and every point is in some set of \(G_1, \dots, G_n\) by definition, so \(E\) cannot be finite.
+Now consider a limit point \(z\) of \(E\), there exists \(G_n\) where \(z \in G_n\) by definition.
+Since \(G_n\) is open, there exists \(r > 0\) where \(B_r(z) \subset G_n\).
+Then, \(x_m \not \in B_r(z)\) if \(m \geq n\), since \(x_m \not \in G_1 \cup \dots \cup G_m\), so \(z\) cannot be a limit point of \(E\), which is a contradiction.
+
+\section{Problem \#29}
+\end{document}
