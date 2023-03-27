@@ -1,0 +1,162 @@
+\documentclass{scrartcl}
+\usepackage[margin=3cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{blindtext}
+\usepackage{datetime}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage{kotex}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{pgf,tikz,pgfplots}
+
+\pgfplotsset{compat=1.15}
+\usetikzlibrary{arrows}
+\newtheorem{theorem}{Theorem}
+
+\setmainhangulfont{Noto Serif CJK KR}[
+  UprightFont=* Light, BoldFont=* Bold,
+  Script=Hangul, Language=Korean, AutoFakeSlant,
+]
+\setsanshangulfont{Noto Sans CJK KR}[
+  UprightFont=* DemiLight, BoldFont=* Medium,
+  Script=Hangul, Language=Korean
+]
+\setmathhangulfont{Noto Sans CJK KR}[
+  SizeFeatures={
+    {Size=-6,  Font=* Medium},
+    {Size=6-9, Font=*},
+    {Size=9-,  Font=* DemiLight},
+  },
+  Script=Hangul, Language=Korean
+]
+\title{MATH311: Homework 5 (due Mar. 28)}
+\author{손량(20220323)}
+\date{Last compiled on: \today, \currenttime}
+
+\newcommand{\un}[1]{\ensuremath{\ \mathrm{#1}}}
+
+\begin{document}
+\maketitle
+
+\section{Section 2 \#14}
+Let \(\{G_n\} = (0, 1 - 1 / n)\) where \(n = 2, 3, \dots\).
+For all \(x \in (0, 1)\), there exists a positive integer \(p\) such that \(p(1 - x) > 1\) by the theorem~1.20 in the book.
+Then, we get \(x < 1 - 1 / p\) so \(x \in G_p\).
+Thus, for all \(x \in (0, 1)\) there exists \(G_p\) such that \(x \in G_p\).
+Since \(G_n\) is open for all \(n = 2, 3, \dots\), \(\{G_n\}\) is an open cover.
+Suppose that there exists a finite subcover \(\{G_{n_k}\}\) of \(\{G_n\}\).
+Let \(M\) be the maximum element of the finite set of \(n_k\) and \(y = 1 - 1 / M\).
+For all \((a_{n_k}, b_{n_k}) \in \{G_{n_k}\}\), \(b_{n_k} = 1 - 1 / n_k \leq 1 - 1 / M\).
+Then, we can conclude that the open cover \(\{G_n\}\) has no finite subcover.
+
+\section{Section 2 \#17}
+Let \(E_0 = [0, 1]\).
+We can define \(E_n\), where \(n = 1, 2, \dots\) as follows:
+\[
+  E_n = \left\{ \frac{x + 4}{10};\; x \in E_{n - 1} \right\} \cup \left\{ \frac{x + 7}{10};\; x \in E_{n - 1} \right\}
+\]
+Then, \(E_n\) is a set of real numbers where first \(n\) digits of its decimal expansion are 4 or 7, and the digits after that are 0.
+This can be interpreted as removing the first \(4 / 10\), middle \(2 / 10\), last \(2 / 10\) from every interval in \(E_{n - 1}\).
+We can also write (TODO: add rigorous derivation)
+\begin{align*}
+  E_n =& [0, 1] \setminus \\
+       &\bigcup^{n - 1}_{m = 0} \bigcup^{10^m - 1}_{k = 0} \left( \left[ \frac{10k}{10^{m + 1}}, \frac{10k + 4}{10^{m + 1}} \right) \cup \left( \frac{10k + 5}{10^{m + 1}}, \frac{10k + 7}{10^{m + 1}} \right) \cup \left( \frac{10k + 8}{10^{m + 1}}, \frac{10k + 10}{10^{m + 1}} \right] \right) \\
+      =& \bigcap^{n - 1}_{m = 1} \bigcup^{10^m - 1}_{k = 10} \left( \left[ \frac{10k + 4}{10^m}, \frac{10k + 5}{10^m} \right] \cup \left[ \frac{10k + 7}{10^m}, \frac{10k + 8}{10^m} \right] \right)
+\end{align*}
+Let \(E = \bigcap^\infty_{n = 0} E_n\).
+Since \(E\) is an intersection of closed sets, \(E\) is a closed set by theorem~2.24.
+Also, since \(E\) is an intersection of subsets of \([0, 1]\) which is a bounded set, \(E\) is also bounded.
+By theorem~2.41, \(E\) is compact.
+Let \(x \in E\), and let \(S\) be any open interval containing x. Let \(I_n\) be a closed interval of \(E_n\) which contains \(x\).
+For sufficiently large \(n\), \(I_n \subset S\).
+Let \(x_n\) be an endpoint of \(I_n\), such that \(x \not = x_n\).
+By the definition of \(E\), \(x_n \in E\), and \(x\) is a limit point of \(E\) so \(E\) is a perfect set.
+By theorem~2.43, \(E\) is an uncountable set.
+Since decimal expansion of every \(x\) in \(E\) has only digits 4 and 7, so \(x \leq 0.4\).
+Then 0 cannot be a limit point of \(E\) because \(d(x, 0) = |x - 0| = (x - 0.4) + 0.4 > 0.4\).
+
+\section{Section 2 \#19}
+\subsection{Proof for (a)}
+By definition, \(\bar{A} = A \cup A', \bar{B} = B \cup B'\).
+Since \(A\) and \(B\) are closed sets, \(A' \subset A, B' \subset B\).
+Thus, \(\bar{A} = A, \bar{B} = B\) and \(\bar{A} \cap B = A \cap \bar{B} = A \cap B = \varnothing\) since \(A\) and \(B\) are disjoint and we get the desired result.
+
+\subsection{Proof for (b)}
+We need to prove that \(A' \cap B = A \cap B' = \varnothing\).
+Let \(p \in X\) be a limit point of \(A\) and suppose that \(p \in B\).
+Since \(p \in B\), there exists some \(r > 0\) such that \(N_r(p) \subset B\), and there exists \(q \in N_r(p) \cap A\) such that \(q \not = p\) since \(p\) is a limit point of \(A\).
+Then, \(q \in A\) and \(q \in B\) both holds, and it is a contradiction since \(A\) and \(B\) are disjoint.
+Thus, such \(p\) does not exist and \(A' \cap B = \varnothing\).
+By using the same argument, we can see that \(A \cap B' = \varnothing\) is also true.
+In conclusion, \(\bar{A} \cap B = (A \cup A') \cap B = (A \cap B) \cup (A' \cap B) = \varnothing \cup \varnothing = \varnothing\) and \(A \cap \bar{B} = A \cap (B \cup B') = (A \cap B) \cup (A \cap B') = \varnothing \cup \varnothing = \varnothing\), so \(A\) and \(B\) are separate.
+
+\subsection{Proof for (c)}
+Let's prove that for all \(q \in A\), \(N_{\delta - d(p, q)}(q) \subset A\).
+Let \(r \in N_{\delta - d(p, q)}\).
+By triangular inequality, \(d(p, r) \leq d(p, q) + d(q, r) < d(p, q) + (\delta - d(p, q)) = \delta\).
+So \(r \in A\), and we know that \(q\) is an interior point of \(A\).
+Thus, \(A\) is open.
+
+Now, let's prove that for all \(q \in B\), \(N_{d(p, q) - \delta}(q) \subset B\).
+Let \(r \in N_{d(p, q) - \delta}(q)\).
+By triangular inequality, \(d(p, r) \geq d(p, q) - d(q, r) > d(p, q) - (d(p, q) - \delta) = \delta\).
+So \(r \in B\), and we know that \(q\) is an interior point of \(B\).
+Thus, \(B\) is open.
+
+For all \(q \in A\), \(d(p, q) < \delta\), so \(d(p, q) > \delta\) is false and \(q \not \in B\).
+Thus, \(A \cap B = \varnothing\) so \(A\) and \(B\) are separate by the result we proved in (b).
+
+\subsection{Proof for (d)}
+Let \(x, y \in X\) and \(D = d(x, y)\).
+Suppose that \(X\) is connected and there exists \(\delta \in [0, D]\) such that for all \(p \in X\), \(d(x, p) \not = \delta\).
+Then, we can partition \(X\) into two disjoint subsets \(A = \{p \in X;\; d(x, p) < \delta\}\) and \(B = \{p \in X;\; d(x, p) > \delta\}\), and \(A \cup B = X\) holds.
+By the resule proven in (c), \(A\) and \(B\) are separate, which is a contradiction.
+In conclusion, such \(\delta\) does not exist and there exists a 1-1 mapping of \([0, D]\) onto a subset of \(X\), so that subset of \(X\) is uncountable.
+Thus, \(X\) is also uncountable since it has an uncountable subset.
+
+\section{Section 2 \#20}
+Let \(E \subset X\) be a connected set whose closure \(\bar{E}\) is not connected where \(X\) is a metric space.
+Then, there exists \(A, B \subset \bar{E}\) such that \(A \cap \bar{B} = \bar{A} \cap B = \varnothing\) and \(A \cup B = \bar{E}\).
+Since \(\bar{E} = E \cup E'\), we can write
+\begin{align*}
+  A \cap \bar{B} &= (A \cap \bar{E}) \cap (\bar{B} \cap \bar{E}) = A \cap \bar{B} \cap \bar{E} \\
+                 &= A \cap \bar{B} \cap (E \cup E') = (A \cap \bar{B} \cap E) \cup (A \cap \bar{B} \cap E') \\
+                 &\supset A \cap \bar{B} \cap E
+\end{align*}
+Let \(C = E \setminus A\), then \(C \subset B\) since \((\bar{E} \setminus A) \subset B\) and \(E \subset \bar{E}\).
+Since \(C \subset B \subset \bar{B}\), by theorem~2.27 \(\bar{C} \subset \bar{B}\) holds.
+From connectedness of \(E\), \((A \cap E) \cap \bar{C} \not = \varnothing\), so \(A \cap \bar{B} \cap E \supset A \cap \bar{C} \cap E \not = \varnothing\), which is a contradiction.
+Thus, such connected set \(E\) does not exist and closures of all connected sets are connected.
+
+Let \(A = \{x \in \mathbb{R}^2;\; d(x, (0, 0)) < 1\}, B = \{x \in \mathbb{R}^2;\; d(x, (2, 0)) < 1\}, C = \{(1, 0)\}, E = A \cup B \cup C\).
+The interior of \(E\) is \(A \cup B\) since \(C\) has no interior points, and by (b) of problem~19 \(A \cup B\) is not connected.
+Thus, the interior of connected set is not connected in general.
+
+\section{Section 3 \#1}
+Let \(a_n = (-1)^n\).
+\(|a_n| = 1\), so for all \(\epsilon > 0\), \(||a_n| - 1| = 0\) holds for \(n \geq 1\) and we can know that \(|a_n|\) converges to 1.
+Suppose that \(a_n\) has a limit \(x\).
+\(|a_n - x| + |x - 0| \geq |a_n| = 1\) holds by triangular inequality, so \(|a_n - x| \geq 1 - |x|\).
+Similarly, \(|a_n - x| + |0 - a_n| = |a_n - x| + 1 \geq |0 - x|\) holds, so \(|a_n - x| \geq |x| - 1\), thus \(|a_n - x| \geq ||x| - 1|\).
+Then, for all \(x \in \mathbb{R}\), \(|a_n - x| \geq ||x| - 1|\) for all \(n \in \mathbb{N}\), and \(x\) is either 1 or -1.
+If \(x = 1\), \(|a_n - 1| = 2 \geq \epsilon\) for odd \(n\) and sufficiently small \(\epsilon\), and if \(x = -1\), \(|a_n - 1| = 2 \geq \epsilon\) for even \(n\) and sufficiently small \(\epsilon\).
+Thus, the limit of \(a_n\) does not exist, and we can see that the converse is not generally true.
+
+\section{Section 3 \#2}
+Let \(a_n = \sqrt{n^2 + n} - n - 1 / 2\).
+We can write
+\[
+  a_n = \sqrt{n^2 + n} - \left( n + \frac{1}{2} \right) = \frac{n^2 + n - (n + 1 / 2)^2}{\sqrt{n^2 + n} + n + 1/2} = -\frac{1}{4\sqrt{n^2 + n} + 4n + 2}
+\]
+Then,
+\[
+  |a_n| = \frac{1}{4\sqrt{n^2 + n} + 4n + 2} \leq \frac{1}{4n} \leq \frac{1}{n}
+\]
+For all \(\epsilon > 0\), \(|a_n - 0| \leq 1 / n < \epsilon\) holds for \(n \geq N\), where \(N\) is an integer which is \(N > 1 / \epsilon\).
+Thus, \(a_n\) converges to \(0\).
+Since \(\lim_{n \to \infty} (1 / 2) = 1 / 2\), \(\lim_{n \to \infty} (\sqrt{n^2 + n} - n) = \lim_{n \to \infty} (a_n + 1 / 2) = 1 / 2\).
+
+\end{document}
