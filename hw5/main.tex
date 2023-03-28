@@ -125,9 +125,11 @@ Since \(C \subset B \subset \bar{B}\), by theorem~2.27 \(\bar{C} \subset \bar{B}
 From connectedness of \(E\), \((A \cap E) \cap \bar{C} \not = \varnothing\), so \(A \cap \bar{B} \cap E \supset A \cap \bar{C} \cap E \not = \varnothing\), which is a contradiction.
 Thus, such connected set \(E\) does not exist and closures of all connected sets are connected.
 
-Let \(A = \{x \in \mathbb{R}^2;\; d(x, (0, 0)) < 1\}, B = \{x \in \mathbb{R}^2;\; d(x, (2, 0)) < 1\}, C = \{(1, 0)\}, E = A \cup B \cup C\).
-The interior of \(E\) is \(A \cup B\) since \(C\) has no interior points, and by (b) of problem~19 \(A \cup B\) is not connected.
-Thus, the interior of connected set is not connected in general.
+Let \(E = ([-1, 1] \times \{0\}) \cup ((-\infty, -1] \times \mathbb{R}) \cup ([1, \infty) \times \mathbb{R})\).
+\(E\) is connected since it has no \(A, B\) such that \(E = A \cup B\) where \(\bar{A} \cap B = A \cap \bar{B} = \varnothing\).
+The interior of \(E\) is \(((-\infty, -1) \times \mathbb{R}) \cup ((1, \infty) \times \mathbb{R})\).
+Let \(A = (-\infty, -1) \times \mathbb{R}, B = (1, \infty) \times \mathbb{R}\) and \(\bar{A} \cap B = A \cap \bar{B} = \varnothing\).
+So the interior of \(E\) is not connected.
 
 \section{Section 3 \#1}
 Let \(a_n = (-1)^n\).
