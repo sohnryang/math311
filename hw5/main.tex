@@ -43,8 +43,8 @@
 
 \section{Section 2 \#14}
 Let \(\{G_n\} = (0, 1 - 1 / n)\) where \(n = 2, 3, \dots\).
-For all \(x \in (0, 1)\), there exists a positive integer \(p\) such that \(p(1 - x) > 1\) by the theorem~1.20 in the book.
-Then, we get \(x < 1 - 1 / p\) so \(x \in G_p\).
+For all \(x \in (0, 1)\), there exists an integer \(p > 1\) such that \(p(1 - x) > 1\) by the theorem~1.20 in the book.
+Then, we get \(x < 1 - 1 / p\) so \(x \in G_p\) and for all \(G_k \in G_n\) \(G_k \cap ((-\infty, 0] \cup [1, \infty)) = \varnothing\), so \(\{G_n\}\) is an open cover of \((0, 1)\).
 Thus, for all \(x \in (0, 1)\) there exists \(G_p\) such that \(x \in G_p\).
 Since \(G_n\) is open for all \(n = 2, 3, \dots\), \(\{G_n\}\) is an open cover.
 Suppose that there exists a finite subcover \(\{G_{n_k}\}\) of \(\{G_n\}\).
@@ -54,22 +54,15 @@ Then, we can conclude that the open cover \(\{G_n\}\) has no finite subcover.
 
 \section{Section 2 \#17}
 Let \(E_0 = [0, 1]\).
-We can define \(E_n\), where \(n = 1, 2, \dots\) as follows:
-\[
-  E_n = \left\{ \frac{x + 4}{10};\; x \in E_{n - 1} \right\} \cup \left\{ \frac{x + 7}{10};\; x \in E_{n - 1} \right\}
-\]
-Then, \(E_n\) is a set of real numbers where first \(n\) digits of its decimal expansion are 4 or 7, and the digits after that are 0.
-This can be interpreted as removing the first \(4 / 10\), middle \(2 / 10\), last \(2 / 10\) from every interval in \(E_{n - 1}\).
-We can also write (TODO: add rigorous derivation)
+Let \(E_n\) be a set of real numbers where first \(n\) digits of one of its decimal expansion are 4 or 7.
+From this definition, we can write
 \begin{align*}
-  E_n =& [0, 1] \setminus \\
-       &\bigcup^{n - 1}_{m = 0} \bigcup^{10^m - 1}_{k = 0} \left( \left[ \frac{10k}{10^{m + 1}}, \frac{10k + 4}{10^{m + 1}} \right) \cup \left( \frac{10k + 5}{10^{m + 1}}, \frac{10k + 7}{10^{m + 1}} \right) \cup \left( \frac{10k + 8}{10^{m + 1}}, \frac{10k + 10}{10^{m + 1}} \right] \right) \\
-      =& \bigcap^{n - 1}_{m = 1} \bigcup^{10^m - 1}_{k = 10} \left( \left[ \frac{10k + 4}{10^m}, \frac{10k + 5}{10^m} \right] \cup \left[ \frac{10k + 7}{10^m}, \frac{10k + 8}{10^m} \right] \right)
+  E_n = \bigcap^{n - 1}_{m = 1} \bigcup^{10^m - 1}_{k = 0} \left( \left[ \frac{10k + 4}{10^m}, \frac{10k + 5}{10^m} \right] \cup \left[ \frac{10k + 7}{10^m}, \frac{10k + 8}{10^m} \right] \right)
 \end{align*}
 Let \(E = \bigcap^\infty_{n = 0} E_n\).
-Since \(E\) is an intersection of closed sets, \(E\) is a closed set by theorem~2.24.
+Since \(E\) is an intersection of unions of finite number of closed sets, \(E\) is a closed set by theorem~2.24.
 Also, since \(E\) is an intersection of subsets of \([0, 1]\) which is a bounded set, \(E\) is also bounded.
-By theorem~2.41, \(E\) is compact.
+Then, by theorem~2.41, \(E\) is compact.
 Let \(x \in E\), and let \(S\) be any open interval containing x. Let \(I_n\) be a closed interval of \(E_n\) which contains \(x\).
 For sufficiently large \(n\), \(I_n \subset S\).
 Let \(x_n\) be an endpoint of \(I_n\), such that \(x \not = x_n\).
@@ -77,6 +70,7 @@ By the definition of \(E\), \(x_n \in E\), and \(x\) is a limit point of \(E\) s
 By theorem~2.43, \(E\) is an uncountable set.
 Since decimal expansion of every \(x\) in \(E\) has only digits 4 and 7, so \(x \leq 0.4\).
 Then 0 cannot be a limit point of \(E\) because \(d(x, 0) = |x - 0| = (x - 0.4) + 0.4 > 0.4\).
+\(0 \not \in E\), so \(E\) is not dense.
 
 \section{Section 2 \#19}
 \subsection{Proof for (a)}
