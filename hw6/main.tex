@@ -1,0 +1,304 @@
+\documentclass{scrartcl}
+\usepackage[margin=3cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{blindtext}
+\usepackage{datetime}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage{kotex}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{pgf,tikz,pgfplots}
+
+\pgfplotsset{compat=1.15}
+\usetikzlibrary{arrows}
+\newtheorem{theorem}{Theorem}
+
+\setmainhangulfont{Noto Serif CJK KR}[
+  UprightFont=* Light, BoldFont=* Bold,
+  Script=Hangul, Language=Korean, AutoFakeSlant,
+]
+\setsanshangulfont{Noto Sans CJK KR}[
+  UprightFont=* DemiLight, BoldFont=* Medium,
+  Script=Hangul, Language=Korean
+]
+\setmathhangulfont{Noto Sans CJK KR}[
+  SizeFeatures={
+    {Size=-6,  Font=* Medium},
+    {Size=6-9, Font=*},
+    {Size=9-,  Font=* DemiLight},
+  },
+  Script=Hangul, Language=Korean
+]
+\title{MATH311: Homework 6 (due Apr. 4)}
+\author{손량(20220323)}
+\date{Last compiled on: \today, \currenttime}
+
+\newcommand{\un}[1]{\ensuremath{\ \mathrm{#1}}}
+
+\begin{document}
+\maketitle
+
+\section{Section 3 \#3}
+First, let's prove that \(s_n < 2\) for \(n = 1, 2, \dots\).
+For \(n = 1\), \(s_n = \sqrt{2} < 2\).
+Suppose that \(s_n < 2\) for \(n = k\), where \(k\) is a positive integer.
+We can write
+\begin{align*}
+  s_{k + 1} = \sqrt{2 + \sqrt{s_k}} < \sqrt{2 + \sqrt{2}} < 2
+\end{align*}
+By induction, we can know that \(s_n < 2\) for \(n = 1, 2, \dots\).
+
+Since \(s_2 = \sqrt{2 + \sqrt{s_1}} = \sqrt{2 + \sqrt{2}}\), \(s_2 > s_1\) holds.
+Suppose that \(s_{n + 1} > s_n\) holds for \(n = k\), where \(k\) is a positive integer.
+We can write
+\begin{align*}
+  s_{k + 2} = \sqrt{2 + \sqrt{s_{k + 1}}} > \sqrt{2 + \sqrt{s_k}} = s_{k + 1}
+\end{align*}
+By induction, we know that \(s_{n + 1} > s_n\) for \(n = 1, 2, \dots\).
+Since \(s_n\) is monotonically increasing but bounded above, \(s_n\) converges.
+
+\section{Section 3 \#4}
+From the recurrence relations, we can write
+\begin{align*}
+  s_{2m + 1} &= \frac{1}{2} + s_{2m} = \frac{1}{2} + \frac{s_{2m - 1}}{2} \\
+  s_{2m + 2} &= \frac{s_{2m + 1}}{2} = \frac{1}{2} \left( \frac{1}{2} + s_{2m} \right) = \frac{1}{4} + \frac{s_{2m}}{2}
+\end{align*}
+for \(m = 1, 2, \dots\).
+Let \(x_n = s_{2n - 1} - 1\), then
+\begin{align*}
+  x_{n + 1} = s_{2n + 1} - 1 = \frac{1}{2} + \frac{s_{2m - 1}}{2} - 1 = \frac{s_{2m - 1} - 1}{2} = \frac{x_n}{2}
+\end{align*}
+so \(x_n = -1/2^{n - 1}\).
+Let \(y_n = s_{2n} - 1/2\), then
+\begin{align*}
+  y_{n + 1} = s_{2n + 2} - \frac{1}{2} = \frac{1}{4} + \frac{s_{2n}}{2} - \frac{1}{2} = \frac{s_{2n}}{2} - \frac{1}{4} = \frac{y_n}{2}
+\end{align*}
+so \(y_n = -1/2^n\).
+Fix \(\epsilon > 0\), and let \(N\) be an integer such that \(N > \log_2 (1 / \epsilon) + 1\).
+For \(n \geq N\),
+\begin{align*}
+  |x_n - 0| &= |x_n| = \frac{1}{2^{n - 1}} \leq \frac{1}{2^{N - 1}} < \epsilon \\
+  |y_n - 0| &= |y_n| = \frac{1}{2^n} \leq \frac{1}{2^N} < \frac{\epsilon}{2} < \epsilon
+\end{align*}
+and we can conclude that \(x_n, y_n\) both converges to \(0\), so \(s_{2n - 1}, s_{2n}\) converges to \(1, 1 / 2\), respectively by properties of limits.
+Suppose that a subsequence of \(\{s_{n_k}\}\) of \(\{s_n\}\) converges to \(L\), where \(L \not \in \{1/2, 1\}\).
+Fix \(0 < \epsilon < \min\{|L - 1/2|, |L - 1|\} / 2\), there exists an integer \(N\) such that \(k \geq N\) implies \(|s_{n_k} - L| < \epsilon\), \(|s_{2k - 1} - 1| < \epsilon\), and \(|s_{2k} - 1/2| < \epsilon\).
+Since \(n_k\) is a strictly increasing sequence of integers, there exists \(k_0 \geq N\) such that \(m := n_{k_0} \geq 2N\).
+If \(m\) is even, \(|s_m - 1 / 2| < \epsilon\).
+By triangular inequality,
+\begin{align*}
+  \left| L - \frac{1}{2} \right| \leq \left| s_m - \frac{1}{2} \right| + |s_m - L| < 2\epsilon
+\end{align*}
+and this contradicts with \(\epsilon < \min\{|L - 1/2|, |L - 1|\} / 2\).
+Similarly, if \(m\) is odd, \(|s_m - 1| < \epsilon\) and
+\begin{align*}
+  |L - 1| \leq |s_m - 1| + |s_m - L| < 2\epsilon
+\end{align*}
+and this also contradicts with \(\epsilon < \min\{|L - 1/2|, |L - 1|\} / 2\).
+Thus, such \(L\) cannot exist and the set of subsequential limits is \(E = \{1/2, 1\}\).
+Then, the upper limit is \(\sup E = 1\), and the lower limit is \(\inf E = 1 / 2\).
+
+\section{Section 3 \#5}
+Let \(x_n = \sup_{k \geq n} a_k, y_n = \sup_{k \geq n} b_k, z_n = \sup_{k \geq n} (a_k + b_k)\) and \(A_n = \{s + t;\; s \in \{a_k, a_{k + 1}, \dots\}, t \in \{b_k, b_{k + 1}, \dots\}\}\).
+Suppose that there exists an upper bound \(\alpha\) of \(A_n\), such that \(\alpha < x_n + y_n\).
+Since \(\alpha\) is an upper bound of \(A_n\), \(s + t \leq \alpha\) for all \(s \in \{a_k, a_{k + 1}, \dots\}\) and \(t \in \{b_k, b_{k + 1}, \dots\}\).
+Also, \(s \leq x_n\) holds since \(x_n = \sup_{k \geq n} a_k = \sup \{a_k, a_{k + 1}, \dots\}\).
+Thus, \(t \leq \alpha - x_n < y_n\) holds for all \(t \in \{b_k, b_{k + 1}, \dots\}\), then it is a contradiction and such \(\alpha\) does not exist.
+Since \(s + t \leq x_n + y_n\) for all \(s \in \{a_k, a_{k + 1}, \dots\}\) and \(t \in \{b_k, b_{k + 1}, \dots\}\), \(\sup A_n = x_n + y_n\).
+From \(\{a_k + b_k, a_{k + 1} + b_{k + 1}, \dots\} \subset A_n\), \(z_n = \sup_{k \geq n} (a_k + b_k) \leq \sup A_n = x_n + y_n\).
+Then, we can write
+\begin{align*}
+  \limsup_{n \to \infty} a_n = \lim_{n \to \infty} x_n, \limsup_{n \to \infty} b_n = \lim_{n \to \infty} y_n, \limsup_{n \to \infty} (a_n + b_n) = \lim_{n \to \infty} z_n
+\end{align*}
+so
+\begin{align*}
+  \limsup_{n \to \infty} (a_n + b_n) = \lim_{n \to \infty} z_n \leq \lim_{n \to \infty} (x_n + y_n) = \limsup_{n \to \infty} a_n + \limsup_{n \to \infty} b_n
+\end{align*}
+
+\section{Section 3 \#8}
+Since \(b_n\) is monotonic and bounded, it converges to some real number \(b\).
+We can write
+\begin{align*}
+  \sum^q_{n = p} a_n b_n = \sum^q_{n = p} a_n (b_n - b) + \sum^q_{n = p} a_n b
+\end{align*}
+For all sufficiently small \(\epsilon > 0\), there exists some integer \(N\) such that \(n \geq N\) implies \(|b_n - b| < \epsilon\).
+For \(q \geq p \geq N\), we can write
+\begin{align*}
+  -\epsilon \sum^q_{n = p} a_n < \sum^q_{n = p} a_n (b_n - b) < \epsilon \sum^q_{n = p} a_n
+\end{align*}
+so
+\begin{align*}
+  (b - \epsilon) \sum^q_{n = p} a_n < \sum^q_{n = p} a_n b_n < (b + \epsilon) \sum^q_{n = p} a_n
+\end{align*}
+Fix \(\epsilon' > 0\), then there exists some \(N' \geq N\) such that \(n \geq N'\) implies
+\begin{align*}
+  \left| \sum^q_{n = p} a_n \right| < \frac{\epsilon'}{\min \{|b - \epsilon|, |b + \epsilon|\}}
+\end{align*}
+by Cauchy's criterion.
+Then, if \(n \geq N'\) and \(q \geq p \geq N'\)
+\begin{align*}
+  \left| \sum^q_{n = p} a_n b_n \right| &< \min \left\{ \left| (b - \epsilon) \sum^q_{n = p} a_n \right|, \left| (b + \epsilon) \sum^q_{n = p} a_n \right| \right\} \\
+                                        &< \frac{\epsilon'}{\min \{|b - \epsilon|, |b + \epsilon|\}} \cdot \min \{|b - \epsilon|, |b + \epsilon|\} = \epsilon'
+\end{align*}
+so \(\sum a_n b_n\) also satisfies Cauchy's criterion, thus it converges.
+
+\section{Section 3 \#16}
+\subsection{Solution for (a)}
+By AM-GM inequality,
+\begin{align}\label{sec5_amgm}
+  x_{n + 1} = \frac{1}{2} \left( x_n + \frac{\alpha}{x_n} \right) \geq \frac{1}{2} \cdot 2 \sqrt{\alpha} = \sqrt{\alpha}
+\end{align}
+for \(n = 1, 2, \dots\) so \(x_n \geq \sqrt{\alpha}\) for \(n = 1, 2, \dots\).
+Then,
+\begin{align*}
+  x_{n + 1} - x_n = \frac{1}{2} \left( x_n + \frac{\alpha}{x_n} \right) - x_n = \frac{1}{2} \left( \frac{\alpha}{x_n} - x_n \right) \leq \frac{1}{2} (\sqrt{\alpha} - \sqrt{\alpha}) = 0
+\end{align*}
+we get \(x_{n + 1} \leq x_n\), so \(x_n\) is monotonically decreasing and it converges to some value \(x\).
+Then, \(\lim_{n \to \infty} x_n = \lim_{n \to \infty} x_{n + 1} = x\) and by using the properties of limits we get
+\begin{align*}
+  x = \frac{1}{2} \left( x + \frac{\alpha}{x} \right)
+\end{align*}
+Solving the equation gives \(x = \sqrt{\alpha}\) or \(x = -\sqrt{\alpha}\).
+Since \(x_n \geq \sqrt{\alpha}\) for all \(n\), \(x \geq \sqrt{\alpha}\) and we obtain \(x = \sqrt{\alpha}\).
+THus, \(x_n\) converges to \(\sqrt{\alpha}\).
+
+\subsection{Solution for (b)}
+We can write
+\begin{align*}
+  \epsilon_{n + 1} = x_{n + 1} - \sqrt{\alpha} = \frac{1}{2} \left( x_n - 2\sqrt{\alpha} + \frac{\alpha}{x_n} \right) = \frac{x_n^2 - 2x_n\sqrt{\alpha} + \alpha}{2x_n} = \frac{\epsilon_n^2}{2x_n}
+\end{align*}
+Suppose that \(x_n > \sqrt\alpha\).
+The equality in (\ref{sec5_amgm}) holds if and only if \(x_n = \alpha / x_n\), but \(x_n > \sqrt\alpha\) so the equality does not hold.
+Thus, \(x_{n + 1} > \sqrt\alpha\), and \(x_n > \sqrt\alpha\) for \(n = 1, 2, \dots\) by induction.
+So
+\begin{align*}
+  \frac{\epsilon_n^2}{2x_n} < \frac{\epsilon_n^2}{2\sqrt\alpha}
+\end{align*}
+
+By setting \(\beta = 2\sqrt\alpha\),
+\begin{align*}
+  \epsilon_2 < \frac{\epsilon_1^2}{2\sqrt\alpha} = \frac{\epsilon_1^2}{\beta} = \beta \left( \frac{\epsilon_1}{\beta} \right)^2
+\end{align*}
+Suppose that the inequality we want to prove holds for \(n = k\).
+Then
+\begin{align*}
+  \epsilon_{k + 2} < \frac{\epsilon_{k + 1}^2}{2\sqrt\alpha} = \beta \left( \frac{\epsilon_{k + 1}}{\beta} \right)^2 < \frac{1}{\beta} \epsilon_{k + 1}^2 < \frac{1}{\beta} \left[ \beta \left( \frac{\epsilon_1}{\beta} \right)^{2^n} \right]^2 = \beta \left( \frac{\epsilon_1}{\beta} \right)^{2^{n + 1}}
+\end{align*}
+and we get the desired result.
+
+\subsection{Solution for (c)}
+From the given values, \(\epsilon_1 = x_1 - \sqrt\alpha = 2 - \sqrt3\) so \(\epsilon_1 / \beta = (2 - \sqrt3) / (2\sqrt3)\).
+We can write
+\begin{align*}
+  \frac{\epsilon_1}{\beta} = \frac{2 - \sqrt3}{2\sqrt3} = \frac{1}{4\sqrt3 + 6} < \frac{1}{10}
+\end{align*}
+Thus,
+\begin{align*}
+  \epsilon_5 &= \beta \left( \frac{\epsilon_1}{\beta} \right)^{16} = 2\sqrt3 \left( \frac{1}{10} \right)^{16} < 4 \cdot 10^{-16} \\
+  \epsilon_6 &= \beta \left( \frac{\epsilon_1}{\beta} \right)^32 = 2\sqrt3 \left( \frac{1}{10} \right)^32 < 4 \cdot 10^{-32}
+\end{align*}
+
+\section{Section 3 \#17}
+If \(x_n > \sqrt\alpha\), then
+\begin{align*}
+  \alpha(\alpha - 1) < x_n^2(\alpha - 1) &\Longrightarrow \alpha^2 + x_n^2 < \alpha x_n^2 + \alpha \\
+                                         &\Longrightarrow \alpha^2 + 2\alpha x_n + x_n^2 < \alpha x_n^2 + 2\alpha x_n + \alpha \\
+                                         &\Longrightarrow (\alpha + x_n)^2 < \alpha (x_n + 1)^2
+\end{align*}
+so
+\begin{align*}
+  x_{n + 1} = \frac{\alpha + x_n}{1 + x_n} < \sqrt\alpha
+\end{align*}
+If \(x_n < \alpha\), then
+\begin{align*}
+  \alpha (\alpha - 1) > x_n^2 (\alpha - 1) &\Longrightarrow \alpha^2 + x_n^2 > \alpha x_n^2 + \alpha \\
+                                           &\Longrightarrow \alpha^2 + 2\alpha x_n + x_n^2 > \alpha x_n^2 + 2\alpha x_n + \alpha \\
+                                           &\Longrightarrow (\alpha + x_n)^2 > \alpha(x_n + 1)^2
+\end{align*}
+so
+\begin{align*}
+  x_{n + 1} = \frac{\alpha + x_n}{1 + x_n} > \sqrt\alpha
+\end{align*}
+Since \(x_1 > \sqrt\alpha\), it can be shown that \(x_{2n - 1} > \sqrt\alpha, x_{2n} < \sqrt\alpha\) for \(n = 1, 2, \dots\) using induction.
+
+\subsection{Solution for (a)}
+First, let's prove \(x_1 > x_3\).
+\begin{align*}
+  x_3 = \frac{\alpha + x_2}{1 + x_2} = \frac{\alpha + \frac{\alpha + x_1}{1 + x_1}}{1 + \frac{\alpha + x_1}{1 + x_1}} = \frac{2\alpha + (\alpha + 1)x_1}{\alpha + 1 + 2x_1} = x_1 + \frac{2\alpha - 2x_1^2}{\alpha + 1 + 2x_1}
+\end{align*}
+since \(x_1 > \sqrt\alpha\), \(2\alpha - 2x_1^2 < 0\) and \(x_1 > x_3\).
+Suppose that \(x_{2n - 1} > x_{2n + 1}\) for \(n = k\).
+We can write
+\begin{align*}
+  x_{2k + 1} - x_{2k + 3} = x_{2k + 1} - \left( x_{2k + 1} + \frac{2\alpha - 2x_{2k + 1}^2}{\alpha + 1 + 2x_{2k + 1}} \right) = \frac{2x_{2k + 1}^2 - 2\alpha}{\alpha + 1 + 2x_{2k + 1}} > 0
+\end{align*}
+so \(x_{2k + 1} > x_{2k + 3}\).
+By induction, \(x_{2n - 1} > x_{2n + 1}\) holds for \(n = 1, 2, \dots\) so \(x_1 > x_3 > x_5 > \dots\).
+
+\subsection{Solution for (b)}
+First, let's prove \(x_2 < x_4\).
+\begin{align*}
+  x_4 = \frac{\alpha + x_3}{1 + x_3} = \frac{\alpha + \frac{\alpha + x_2}{1 + x_2}}{1 + \frac{\alpha + x_2}{1 + x_2}} = \frac{2\alpha + (\alpha + 1)x_2}{\alpha + 1 + 2x_2} = x_2 + \frac{2\alpha - 2x_2^2}{\alpha + 1 + 2x_2}
+\end{align*}
+Since \(x_2 < \sqrt\alpha\), \(2\alpha - 2x_2^2 > 0\) and \(x_2 < x_4\).
+Suppose that \(x_{2n} < x_{2n + 2}\) for \(n = k\).
+We can write
+\begin{align*}
+  x_{2k + 2} - x_{2k + 4} = x_{2k + 2} - \left( x_{2k + 2} + \frac{2\alpha - 2x_{2k + 2}^2}{\alpha + 1 + 2x_{2k + 2}} \right) = \frac{2x_{2k + 2}^2 - 2\alpha}{\alpha + 1 + 2x_{2k + 2}} < 0
+\end{align*}
+so \(x_{2k + 2} < x_{2k + 4}\).
+By induction, \(x_{2n} < x_{2n + 2}\) holds for \(n = 1, 2, \dots\) so \(x_2 < x_4 < x_6 < \dots\).
+
+\subsection{Solution for (c)}
+From (a) and (b), we can write
+\begin{align*}
+  x_2 < x_4 < \dots < \sqrt\alpha < \dots < x_3 < x_1
+\end{align*}
+Subsequence \(x_{2n}\) is monotonically increasing and bounded, so it converges to some value \(x\).
+Subsequence \(x_{2n - 1}\) is also monotonically increasing and bounded, so it converges to some value \(x'\).
+Then, using properties of limits
+\begin{align*}
+  x_{2n + 2} - x_{2n} = \frac{2x_{2n}^2 - 2\alpha}{\alpha + 1 + 2x_{2n}} \Longrightarrow \frac{2x^2 - 2\alpha}{\alpha + 1 + 2x} = 0
+\end{align*}
+we can conclude that \(x = \sqrt\alpha\) since \(x_{2n} > 0\).
+Likewise,
+\begin{align*}
+  x_{2n + 1} - x_{2n - 1} = \frac{2x_{2n - 1}^2 - 2\alpha}{\alpha + 1 + 2x_{2n - 1}} \Longrightarrow \frac{2{x'}^2 - 2\alpha}{\alpha + 1 + 2x'} = 0
+\end{align*}
+\(x' = \sqrt\alpha\) since \(x_{2n - 1} > 0\).
+Since \(x_{2n}\) and \(x_{2n - 1}\) both converge to \(\sqrt\alpha\), for all \(\epsilon > 0\) there exists some integer \(N\) such that \(n \geq N\) implies \(|x_{2n} - \sqrt\alpha|, |x_{2n - 1} - \sqrt\alpha| < \epsilon\).
+Then, \(n \geq 2N - 1\) implies that \(|x_n - \sqrt\alpha| < \epsilon\), so \(x_n\) converges to \(\sqrt\alpha\).
+
+\subsection{Solution for (d)}
+Let \(\epsilon_n = x_n - \sqrt\alpha\).
+We can write
+\begin{align*}
+  \epsilon_{n + 1} &= x_{n + 1} - \sqrt\alpha = \frac{\alpha + x_n}{1 + x_n} - \sqrt\alpha = \frac{\alpha + x_n - \sqrt\alpha - \sqrt\alpha x_n}{1 + x_n} \\
+                   &= \frac{(\sqrt\alpha - 1)(\sqrt\alpha - x_n)}{1 + x_n} = -\frac{(\sqrt\alpha - 1)\epsilon_n}{1 + x_n}
+\end{align*}
+then
+\begin{align*}
+  |\epsilon_{n + 1}| = \left| \frac{(\sqrt\alpha - 1)\epsilon_n}{1 + x_n} \right| = \left| \frac{\sqrt\alpha - 1}{1 + x_n} \right| |\epsilon_n| \geq \left| \frac{\sqrt\alpha - 1}{1 + x_1} \right| |\epsilon_n|
+\end{align*}
+Using induction, we obtain
+\begin{align*}
+  |\epsilon_{n + 1}| \geq \left| \frac{\sqrt\alpha - 1}{1 + x_1} \right|^n |\epsilon_1|
+\end{align*}
+From this, we can see that \(|\epsilon_n|\) goes to zero no faster than geometric sequence.
+Let \(\delta_n\) be the \(n\)-th error term we have written in (c).
+Then, \(\delta_n\) goes to zero faster than doubly exponential sequence, so this progress converges slower than the process described in problem~16.
+
+\section{Section 3 \#20}
+Fix \(\epsilon > 0\).
+There exists some \(N\) such that \(n, m \geq N\) implies \(d(p_n, p_m) < \epsilon / 2\), and \(k \geq N\) implies \(d(p_{n_k}, p) < \epsilon / 2\).
+Since \(n_i\) is a strictly increasing sequence of integers, there exists some \(k_0 \geq N\) such that \(q := n_{k_0} \geq N\).
+By triangular inequality,
+\begin{align*}
+  d(p_l, p) \leq d(p_l, p_q) + d(p_q, p) < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
+\end{align*}
+holds if \(l \geq N\) and we know that \(p_n\) converges to \(p\).
+
+\end{document}
