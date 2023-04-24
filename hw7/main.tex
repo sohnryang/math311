@@ -1,0 +1,105 @@
+\documentclass{scrartcl}
+\usepackage[margin=3cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{blindtext}
+\usepackage{datetime}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage{kotex}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{pgf,tikz,pgfplots}
+
+\pgfplotsset{compat=1.15}
+\usetikzlibrary{arrows}
+\newcommand\Overline[2][0.8pt]{%
+  \begin{tikzpicture}[baseline=(a.base)]
+    \node[inner xsep=0pt,inner ysep=1.5pt] (a) {$#2$};
+    \draw[line width= #1] (a.north west) -- (a.north east);
+  \end{tikzpicture}
+}
+\newtheorem{theorem}{Theorem}
+
+\setmainhangulfont{Noto Serif CJK KR}[
+  UprightFont=* Light, BoldFont=* Bold,
+  Script=Hangul, Language=Korean, AutoFakeSlant,
+]
+\setsanshangulfont{Noto Sans CJK KR}[
+  UprightFont=* DemiLight, BoldFont=* Medium,
+  Script=Hangul, Language=Korean
+]
+\setmathhangulfont{Noto Sans CJK KR}[
+  SizeFeatures={
+    {Size=-6,  Font=* Medium},
+    {Size=6-9, Font=*},
+    {Size=9-,  Font=* DemiLight},
+  },
+  Script=Hangul, Language=Korean
+]
+\title{MATH311: Homework 7 (due Apr. 19)}
+\author{손량(20220323)}
+\date{Last compiled on: \today, \currenttime}
+
+\newcommand{\un}[1]{\ensuremath{\ \mathrm{#1}}}
+
+\begin{document}
+\maketitle
+
+\section{Section 4 \#1}
+
+\section{Section 4 \#2}
+Since \(f\) is continuous and \(\Overline{f(E)}\) is a closed subset of \(Y\), \(f^{-1}(\Overline{f(E)})\) is also a closed subset of \(X\).
+\(E \subset f^{-1}(\Overline{f(E)})\), so \(\Overline{E} \subset f^{-1}(\Overline{f(E)})\) and \(f(\Overline{E}) \subset \Overline{f(E)}\).
+
+Consider \(f: E \to \mathbb{R}, x \mapsto 1 / (1 + e^{-x})\), where \(E = \mathbb{R}\).
+Since \(e^{-x} > 0\) for all \(x \in E\), \(f(E) = (0, 1)\).
+We can see that \(f(\Overline{E}) = f(E) = (0, 1)\), so \(f(\Overline{E}) \subset \Overline{f(E)} = [0, 1]\) and \(f(\Overline{E})\) is a proper subset of \(\Overline{f(E)}\).
+
+\section{Section 4 \#3}
+Let \(E := \{0\}\).
+\(E\) is a closed set since \(E' = \varnothing\).
+Then, \(f^{-1}(E)\) is also closed since \(f\) is continuous.
+By definition, \(f^{-1}(E)\) is the set of all \(x \in X\) such that \(f(x) \in E\), so \(f^{-1}(E) = Z(f)\) and we get the desired result.
+
+\section{Section 4 \#4}
+By the result we proved in \#3, \(f(E) \subset f(X) = f(\Overline{E}) \subset \Overline{f(E)}\) since \(E\) is dense in \(X\).
+From \(f(X) \subset \Overline{f(E)}\), all points in \(f(X)\) are either point or limit point of \(f(E)\) so \(f(E)\) is dense in \(f(X)\).
+
+Let \(h: X \to Y, x \mapsto f(x) - g(x)\), then \(h(E) = \{0\}\).
+By the result we proved earlier, \(h(E)\) is dense in \(h(X)\) so every point in \(h(X)\) is either a limit point or point of \(h(E)\).
+Since \([h(E)]' = \varnothing\), \(h(X) \subset \{0\}\), thus \(h(X) = \{0\}\) and \(f(x) - g(x) = 0\) for all \(x \in X\).
+
+\section{Section 4 \#5}
+Using the resule proved in exercise~29 of chapter~2, the complement of \(E\) can be written union of at most countably many disjoint open intervals, \((a_1, b_1), (a_2, b_2), \dots, (a_n, b_n), \dots\) with possibly one or both of \((a_0, \infty)\) and \((-\infty, b_0)\).
+Let \(g(x)\) be a function defined on \(\mathbb{R}\) such that
+\begin{align*}
+  g(x) = \begin{cases}
+    f(x) & (x \in E) \\
+    \frac{f(b_k) - f(a_k)}{b_k - a_k} (x - a_k) + f(a_k) & (x \in (a_k, b_k)) \\
+    f(a) & (x \geq a) \\
+    f(b) & (x \leq b)
+  \end{cases}
+\end{align*}
+For \(p \in E^C\), \(g\) is continuous at \(x = p\) since it is a point in the region where \(g(x)\) is a polynomial function.
+For \(p \in E^\circ\), \(g\) is continuous at \(x = p\) since for all \(\epsilon > 0\), there exists some \(\delta > 0\) such that \(|f(x) - f(p)| < \epsilon\) for all \(x \in E^\circ\) satisfying \(|x - p| < \delta\) and \((x - \delta, x + \delta) \subset E^\circ\) as \(f\) is continuous at \(x = p\).
+Consider the case where \(p = a_k\), where \(k \geq 0\).
+We can take \((p - r, p + r)\) such that \(0 < r < b_k - a_k\) and \(b_{k - 1} < p - r\) if \(k > 0\).
+(If \(k = 0\), then we can simply ignore \(b_{k - 1} < p - r\) condition.)
+Then, \((p - r, a_k] \subset E\) and \((a_k, p + r) \subset E^C\).
+Fix \(\epsilon > 0\), then there exists some \(\delta_1 > 0\) such that \(|g(x) - g(p)| < \epsilon\) for all \(x \in (p - r, a_k]\) satisfying \(|x - p| < \delta_1\) as \(g\) is continuous in \((p - r, a_k] \subset E\).
+Also, there exists some \(\delta_2 > 0\) such that \(|g(x) - g(p)| < \epsilon\) for all \(x \in (a_k, p + r)\) satisfying \(|x - p| < \delta_2\) as \(g\) is a polynomial function in \((a_k, p + r)\) and it's continuous.
+Let \(\delta = \min \{\delta_1, \delta_2\}\) then \(|g(x) - g(p)| < \epsilon\) for all \(x \in (p - r, p + r)\) satisfying \(|x - p| < \delta\) so \(g\) is continuous at \(x = p\).
+We can prove that \(g\) is continuous at \(x = b_k\) where \(k \geq 0\) using the similar logic.
+
+Consider \(f : (0, 1] \to \mathbb{R}, x \mapsto 1 / x\).
+Suppose that a continuous extension \(g\) on \(\mathbb{R}\) such that \(f(x) = g(x)\) for all \(x \in (0, 1)\).
+Since \(g\) is a continuous function on \(\mathbb{R}\), \(g(0) = \lim_{x \to 0} g(x)\) should hold.
+However, for sequence \(p_n = 1 / n\), \(\lim_{n \to \infty} p_n = 0\) but \(\lim_{n \to \infty} g(p_n) = \lim_{n \to \infty} n \not = 0\) so it is a contradiction and the result is not generally true for all domains.
+
+For continuous vector valued function \(\mathbf{f} : E \to \mathbb{R}^k, x \mapsto (f_1(x), f_2(x), \dots, f_k(x))\) defined on closed sets, \(f_1, f_2, \dots, f_k\) are continuous on \(E\).
+Let \(g_1, g_2, \dots, g_k\) be continuous extensions of \(f_1, f_2, \dots, f_k\) respectively.
+Then, we can define \(\mathbf{g} : \mathbb{R} \to \mathbb{R}^k, x \mapsto (g_1(x), g_2(x), \dots, g_k(x))\) and it is continuous on \(\mathbb{R}\) since its components are continuous on \(\mathbb{R}\).
+
+\end{document}
