@@ -84,7 +84,7 @@ By the result we proved earlier, \(h(E)\) is dense in \(h(X)\) so every point in
 Since \([h(E)]' = \varnothing\), \(h(X) \subset \{0\}\), thus \(h(X) = \{0\}\) and \(f(x) - g(x) = 0\) for all \(x \in X\).
 
 \section{Section 4 \#5}
-Using the resule proved in exercise~29 of chapter~2, the complement of \(E\) can be written union of at most countably many disjoint open intervals, \((a_1, b_1), (a_2, b_2), \dots, (a_n, b_n), \dots\) with possibly one or both of \((a_0, \infty)\) and \((-\infty, b_0)\).
+Using the resule proved in exercise~29 of chapter~2, the complement of \(E\) can be written union of at most countably many disjoint open intervals, \((a_1, b_1), (a_2, b_2), \dots, (a_n, b_n), \dots\) with possibly one or both of \((a_0, \infty)\) and \((-\infty, b)\).
 Let \(g(x)\) be a function defined on \(\mathbb{R}\) such that
 \begin{align*}
   g(x) = \begin{cases}
@@ -103,7 +103,7 @@ Then, \((p - r, a_k] \subset E\) and \((a_k, p + r) \subset E^C\).
 Fix \(\epsilon > 0\), then there exists some \(\delta_1 > 0\) such that \(|g(x) - g(p)| < \epsilon\) for all \(x \in (p - r, a_k]\) satisfying \(|x - p| < \delta_1\) as \(g\) is continuous in \((p - r, a_k] \subset E\).
 Also, there exists some \(\delta_2 > 0\) such that \(|g(x) - g(p)| < \epsilon\) for all \(x \in (a_k, p + r)\) satisfying \(|x - p| < \delta_2\) as \(g\) is a polynomial function in \((a_k, p + r)\) and it's continuous.
 Let \(\delta = \min \{\delta_1, \delta_2\}\) then \(|g(x) - g(p)| < \epsilon\) for all \(x \in (p - r, p + r)\) satisfying \(|x - p| < \delta\) so \(g\) is continuous at \(x = p\).
-We can prove that \(g\) is continuous at \(x = b_k\) where \(k \geq 0\) using the similar logic.
+We can prove that \(g\) is continuous at \(x = b_k\) where \(k \geq 0\) and \(x = b\) using the similar logic.
 
 Consider \(f : (0, 1] \to \mathbb{R}, x \mapsto 1 / x\).
 Suppose that a continuous extension \(g\) on \(\mathbb{R}\) such that \(f(x) = g(x)\) for all \(x \in (0, 1)\).
