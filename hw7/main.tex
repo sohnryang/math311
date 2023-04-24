@@ -48,6 +48,18 @@
 \maketitle
 
 \section{Section 4 \#1}
+We write \(f\) as
+\begin{align*}
+  f(x) = \begin{cases}
+    1 & (x = 0) \\
+    0 & (x \not = 0)
+  \end{cases}
+\end{align*}
+Fix \(\epsilon = 1 / 2\), then \(|f(x) - f(0)| < \epsilon\) for only \(x = 1\), so there is no \(\delta > 0\) such that \(|x - 0| < \delta\) implies \(|f(x) - f(0)| < \epsilon\) and \(f\) is not continuous at \(x = 0\).
+Fix \(\epsilon > 0\).
+For all \(x \in \mathbb{R}\), there exists \(\delta > 0\) such that \(0 < |h| < \delta\) implies \(|f(x + h) - f(x - h)| < \epsilon\) since if \(x \not = 0\), \(x\) is an element of either \((0, \infty)\) or \((-\infty, 0)\) which are both open sets.
+If \(x = 0\), for all \(h\) such that \(0 < |h|\), \(|f(x + h) - f(x - h)| = |0 - 0| = 0\) so such \(\delta\) exists and \(\lim_{h \to 0} [f(x + h) - f(x - h)] = 0\).
+Thus, the condition does not imply that \(f\) is continuous.
 
 \section{Section 4 \#2}
 Since \(f\) is continuous and \(\Overline{f(E)}\) is a closed subset of \(Y\), \(f^{-1}(\Overline{f(E)})\) is also a closed subset of \(X\).
