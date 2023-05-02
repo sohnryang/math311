@@ -1,0 +1,256 @@
+\documentclass{scrartcl}
+\usepackage[margin=3cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{blindtext}
+\usepackage{datetime}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage{kotex}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{pgf,tikz,pgfplots}
+
+\pgfplotsset{compat=1.15}
+\usetikzlibrary{arrows}
+\newcommand\Overline[2][0.8pt]{%
+  \begin{tikzpicture}[baseline=(a.base)]
+    \node[inner xsep=0pt,inner ysep=1.5pt] (a) {$#2$};
+    \draw[line width= #1] (a.north west) -- (a.north east);
+  \end{tikzpicture}
+}
+\newtheorem{theorem}{Theorem}
+
+\setmainhangulfont{Noto Serif CJK KR}[
+  UprightFont=* Light, BoldFont=* Bold,
+  Script=Hangul, Language=Korean, AutoFakeSlant,
+]
+\setsanshangulfont{Noto Sans CJK KR}[
+  UprightFont=* DemiLight, BoldFont=* Medium,
+  Script=Hangul, Language=Korean
+]
+\setmathhangulfont{Noto Sans CJK KR}[
+  SizeFeatures={
+    {Size=-6,  Font=* Medium},
+    {Size=6-9, Font=*},
+    {Size=9-,  Font=* DemiLight},
+  },
+  Script=Hangul, Language=Korean
+]
+\title{MATH311: Homework 8 (due May. 2)}
+\author{손량(20220323)}
+\date{Last compiled on: \today, \currenttime}
+
+\newcommand{\un}[1]{\ensuremath{\ \mathrm{#1}}}
+
+\begin{document}
+\maketitle
+
+\section{Section 4 \#11}
+Fix \(\epsilon > 0\).
+By uniform continuity of \(f\), there exists \(\delta > 0\) such that \(d_Y(f(p), f(q)) < \epsilon\) for all \(p, q \in X\) for which \(d_X(p, q) < \delta\).
+Since \(\{x_n\}\) is a Cauchy sequence, there exists an integer \(N > 0\) such that \(d_X(x_n, x_m) < \delta\) if \(n, m \geq N\).
+Thus, \(n, m \geq N\) implies that \(d_X(x_n, x_m) < \delta\) so \(d_Y(f(x_n), f(x_m)) < \epsilon\).
+In conclusion, \(\{f(x_n)\}\) is a Cauchy sequence.
+
+Define \(g : X \to \mathbb{R}\) as follows:
+\begin{align*}
+  g(x) = \begin{cases}
+    f(x) & (x \in E) \\
+    \lim_{n \to \infty} f(x_n) & (x \not \in E)
+  \end{cases}
+\end{align*}
+where \(\{x_n\}\) is a sequence in \(E\) such that \(\lim_{n \to \infty} x_n = x\).
+Then, \(g\) is well defined on \(X\) since for all \(\{x_n\} \subset E\) such that \(\lim_{n \to \infty} x_n = x\), \(\{x_n\}\) is Cauchy sequence so \(\{f(x_n)\}\) is also Cauchy, and from \(\{f(x_n)\} \subset \mathbb{R}\), they converge to the same value.
+Fix \(\epsilon > 0\).
+If \(a, b \in E\), there exists some \(\delta > 0\) such that \(|g(a) - g(b)| < \epsilon / 3\) since \(f\) is uniformly continuous.
+If \(a \in E, b \in X \setminus E\), there exists some \(c \in E\) such that \(d_X(c, b) < \delta - d_X(a, b)\) since \(b \in X \setminus E\) is a limit point of \(E\).
+Then, \(|g(c) - g(b)| < \epsilon / 3\) and we can write
+\begin{align*}
+  d_X(a, c) \leq d_X(a, b) + d_X(c, b) < \delta
+\end{align*}
+so \(|g(a) - g(c)| < \epsilon / 3\), and
+\begin{align*}
+  |g(a) - g(b)| \leq |g(a) - g(c)| + |g(c) - g(b)| < \frac{2\epsilon}{3} < \epsilon
+\end{align*}
+If \(a, b \in X \setminus E\), there exists some \(p, q \in E\) such that
+\begin{align*}
+  d_X(a, p) < \frac{1}{2}(\delta - d_X(a, b)), \quad d_X(b, q) < \frac{1}{2}(\delta - d_X(a, b))
+\end{align*}
+since \(a, b\) are limit points of \(E\).
+Then, \(|g(a) - g(p)| < \epsilon / 3\) and \(|g(b) - g(q)| < \epsilon / 3\) holds, and
+\begin{align*}
+  d_X(p, q) \leq d_X(a, p) + d_X(a, b) + d_X(b, q) < \delta
+\end{align*}
+so \(|g(p) - g(q)| < \epsilon / 3\).
+Thus,
+\begin{align*}
+  |g(a) - g(b)| \leq |g(a) - g(p)| + |g(p) - g(q)| + |g(b) - g(q)| < \epsilon
+\end{align*}
+So \(g\) is uniformly continuous on \(X\), then \(g\) is continuous on \(X\) and \(f\) has a continuous extension from \(E\) to \(X\).
+
+\section{Section 4 \#14}
+Suppose that there exists some continuous mapping \(f : I \to I\) such that \(f(x) \not = x\) for all \(x \in I\).
+Let \(g: I \to I, x \mapsto f(x) - x\).
+Then \(g(x) \not = 0\) for all \(x \in I\).
+In particular, \(g(0) \not = 0\) so \(g(0) > 0\).
+If there exists some \(a \in I\) such that \(g(a) < 0\), there exists \(x \in (0, a)\) such that \(g(x) = 0\) by intermediate value theorem, and it contradicts with the assumption we made earlier.
+Thus, \(g(x) > 0\) for all \(x \in I\).
+However, \(g(1) = f(1) - 1\) and \(f(1) \in I\) so \(-1 \leq g(1) \leq 0\), which is a contradiction.
+Thus, such \(f\) cannot exists and we get the desired result.
+
+\section{Section 4 \#18}
+Fix \(\epsilon > 0\).
+Let \(p\) a real number, \(M\) be an integer where \(0 < 1 / M < \epsilon\), and \(m_n\) be the largest integer such that \(m_n \leq np\) for positive integer \(n\).
+Then, we can write
+\begin{align*}
+  m_n \leq np \leq m_n + 1 \Longleftrightarrow \frac{m_n}{n} \leq p \leq \frac{m_n + 1}{n}
+\end{align*}
+Let \(\delta_1 = \min \{(m_n + 1) / n - p\}\) for \(n = 1, 2, \dots, M\).
+Suppose that there exists some rational \(q = s / t \in (p, p + \delta_1)\) where \(s, t \in \mathbb{Z}\) are coprime and \(0 < t \leq M\).
+If \(q \leq m_t / t\), \(q \leq m_t / t \leq p\) so it is impossible.
+If \(q \geq (m_t + 1) / t\), the following holds:
+\begin{align*}
+  q - p \geq \frac{m_t + 1}{t} - p \geq \delta_1
+\end{align*}
+and it is a contradiction.
+Thus, such \(q\) cannot exist and we can conclude that \(x \in (p, p + \delta_1)\) implies \(f(x) < 1 / M < \epsilon\).
+Let \(\delta_2 = \min\{p - m_n / n\}\) for \(n = 1, 2, \dots, M\).
+Suppose that there exists some rational \(q = s / t \in (p - \delta_2, p)\) where \(s, t \in \mathbb{Z}\) are coprime and \(0 < t \leq M\).
+If \(q \geq (m_t + 1) / t\), \(q \geq (m_t + 1) / t \geq p\) so it is impossible.
+If \(q \leq m_t / t\), the following holds:
+\begin{align*}
+  p - q \geq p - \frac{m_t}{t} \geq \delta_2
+\end{align*}
+and it is a contradiction.
+Thus, such \(q\) cannot exist and we can conclude that \(x \in (p - \delta_2, p)\) implies \(f(x) < 1 / M < \epsilon\).
+Let \(\delta = \min \{\delta_1, \delta_2\}\), then for all \(x \in (p - \delta, p + \delta)\) such that \(x \not = p\), \(0 \geq f(x) < 1 / M < \epsilon\) so \(|f(x) - 0| < \epsilon\).
+Them we can conclude that \(\lim_{x \to p} f(x) = 0\) for all \(p \in \mathbb{R}\).
+If \(p\) is rational, \(f(p) \not = 0\) so \(f(x)\) is not continuous at every rational point, and the discontinuities are simple since \(f(p+) = f(p-) = 0\).
+If \(p\) is irrational, \(f(p) = 0\) so \(f(x)\) is continuous at every irrational point.
+
+\section{Section 4 \#20}
+\subsection{Proof for (a)}
+Suppose that \(\rho_E(x) = \inf_{z \in E} d(x, z) = 0\) and \(x \not \in \Overline{E}\).
+Then, \(x \in (\Overline{E})^C\) and \((\Overline{E})^C\) is an open set, so there exists some \(r > 0\) such that for all \(y \in X\), \(d(x, y) < r\) implies \(y \in (\Overline{E})^C\) so \(y \not \in \Overline{E}\).
+Thus, for all \(z \in \Overline{E}\), \(d(x, z) \geq r\) so \(d(x, z) \geq r\) for all \(z \in E\), which is a contradiction since \(\inf_{z \in E} d(x, z) = 0\).
+We can conclude that \(\rho_E(x) = 0\) implies \(x \in \Overline{E}\).
+
+Suppose that \(x \in \Overline{E}\).
+If \(x \in E\), we can take \(z = x\) and get \(d(x, z) = 0\).
+If \(x \in E'\), for all \(r > 0\) there exists \(z \not = x\) such that \(d(x, z) < r\), so \(\inf_{z \in E} d(x, z) > 0\) is impossible.
+Thus, \(\inf_{z \in E} d(x, z) = 0\) also holds for this case and we can conclude that \(x \in \Overline{E}\) implies \(\rho_E(x) = 0\).
+
+In conclusion, \(\rho_E(x) = 0\) holds if and only if \(x \in \Overline{E}\).
+
+\subsection{Proof for (b)}
+By triangular inequality, \(d(x, z) \leq d(x, y) + d(y, z)\) for all \(z \in E\) and \(x, y \in X\).
+We can take the infinimum of both sides and get \(\inf_{z \in E} d(x, z) \leq d(x, y) + \inf_{z \in E} d(y, z)\).
+(if otherwise, there exists some \(z \in E\) such that \(d(x, y) + d(y, z) < \inf_{t \in E} d(x, t) \leq d(x, z)\), which is a contradiction)
+Thus, we can write \(\rho_E(x) \leq d(x, y) + \rho_E(y)\) so \(|\rho_E(x) - \rho_E(y)| \leq d(x, y)\) holds.
+For all \(\epsilon > 0\), we can take \(\delta = \epsilon\) then for all \(x, y \in X\), \(d(x, y) < \delta\) implies \(|\rho_E(x) - \rho_E(y)| \leq d(x, y) < \delta = \epsilon\), so \(\rho_E\) is a uniformly continuous function on \(X\).
+
+\section{Section 4 \#21}
+Using the result from \#20 (b), \(\rho_F\) is a uniformly continuous function on \(X\).
+By extreme value theorem, there exists \(x_0 \in K\) such that \(\rho_F(x_0) = \inf_{p \in K} \rho_F(p)\).
+Then we can write
+\begin{align*}
+  \rho_F(x_0) = \inf_{p \in K} \rho_F(p) = \inf_{p \in K, q \in F} d(p, q)
+\end{align*}
+Since \(K\) and \(F\) are disjoint, \(x \in K\) implies \(x \not \in F\), and since \(F\) is closed \(F = \Overline{F}\) so \(x \not \in \Overline{F}\).
+Using the result from \#20 (a), \(\rho_F(x) > 0\) for all \(x \in K\) so \(\rho_F(x_0) > 0\).
+Then, we can take \(\delta \in (0, \rho_F(x_0))\) and \(d(p, q) \geq \rho_F(x_0) > \delta\) for all \(p \in K, q \in F\).
+
+Consider the subsets of \(\mathbb{R}^2\), \(A = \{(x, 0); x \in \mathbb{R}\}\) and \(B = \{(0, 1 / x); x \in \mathbb{R}, n > 0\}\).
+For all points \((a, b) \in \mathbb{R}^2\) where \(b \not = 0\), all points \(p \in \mathbb{R}^2\) such that \(d(p, (a, b)) < b / 2\) are not in \(A\), so such \((a, b)\) is an interior point of \(A^C\).
+Thus, \(A^C\) is open so \(A\) is closed, but not bounded so \(A\) is not compact.
+Let \(f : (0, \infty) \to \mathbb{R}^2, x \mapsto (x, 1 / x)\).
+Then \(f\) is a continuous function defined on \((0, \infty)\).
+For all converging sequence \(\{(x_n, 1 / x_n)\}\) on \(B\), the point the sequence is converging to is also a point in \(B\) since \(B\) is a graph of \(f\), which is continuous.
+Thus \(B' \subset B\) and \(B\) is closed, but not bounded so \(B\) is not compact.
+Suppose that for all \(p \in A, q \in B\), \(d(p, q) > \delta\) for some \(\delta > 0\).
+Since \((1 / \delta, 0) \in A\) and \((1 / \delta, \delta) \in B\), \(d((1 / \delta, 0), (1 / \delta, \delta)) = \delta\) and it is a contradiction, so such \(\delta\) cannot exist.
+
+\section{Section 4 \#22}
+Since \(A\) and \(B\) are disjoint nonempty closed sets, \(\Overline{A} \cap \Overline{B} = A \cap B = \varnothing\), so there is no \(p \in X\) such that \(\rho_A(p) = \rho_B(p) = 0\).
+Thus, \(f(p)\) is continuous on \(X\) since continuous function on \(X\) satisfies \(\rho_A(p) + \rho_B(p) \not = 0\) for all \(p \in X\), and \(\rho_A(p)\) is also continuous, so \(\rho_A(p) / (\rho_A(p) + \rho_B(p))\) is also continuous on \(X\).
+Since \(\rho_A(p)\) and \(\rho_B(p)\) are both nonnegative, \(f(p) \geq 0\) and \(f(p) \leq 1\) from \(\rho_A(p) \leq \rho_A(p) + \rho_B(p)\).
+If \(p \in A\), then \(\rho_A(p) = 0\) and \(\rho_B(p) \not = 0\), so \(f(p) = 0\).
+If \(p \in B\), then \(\rho_A(p) \not = 0\) and \(\rho_B(p) = 0\), so \(f(p) = 1\).
+By intermediate value theorem, for all \(y \in (0, 1)\) there exists \(x \in (0, 1)\) such that \(f(x) = y\).
+Thus, the range of \(f\) lies in \([0, 1]\).
+
+Let \(g : X \to [0, 1], p \mapsto f(p)\), then \(g\) is a continuous function on \(X\).
+Since \([0, 1/2), (1/2, 1]\) are both open in \([0, 1]\), \(V = g^{-1}([0, 1/2)) = f^{-1}([0, 1/2))\) and \(W = g^{-1}((1/2, 1]) = f^{-1}((1/2, 1])\) are both open in \(X\).
+By the result proved in \#20 (a), \(f(p) = 1\) if and only if \(p \in A\), and \(f(p) = 0\) if and only if \(p \in B\) so \(A = f^{-1}(\{1\}) \subset V, B = f^{-1}(\{0\}) \subset W\).
+Also, since \(f\) cannot map a single value in \(X\) to multiple values, \(f^{-1}([0, 1/2))\) and \(f^{-1}((1/2, 1])\) are disjoint because \([0, 1/2), (1/2, 1]\) are disjoint.
+
+\section{Section 4 \#23}
+Let \(p \in (a, b)\), \(h > 0\) such that \((p - h, p + h) \subset (a, b)\), and \(M = \max \{f(p - h), f(p + h)\}\).
+Then, for all \(\lambda \in (0, 1)\), \(f(\lambda (p - h) + (1 - \lambda) (p + h)) \leq \lambda f(p - h) + (1 - \lambda) f(p + h) \leq M\), so \(f(x) \leq M\) for all \(x \in (p - h, p + h)\).
+Let \(t \in (-h, h)\).
+Then we can write
+\begin{align*}
+  f(p) \leq \frac{1}{2} f(p + t) + \frac{1}{2} f(p - t)
+\end{align*}
+so
+\begin{align*}
+  f(p + t) \geq 2f(p) - f(p - t) \geq 2f(p) - M
+\end{align*}
+Thus, \(2f(p) - M \leq f(x) \leq M\) holds for all \(x \in (p - h, p + h)\).
+Let \(x, y \in (p - h, p + h)\) and \(x < y\).
+Take \(\epsilon > 0\) such that \(y + \epsilon < p + h\), then \(\lambda = |y - x| / (|y - x| + \epsilon)\).
+Let \(z = x + (y - x) / \lambda = y + \epsilon\), then \(z \in (p - h, p + h)\).
+Then we can write
+\begin{align*}
+  f(y) \leq \lambda f(z) + (1 - \lambda) f(x) = \lambda (f(z) - f(x)) + f(x)
+\end{align*}
+so
+\begin{align*}
+  f(y) - f(x) = \lambda (M - (2f(p) - M)) < \frac{|y - x|}{\epsilon} (2M - 2f(p))
+\end{align*}
+By taking \(\delta = \epsilon^2 / (4M - 4f(p))\) for all \(x, y \in (p - h, p + h)\) such that \(|x - y| < \delta\), \(|f(y) - f(x)| \leq \epsilon / 2 < \epsilon\).
+In conclusion, \(f\) is uniformly continuous on \((p - h, p + h)\), so it is continuous at \(x = p\), so \(f\) is continuous on \((a, b)\).
+
+Suppose that \(f : (a, b) \to \mathbb{R}\) is a convex function, and \(g : f((a, b)) \to \mathbb{R}\) is an increasing convex function.
+For all \(x, y \in (a, b)\) and \(\lambda \in (0, 1)\), the following holds:
+\begin{align}\label{sec7_f_convex}
+  f(\lambda x + (1 - \lambda) y) \leq \lambda f(x) + (1 - \lambda) f(y)
+\end{align}
+The following also holds:
+\begin{align*}
+  g(\lambda f(x) + (1 - \lambda) f(y)) \leq \lambda g(f(x)) + (1 - \lambda) g(f(y))
+\end{align*}
+Since \(g\) is increasing function, from (\ref{sec7_f_convex}),
+\begin{align*}
+  g(f(\lambda x + (1 - \lambda) y)) \leq g(\lambda f(x) + (1 - \lambda) f(y)) \leq \lambda g(f(x)) + (1 - \lambda) g(f(y))
+\end{align*}
+Thus \(g(f(x))\) is also a convex function on \((a, b)\).
+
+From
+\begin{align}\label{sec7_ineq_first}
+  \frac{f(t) - f(s)}{t - s} \leq \frac{f(u) - f(s)}{u - s}
+\end{align}
+we can write the equivalent inequalities of (\ref{sec7_ineq_first}).
+\begin{align*}
+  (u - s)(f(t) - f(s)) &\leq (t - s)(f(u) - f(s)) \\
+  (u - s)f(t) &\leq (t - s)f(u) + (u - t)f(s) \\
+  f(t) &\leq \frac{t - s}{u - s} f(u) + \frac{u - t}{u - s} f(s) \\
+  f \left( \frac{t - s}{u - s} u + \left( 1 - \frac{t - s}{u - s} \right) s \right) &\leq \frac{t - s}{u - s} f(u) + \left( 1 - \frac{t - s}{u - s} \right) f(s)
+\end{align*}
+From the definition of convexivity, (\ref{sec7_ineq_first}) holds since \((t - s) / (u - s) \in (0, 1)\).
+From
+\begin{align}\label{sec7_ineq_second}
+  \frac{f(u) - f(s)}{u - s} \leq \frac{f(u) - f(t)}{u - t}
+\end{align}
+we can again write the equivalent inequalities of (\ref{sec7_ineq_second}).
+\begin{align*}
+  (u - t)(f(u) - f(s)) &\leq (u - s)(f(u) - f(t)) \\
+  (s - t)f(u) &\leq (u - t)f(s) - (u - s)f(t) \\
+  f(u) &\leq \frac{u - t}{s - t}f(s) - \frac{u - s}{s - t}f(t) \\
+  f \left( \frac{u - t}{s - t} s + \left( 1 - \frac{u - t}{s - t} \right) t \right) &\leq \frac{u - t}{s - t}f(s) + \left( 1 - \frac{u - t}{s - t} \right) f(t)
+\end{align*}
+From the definition of convexivity, (\ref{sec7_ineq_second}) holds since \((u - t) / (s - t) \in (0, 1)\).
+
+\end{document}
