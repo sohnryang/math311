@@ -14,6 +14,13 @@
 
 \pgfplotsset{compat=1.15}
 \usetikzlibrary{arrows}
+
+\newcommand\Overline[2][0.8pt]{%
+  \begin{tikzpicture}[baseline=(a.base)]
+    \node[inner xsep=0pt,inner ysep=1.5pt] (a) {$#2$};
+    \draw[line width= #1] (a.north west) -- (a.north east);
+  \end{tikzpicture}
+}
 \newtheorem{theorem}{Theorem}
 
 \setmainhangulfont{Noto Serif CJK KR}[
@@ -37,6 +44,11 @@
 \date{Last compiled on: \today, \currenttime}
 
 \newcommand{\un}[1]{\ensuremath{\ \mathrm{#1}}}
+\newcommand{\imag}{\operatorname{Im}}
+\newcommand{\real}{\operatorname{Re}}
+\newcommand{\Log}{\operatorname{Log}}
+\newcommand{\Arg}{\operatorname{Arg}}
+\DeclareMathOperator*{\Res}{Res}
 
 \begin{document}
 \maketitle
