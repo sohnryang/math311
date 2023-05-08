@@ -1,0 +1,192 @@
+\documentclass{scrartcl}
+\usepackage[margin=3cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{blindtext}
+\usepackage{datetime}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage{kotex}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{pgf,tikz,pgfplots}
+
+\pgfplotsset{compat=1.15}
+\usetikzlibrary{arrows}
+
+\newcommand\Overline[2][0.8pt]{%
+  \begin{tikzpicture}[baseline=(a.base)]
+    \node[inner xsep=0pt,inner ysep=1.5pt] (a) {$#2$};
+    \draw[line width= #1] (a.north west) -- (a.north east);
+  \end{tikzpicture}
+}
+\newtheorem{theorem}{Theorem}
+
+\setmainhangulfont{Noto Serif CJK KR}[
+  UprightFont=* Light, BoldFont=* Bold,
+  Script=Hangul, Language=Korean, AutoFakeSlant,
+]
+\setsanshangulfont{Noto Sans CJK KR}[
+  UprightFont=* DemiLight, BoldFont=* Medium,
+  Script=Hangul, Language=Korean
+]
+\setmathhangulfont{Noto Sans CJK KR}[
+  SizeFeatures={
+    {Size=-6,  Font=* Medium},
+    {Size=6-9, Font=*},
+    {Size=9-,  Font=* DemiLight},
+  },
+  Script=Hangul, Language=Korean
+]
+\title{MATH311: Homework 9 (due May. 9)}
+\author{손량(20220323)}
+\date{Last compiled on: \today, \currenttime}
+
+\newcommand{\un}[1]{\ensuremath{\ \mathrm{#1}}}
+\newcommand{\imag}{\operatorname{Im}}
+\newcommand{\real}{\operatorname{Re}}
+\newcommand{\Log}{\operatorname{Log}}
+\newcommand{\Arg}{\operatorname{Arg}}
+\DeclareMathOperator*{\Res}{Res}
+
+\begin{document}
+\maketitle
+
+\section{Section 5 \#1}
+For all \(x \in \mathbb{R}\) and \(h > 0\), we can write
+\begin{align*}
+  |f(x + h) - f(x)| \leq h^2
+\end{align*}
+Then
+\begin{align*}
+  \left| \frac{f(x + h) - f(x)}{h} \right| \leq h
+\end{align*}
+taking the limit \(h \to 0\) to the both sides, by sandwich theorem we know that \(f'(x) = 0\) for all \(x \in \mathbb{R}\).
+For all \(x \not = 0\), there exists some \(c \in (\min\{0, x\}, \max\{0, x\})\) such that \(xf'(c) = f(x) - f(0)\) by mean value theorem.
+Since \(f'(c) = 0\), \(f(x) = f(0)\) for all \(x \not = 0\), so \(f(x)\) is constant.
+
+\section{Section 5 \#2}
+Suppose that \(f\) is not strictly increasing in \((a, b)\).
+There exists some \(x_1, x_2\) such that \(x_1 < x_2\) and \(f(x_1) \geq f(x_2)\).
+Then, we can write
+\begin{align*}
+  \frac{f(x_1) - f(x_2)}{x_1 - x_2} \leq 0
+\end{align*}
+By mean value theorem, there exists some \(c \in (x_1, x_2)\) such that \(f'(c) = (f(x_1) - f(x_2)) / (x_1 - x_2) \leq 0\), which is a contradiction.
+Thus, \(f\) is strictly increasing in \((a, b)\).
+
+Fix \(x \in f((a, b))\), and let \(y = f(x)\).
+For sufficiently small \(\delta > 0\), there exists some \(x_1, x_2 \in (a, b)\) such that \(f(x_1) = y - \delta\) and \(f(x_2) = y + \delta\) since \(f\) is a strictly increasing function defined on an open set.
+Let \(h(k) = g(y + k) - g(y)\) where \(k \in (-\delta, \delta)\).
+Since \(f\) is a strictly increasing function, \(g\) is also a strictly increasing function so \(x + h(k) = g(y + k) \in (g(y - \delta), g(y + \delta)) \subset (a, b)\) holds.
+Then we can write
+\begin{align*}
+  \lim_{k \to 0} \frac{g(y + k) - g(y)}{k} = \lim_{k \to 0} \frac{h(k)}{f(x + h(k)) - f(x)}
+\end{align*}
+Since \(f\) is a strictly increasing function on \((a, b)\), \(f\) maps all open subsets of \((a, b)\) to open set and \(g\) is continuous.
+Then \(h(k) \to 0\) as \(k \to 0\), so we can write
+\begin{align*}
+  \lim_{k \to 0} \frac{h(k)}{f(x + h(k)) - f(x)} = \lim_{h \to 0} \frac{h}{f(x + h) - f(x)} = \frac{1}{f'(x)}
+\end{align*}
+Let \(h(t) = g(f(t))\), then since \(g\) is differentiable at \(f(x)\), \(h\) is differentiable at \(x\) and \(h'(x) = g'(f(x))f'(x)\).
+Since \(h(t) = g(f(t)) = t\), we can write
+\begin{align*}
+  g'(f(x)) = \frac{1}{f'(x)}
+\end{align*}
+
+\section{Section 5 \#5}
+Fix \(\epsilon > 0\).
+Since \(f'(x) \to 0\) as \(x \to \infty\), there exists \(M \in \mathbb{R}\) such that \(x > M\) implies \(|f'(x)| < \epsilon\).
+By mean value theorem, there exists \(z \in (x, x + 1)\) such that \(f'(z) = f(x + 1) - f(x) = g(x)\).
+Then, \(x > M\) implies \(|g(x)| = |f(x + 1) - f(x)| = |f'(z)| < \epsilon\) as \(z > M\) so \(g(x) \to 0\) as \(x \to \infty\).
+
+\section{Section 5 \#6}
+By mean value theorem, there exists \(z \in (0, x)\) such that \(f'(z) = f(x) / x = (f(x) - f(0)) / (x - 0)\) for all \(x \geq 0\).
+Since \(f'\) is monotonically increasing, \(f'(x) \geq f'(z)\) so \(f'(x) - f(x) / x \geq 0\) for all \(x \geq 0\).
+For \(x > 0\), \(g'(x) = (xf'(x) - f(x)) / x^2 = (f'(x) - f(x) / x) / x \geq 0\), so \(g\) is monotonically increasing in \((0, \infty)\).
+
+\section{Section 5 \#9}
+Fix \(\epsilon > 0\).
+There exists \(\delta > 0\) such that \(|x| < \delta\) implies \(|f'(x) - 3| < \epsilon\).
+For all \(h > 0\), by mean value theorem there exists \(x \in (0, h)\) such that \(f'(x) = (f(h) - f(0)) / h\).
+Likewise, for all \(h < 0\) again by mean value theorem there exists \(x \in (h, 0)\) such that \(f'(x) = (f(h) - f(0)) / h\).
+Thus, if \(|h| < \delta\), there exists some \(0 < |x| < |h|\) such that \(f'(x) = (f(h) - f(0)) / h\), so we can write
+\begin{align*}
+  \left| \frac{f(h) - f(0)}{h} - 3 \right| = \left| f'(x) - 3 \right| < \epsilon
+\end{align*}
+and know that \(\lim_{h \to 0} (f(h) - f(0)) / h = 3\), so \(f'(0) = 3\).
+
+\section{Section 5 \#11}
+Since \(f''(x)\) exists, \(f'\) exists in a neighborhood of \(x\).
+Applying theorem~5.13,
+\begin{align*}
+  \lim_{h \to 0} \frac{f(x + h) + f(x - h) - 2f(x)}{h^2}
+  &= \lim_{h \to 0} \frac{f'(x + h) - f'(x - h)}{2h} \\
+  &= \lim_{h \to 0} \frac{f'(x + h) - f'(x)}{2h} + \lim_{h \to 0} \frac{f'(x) - f'(x - h)}{2h} \\
+  &= \frac{f''(x)}{2} + \frac{f''(x)}{2} = f''(x)
+\end{align*}
+
+Let \(f : \mathbb{R} \to \mathbb{R}\) as follows:
+\begin{align*}
+  f(x) = \begin{cases}
+    x^2 & (x \geq 0) \\
+    -x^2 & (x < 0)
+  \end{cases}
+\end{align*}
+Then we can write
+\begin{align*}
+  \lim_{h \to 0} \frac{f(h) + f(-h) - 2f(0)}{h^2}
+  = \lim_{h \to 0} \frac{h^2 + (-h^2)}{h^2} = 0
+\end{align*}
+However, since \(f'(x) = 2|x|\), \(f\) is not twice differentiable at 0.
+
+\section{Section 5 \#14}
+Suppose that \(f\) is convex, then for all \(s, t, u \in (a, b)\) such that \(s < t < u\),
+\begin{align*}
+  \frac{f(t) - f(s)}{t - s} \leq \frac{f(u) - f(s)}{u - s} \leq \frac{f(u) - f(t)}{u - t}
+\end{align*}
+Then we can write
+\begin{align*}
+  f'(s) = \lim_{t \to s} \frac{f(t) - f(s)}{t - s} \leq \lim_{t \to u} \frac{f(u) - f(t)}{u - t} = f'(u)
+\end{align*}
+so \(a < s < t < u\) implies \(f'(s) \leq f'(u)\) and \(f'\) is monotonically increasing.
+
+Now, suppose that \(f'\) is monotonically increasing.
+For \(x, y \in (a, b)\) and \(\lambda \in (0, 1)\), if \(x < y\) then by mean value theorem there exists \(x_1 \in (x, \lambda x + (1 - \lambda) y)\) and \(x_2 \in (\lambda x + (1 - \lambda) y, y)\) such that
+\begin{align*}
+  \frac{f(\lambda x + (1 - \lambda) y) - f(x)}{[\lambda x + (1 - \lambda) y] - x} = f'(x_1)
+  \leq f'(x_2) = \frac{f(y) - f(\lambda x + (1 - \lambda) y)}{y - [\lambda x + (1 - \lambda) y]}
+\end{align*}
+Then we can write
+\begin{align*}
+  \frac{f(\lambda x + (1 - \lambda) y) - f(x)}{(1 - \lambda)(y - x)}
+  &\leq \frac{f(y) - f(\lambda x + (1 - \lambda) y)}{\lambda (y - x)} \\
+  \lambda (f(\lambda x + (1 - \lambda) y) - f(x)) &\leq (1 - \lambda)(f(y) - f(\lambda x + (1 - \lambda) y)) \\
+  f(\lambda x + (1 - \lambda) y) &\leq \lambda f(x) + (1 - \lambda) f(y)
+\end{align*}
+If \(x > y\), there exists \(x_1 \in (y, \lambda x + (1 - \lambda) y)\) and \(x_2 \in (\lambda x + (1 - \lambda) y, x)\) such that
+\begin{align*}
+  \frac{f(\lambda x + (1 - \lambda) y) - f(y)}{[\lambda x + (1 - \lambda) y] - y} = f'(x_1)
+  \leq f'(x_2) = \frac{f(x) - f(\lambda x + (1 - \lambda) y)}{x - [\lambda x + (1 - \lambda) y]}
+\end{align*}
+Then we can also write
+\begin{align*}
+  \frac{f(\lambda x + (1 - \lambda) y) - f(y)}{\lambda (x - y)}
+  &\leq \frac{f(x) - f(\lambda x + (1 - \lambda) y)}{(1 - \lambda)(x - y)} \\
+  (1 - \lambda)(f(\lambda x + (1 - \lambda) y) - f(y)) &\leq \lambda (f(x) - f(\lambda x + (1 - \lambda) y)) \\
+  f(\lambda x + (1 - \lambda) y) &\leq \lambda f(x) + (1 - \lambda) f(y)
+\end{align*}
+If \(x = y\), \(f(\lambda x + (1 - \lambda) y) \leq \lambda f(x) + (1 - \lambda) f(y)\) obviously holds, so \(f\) is convex.
+
+Suppose that \(f''(x) \geq 0\) for all \(x \in (a, b)\).
+Then, \(f'\) is a monotonically increasing function so \(f\) is convex.
+If \(f\) is convex, \(f'\) is a monotonically increasing differentiable function.
+Then, for all \(x \in (a, b)\) and \(h\) such that \(x + h \in (a, b)\), we can write
+\begin{align*}
+  \frac{f'(x + h) - f'(x)}{h} \geq 0
+\end{align*}
+as \(f'\) is monotonically increasing.
+By sandwich theorem, \(f''(x) = \lim_{h \to 0} (f'(x + h) - f(x)) / h \geq 0\) and we get the desired result.
+
+\end{document}
