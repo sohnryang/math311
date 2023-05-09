@@ -102,9 +102,9 @@ By mean value theorem, there exists \(z \in (x, x + 1)\) such that \(f'(z) = f(x
 Then, \(x > M\) implies \(|g(x)| = |f(x + 1) - f(x)| = |f'(z)| < \epsilon\) as \(z > M\) so \(g(x) \to 0\) as \(x \to \infty\).
 
 \section{Section 5 \#6}
-By mean value theorem, there exists \(z \in (0, x)\) such that \(f'(z) = f(x) / x = (f(x) - f(0)) / (x - 0)\) for all \(x \geq 0\).
+By mean value theorem, there exists \(z \in (0, x)\) such that \(f'(z) = f(x) / x = (f(x) - f(0)) / (x - 0)\) for all \(x > 0\).
 Since \(f'\) is monotonically increasing, \(f'(x) \geq f'(z)\) so \(f'(x) - f(x) / x \geq 0\) for all \(x \geq 0\).
-For \(x > 0\), \(g'(x) = (xf'(x) - f(x)) / x^2 = (f'(x) - f(x) / x) / x \geq 0\), so \(g\) is monotonically increasing in \((0, \infty)\).
+For \(x > 0\), \(g\) is differentiable and \(g'(x) = (xf'(x) - f(x)) / x^2 = (f'(x) - f(x) / x) / x \geq 0\), so \(g\) is monotonically increasing in \((0, \infty)\).
 
 \section{Section 5 \#9}
 Fix \(\epsilon > 0\).
@@ -150,7 +150,7 @@ Then we can write
 \begin{align*}
   f'(s) = \lim_{t \to s} \frac{f(t) - f(s)}{t - s} \leq \lim_{t \to u} \frac{f(u) - f(t)}{u - t} = f'(u)
 \end{align*}
-so \(a < s < t < u\) implies \(f'(s) \leq f'(u)\) and \(f'\) is monotonically increasing.
+so \(a < s < u < b\) implies \(f'(s) \leq f'(u)\) by sandwich theorem, and \(f'\) is monotonically increasing.
 
 Now, suppose that \(f'\) is monotonically increasing.
 For \(x, y \in (a, b)\) and \(\lambda \in (0, 1)\), if \(x < y\) then by mean value theorem there exists \(x_1 \in (x, \lambda x + (1 - \lambda) y)\) and \(x_2 \in (\lambda x + (1 - \lambda) y, y)\) such that
@@ -182,7 +182,7 @@ If \(x = y\), \(f(\lambda x + (1 - \lambda) y) \leq \lambda f(x) + (1 - \lambda)
 Suppose that \(f''(x) \geq 0\) for all \(x \in (a, b)\).
 Then, \(f'\) is a monotonically increasing function so \(f\) is convex.
 If \(f\) is convex, \(f'\) is a monotonically increasing differentiable function.
-Then, for all \(x \in (a, b)\) and \(h\) such that \(x + h \in (a, b)\), we can write
+Then, for all \(x \in (a, b)\) and \(h > 0\) such that \(x + h \in (a, b)\), we can write
 \begin{align*}
   \frac{f'(x + h) - f'(x)}{h} \geq 0
 \end{align*}
