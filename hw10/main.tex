@@ -1,0 +1,470 @@
+\documentclass{scrartcl}
+\usepackage[margin=3cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{blindtext}
+\usepackage{datetime}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage{kotex}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{pgf,tikz,pgfplots}
+
+\pgfplotsset{compat=1.15}
+\usetikzlibrary{arrows}
+
+\newcommand\Overline[2][0.8pt]{%
+  \begin{tikzpicture}[baseline=(a.base)]
+    \node[inner xsep=0pt,inner ysep=1.5pt] (a) {$#2$};
+    \draw[line width= #1] (a.north west) -- (a.north east);
+  \end{tikzpicture}
+}
+\newtheorem{theorem}{Theorem}
+
+\setmainhangulfont{Noto Serif CJK KR}[
+  UprightFont=* Light, BoldFont=* Bold,
+  Script=Hangul, Language=Korean, AutoFakeSlant,
+]
+\setsanshangulfont{Noto Sans CJK KR}[
+  UprightFont=* DemiLight, BoldFont=* Medium,
+  Script=Hangul, Language=Korean
+]
+\setmathhangulfont{Noto Sans CJK KR}[
+  SizeFeatures={
+    {Size=-6,  Font=* Medium},
+    {Size=6-9, Font=*},
+    {Size=9-,  Font=* DemiLight},
+  },
+  Script=Hangul, Language=Korean
+]
+\title{MATH311: Homework 10 (due May. 16)}
+\author{손량(20220323)}
+\date{Last compiled on: \today, \currenttime}
+
+\newcommand{\un}[1]{\ensuremath{\ \mathrm{#1}}}
+\newcommand{\imag}{\operatorname{Im}}
+\newcommand{\real}{\operatorname{Re}}
+\newcommand{\Log}{\operatorname{Log}}
+\newcommand{\Arg}{\operatorname{Arg}}
+\DeclareMathOperator*{\Res}{Res}
+
+\begin{document}
+\maketitle
+
+\section{Section 5 \#19}
+\subsection{Proof for (a)}
+Fix \(\epsilon > 0\).
+Since \(f'(0)\) exists, there exists some positive integer \(N\) such that \(n \geq N\) implies
+\begin{align*}
+  \left| \frac{f(\beta_n) - f(0)}{\beta_n} - f'(0) \right| < \frac{\epsilon}{2},\,
+  \left| \frac{f(0) - f(\alpha_n)}{-\alpha_n} - f'(0) \right| < \frac{\epsilon}{2}
+\end{align*}
+Since \(\alpha_n < 0 < \beta_n\), we can write
+\begin{align*}
+  \frac{\beta_n}{\beta_n - \alpha_n} \left| \frac{f(\beta_n) - f(0)}{\beta_n} - f'(0) \right| < \frac{\epsilon}{2},\,
+  \frac{-\alpha_n}{\beta_n - \alpha_n} \left| \frac{f(0) - f(\alpha_n)}{-\alpha_n} - f'(0) \right| < \frac{\epsilon}{2}
+\end{align*}
+By triangular inequality,
+\begin{align*}
+  \left| D_n - f'(0) \right|
+  &= \left| \frac{\beta_n}{\beta_n - \alpha_n} \frac{f(\beta_n) - f(0)}{\beta_n} + \frac{-\alpha_n}{\beta_n - \alpha_n} \frac{f(0) - f(\alpha_n)}{-\alpha_n} - f'(0) \right| \\
+  &\leq \frac{\beta_n}{\beta_n - \alpha_n} \left| \frac{f(\beta_n) - f(0)}{\beta_n} - f'(0) \right| + \frac{-\alpha_n}{\beta_n - \alpha_n} \left| \frac{f(0) - f(\alpha_n)}{-\alpha_n} - f'(0) \right| \\
+  &< \frac{\epsilon}{2} + \frac{\epsilon}{2} < \epsilon
+\end{align*}
+so \(\lim_{n \to \infty} D_n = f'(0)\).
+
+\subsection{Proof for (b)}
+We can write
+\begin{align}
+  \nonumber D_n
+  &= \frac{f(\beta_n) - f(0)}{\beta_n - \alpha_n} - \frac{f(\alpha_n) - f(0)}{\beta_n - \alpha_n} \\
+  \nonumber &= \frac{f(\beta_n) - f(0)}{\beta_n} \cdot \frac{\beta_n}{\beta_n - \alpha_n} - \frac{f(\alpha_n) - f(0)}{\alpha_n} \cdot \frac{\alpha_n}{\beta_n - \alpha_n} \\
+  \nonumber &= \frac{f(\beta_n) - f(0)}{\beta_n} \cdot \frac{\beta_n}{\beta_n - \alpha_n} - \frac{f(\alpha_n) - f(0)}{\alpha_n} \left( \frac{\beta}{\beta_n - \alpha_n} - 1 \right) \\
+  \label{sec1_2_equality} &= \frac{f(\alpha_n) - f(0)}{\alpha_n} + \frac{\beta_n}{\beta_n - \alpha_n} \left( \frac{f(\beta_n) - f(0)}{\beta_n} - \frac{f(\alpha_n) - f(0)}{\alpha_n} \right)
+\end{align}
+Since \(\beta_n / (\beta_n - \alpha_n)\) is bounded, there exists some positive real number \(M\) such that \(\beta_n / (\beta_n - \alpha_n) \leq M\) and \(\beta_n > \alpha_n > 0\) so \(\beta_n / (\beta_n - \alpha_n) > 0\).
+Using (\ref{sec1_2_equality}), we can write
+\begin{align}\label{sec1_2_ineq}
+  \frac{f(\alpha_n) - f(0)}{\alpha_n}
+  < D_n
+  \leq \frac{f(\alpha_n) - f(0)}{\alpha_n} + M\left( \frac{f(\beta_n) - f(0)}{\beta_n} - \frac{f(\alpha_n) - f(0)}{\alpha_n} \right)
+\end{align}
+Since \(f'(0)\) exists and \(a_n \to 0\) and \(b_n \to 0\) as \(n \to \infty\), we can take the limit of all sides of (\ref{sec1_2_ineq}) and obtain
+\begin{align*}
+  f'(0) \leq \lim_{n \to \infty} D_n \leq f'(0) + M (f'(0) - f'(0)) = f'(0)
+\end{align*}
+Thus, \(\lim_{n \to \infty} D_n = f'(0)\).
+
+\subsection{Proof for (c)}
+Fix \(\epsilon > 0\).
+From continuity of \(f'(x)\), there exists some \(\delta > 0\) such that \(|x| < \delta\) implies \(|f'(x) - f'(0)| < \epsilon\).
+Since \(\alpha_n \to 0\) and \(\beta_n \to 0\) as \(n \to \infty\), there exists some positive integer \(N\) such that \(n \geq N\) implies \(|\alpha_n| < \delta\) and \(|\beta_n| < \delta\).
+By mean value theorem, for all \(n\) there exists \(\gamma_n\) between \(\alpha_n\) and \(\beta_n\) such that \(f'(\gamma_n) = D_n\).
+Then, \(n \geq N\) implies \(|\gamma_n| < \delta\), hence \(|f'(\gamma_n) - f'(0)| < \epsilon\).
+Thus, we can conclude that \(\lim_{n \to \infty} D_n = f'(0)\).
+
+\section{Section 5 \#22}
+\subsection{Proof for (a)}
+Suppose that \(f(x)\) has two fixed points, \(\alpha\) and \(\beta\).
+By mean value theorem, there exists \(\gamma\) between \(\alpha\) and \(\beta\) such that
+\begin{align*}
+  f'(\gamma) = \frac{f(\alpha) - f(\beta)}{\alpha - \beta} = \frac{\alpha - \beta}{\alpha - \beta} = 1
+\end{align*}
+which is a contradiction.
+
+\subsection{Proof for (b)}
+We can write
+\begin{align*}
+  f'(t) = 1 - \frac{e^t}{(1 + e^t)^2}
+\end{align*}
+Since \(e^t > 0\) for all \(t\), \(e^t < 1 + e^t < (1 + e^t)^2\), so \(0 < e^t / (1 + e^t)^2 < 1\) and \(0 < f'(t) < 1\).
+Also, \((1 + e^t)^{-1} > 0\) for all \(t\) and \(f(t) > t\) and \(f\) does not have any fixed point.
+
+\subsection{Proof for (c)}
+Let \(g(t) = f(t) - t\).
+Suppose that \(f(t)\) does not have any fixed point.
+Then, Since \(f\) is differentiable, \(f\) is continuous and \(g\) is also continuous, and intermediate value theorem tells us that either \(g(t) > 0\) or \(g(t) < 0\) holds as \(g(t) \not = 0\) for all \(t\).
+For all real \(t\), \(|f'(t)| = |g'(t) + 1| \leq A\) so \(-A - 1 \leq g'(t) \leq A - 1 < 0\).
+
+Let's consider the case where \(g(t) > 0\) for all \(t\).
+By mean value theorem, for all \(t > s\), we can write
+\begin{align}
+  \label{sec2_3_mvt} \frac{g(t) - g(s)}{t - s} &\leq A - 1 \\
+  \nonumber g(t) &\leq (t - s)(A - 1) + g(s)
+\end{align}
+We can take \(t = s - g(s) / (A - 1)\), then
+\begin{align*}
+  g(t) \leq \left( s - \frac{g(s)}{A - 1} - s \right) (A - 1) + g(s) = 0
+\end{align*}
+which is a contradiction.
+
+Now, let's consider the case where \(g(t) < 0\) for all \(t\).
+Using the mean value theorem again, (\ref{sec2_3_mvt}) holds for all \(t > s\).
+Then we can write
+\begin{align*}
+  g(s) \geq g(t) - (t - s)(A - 1)
+\end{align*}
+Taking \(s = t - g(t) / (A - 1)\),
+\begin{align*}
+  g(s) \geq g(t) - \left( t - t + \frac{g(t)}{A - 1} \right) (A - 1) = 0
+\end{align*}
+which is a contradiction.
+In conclusion, \(f(t)\) has at least one fixed point.
+
+Since \(x_{n + 1} = f(x_n)\), \(x_{n + 1} - x = f(x_n) - x = f(x_n) - f(x)\).
+By mean value theorem, there exists \(c_n\) between \(x\) and \(x_n\) such that
+\begin{align*}
+  x_{n + 1} - x = f(x_n) - f(x) = (x_n - x) f'(c_n)
+\end{align*}
+so
+\begin{align*}
+  |x_{n + 1} - x| \leq A |x_n - x|
+\end{align*}
+by induction, we obtain
+\begin{align*}
+  |x_{n + 1} - x| \leq A^n |x_1 - x|
+\end{align*}
+and since \(0 \geq A < 1\), taking the limit of both sides gives us
+\begin{align*}
+  \lim_{n \to \infty} |x_{n + 1} - x| \leq \lim_{n \to \infty} A^n |x_1 - x| = 0
+\end{align*}
+so \(\lim_{n \to \infty} x_n = x\) by sandwich theorem and we get the desired result.
+
+\subsection{Solution for (d)}
+As \(x_{n + 1} = f(x_n)\), \((x_n, x_{n + 1}) = (x_n, f(x_n))\) is a point on \(y = f(x)\).
+Thus, the process in (c) can be visualized by the path in the problem statement.
+
+\section{Section 5 \#25}
+\subsection{Solution for (a)}
+A line tangent to the graph of \(f(x)\) at the point \((x_n, f(x_n))\) is \(y = f'(x_n) (x - x_n) + f(x_n)\).
+From this, we know that the tangent line passes \((x_{n + 1}, 0)\).
+Thus, we can interpret \(x_{n + 1}\) as the \(x\)-intercept of the tangent line of \(f(x)\) at the point \((x_n, f(x_n))\).
+
+\subsection{Proof for (b)}
+Suppose that \(x_k \in (\xi, b)\).
+Mean value theorem tells us that there exists some \(c \in (\xi, x_n)\) such that
+\begin{align}\label{sec3_2_mvt}
+  f(\xi) - f(x_k) = f'(c) (\xi - x_k)
+\end{align}
+Since \(0 \leq f''(x) \leq M\) for all \(x \in [a, b]\), \(f'\) is a monotonically increasing function on \([a, b]\), so (\ref{sec3_2_mvt}) can be written as
+\begin{align*}
+  -f(x_k) \geq f'(x_k) (\xi - x_k)
+\end{align*}
+as \(f'(x) \leq f'(x_k)\).
+Let \(l(x) = f'(x_k) (x - x_k) + f(x_k)\).
+Then we can write
+\begin{align*}
+  l(\xi) = f'(x_k) (\xi - x_k) + f(x_k) \leq -f(x_k) + f(x_k) = 0
+\end{align*}
+If \(l(\xi) = 0\), \(x_{k + 1} = \xi\) and \(x_{k + 1} < x_k\).
+If \(l(\xi) < 0\), since \(l(x)\) is continuous on \([\xi, x_k]\) intermediate value theorem tells us that there exists \(\alpha \in (\xi, x_k)\) such that \(l(\alpha) = 0\).
+Then, \(x_{k + 1} = \alpha\) and \(x_{k + 1} < x_k\) holds.
+Furthermore, \(\xi = \xi - f(\xi) / f'(\xi)\), so by induction \(x_n \in [\xi, b)\) implies \(x_{n + 1} \in [\xi, x_n)\) for all \(n = 1, 2, \dots\) and \(x_{n + 1} < x_n\).
+
+Since \(\{x_n\}\) is monotonically decreasing and bounded, it converges to some value \(L\) by monotone convergence theorem.
+If we take the limit of both sides of \(x_{n + 1} = x_n - f(x_n) / f'(x_n)\), we obtain \(L = L - f(L) / f'(L)\) and since \(L \in [\xi, x_1]\), \(f'(L) > 0\) so \(f(L) = 0\).
+By definition, \(\xi\) is the only point in \((a, b)\) at which \(f(\xi) = 0\), so \(L = \xi\) and we get the desired result.
+
+\subsection{Proof for (c)}
+By Taylor's theorem, there exists \(t_n\) between \(\xi\) and \(x_n\) such that
+\begin{align*}
+  f(\xi) = f(x_n) + f'(x_n) (\xi - x_n) + \frac{f''(t_n)}{2} (\xi - x_n)^2
+\end{align*}
+then we can write
+\begin{align*}
+  -\frac{f(x_n)}{f'(x_n)} &= \xi - x_n + \frac{f''(t_n)}{2f'(x_n)} (\xi - x_n)^2 \\
+  x_n -\frac{f(x_n)}{f'(x_n)} - \xi &= \frac{f''(t_n)}{2f'(x_n)} (\xi - x_n)^2 \\
+  x_{n + 1} - \xi &= \frac{f''(t_n)}{2f'(x_n)} (x_n - \xi)^2
+\end{align*}
+and we get the desired result.
+
+\subsection{Proof for (d)}
+As we have proved in (b), \(x_n \in [\xi, b)\) for all \(n = 1, 2, \dots\) so \(x_{n + 1} - \xi \geq 0\).
+Since \(f'(x) \geq \delta\) and \(f''(x) \leq M\) for all \(x \in [a, b]\), \(f''(t_n) / (2f'(x_n)) \leq M / (2\delta)\) for all \(n = 1, 2, \dots\).
+Thus, we can write
+\begin{align*}
+  x_{n + 1} - \xi \leq \frac{M}{2\delta} (x_n - \xi)^2 = A(x_n - \xi)^2
+\end{align*}
+Let \(y_n = x_n - \xi\), then \(y_{n + 1} \leq Ay_n^2 \leq A(Ay_{n - 1}^2)^2 \leq \dots \leq A \cdot A^2 \cdot \dots \cdot A^{2^{n - 1}} y_1^{2^n} = A^{2^n - 1} y_1^{2^n} = [A(x_1 - \xi)]^{2^n} / A\) and we get the desired result.
+
+\subsection{Proof for (e)}
+Since \(f'(x) > 0\) for all \(x \in [a, b]\), \(g(x) - x = 0\) if and only if \(f(x) = 0\) and \(\xi\) is the only point in \((a, b)\) at which \(f(\xi) = 0\), so \(\xi\) is the only fixed point of \(g(x)\) in \([a, b]\).
+Thus, Newton's method amounts to finding a fixed point of \(g\) in \([a, b]\).
+
+We can write
+\begin{align*}
+  g'(x) = 1 - \frac{(f'(x))^2 - f(x) f''(x)}{(f'(x))^2} = 1 - \left( 1 - \frac{f(x) f''(x)}{(f'(x))^2} \right) = \frac{f(x) f''(x)}{(f'(x))^2}
+\end{align*}
+so \(g'(x)\) tends to 0 as \(x\) approaches \(\xi\).
+
+\subsection{Solution for (f)}
+We can write
+\begin{align*}
+  x_{n + 1} = x_n - \frac{f(x_n)}{f'(x_n)} = x_n - \frac{x_n^{1/3}}{x_n^{-2/3}/3} = -2x_n
+\end{align*}
+so \(x_n = (-2)^{n - 1} x_1\) and \(\{x_n\}\) does not converge as it is not bounded.
+
+\section{Section 6 \#1}
+Since \(f\) is bounded on \([a, b]\) and discontinuous only on \(x_0\) and \(\alpha\) is continuous there, we can use theorem~6.10 and know that \(f \in \mathscr{R}(\alpha)\).
+
+Since \(f\) is zero except only one point, \(x_0\), for all partition \(P = \{p_0, \dots, p_n\}\) of \([a, b]\), \(m_i = \inf_{p_{i - 1} \leq x \leq p_i} f(x) = 0\) so \(L(P, f, \alpha) = \sum^n_{i = 1} m_i \Delta\alpha_i = 0\).
+Thus, \(\sup L(P, f, \alpha) = \underline{\int^b_a} f d\alpha = 0\).
+Since \(f \in \mathscr{R}(\alpha)\), \(\int^b_a f d\alpha = \underline{\int^b_a} f d\alpha = 0\).
+
+\section{Section 6 \#2}
+Suppose that \(f(\alpha) > 0\).
+Since \(\int^b_a f dx = 0\), \(\underline{\int^b_a} f dx = \sup L(P, f) = 0\).
+By definition, \(f(x) \geq 0\) so for all partition \(P = \{x_0, \dots, x_n\}\) of \([a, b]\), \(L(P, f) \geq 0\) as \(m_i = \inf_{x_{i - 1} \leq x \leq x_i} f(x) \geq 0\), which implies \(L(P, f) = \sum^n_{i = 1} m_i \Delta x_i \geq 0\).
+Then, since \(\sup L(P, f) = 0\), \(L(P, f) = 0\) for all partition \(P\) of \([a, b]\).
+Since \(f\) is continuous at \(\alpha\), there exists some \(\delta > 0\) such that \((\alpha - \delta, \alpha + \delta) \in [a, b]\) and \(|x - \alpha| < \delta\) implies \(|f(x) - f(\alpha)| < f(\alpha) / 2\).
+Then \(f(x) > f(\alpha) / 2\) for all \(x \in (\alpha - \delta, \alpha + \delta)\).
+Consider a partition \(P = \{a, \alpha - \delta / 2, \alpha + \delta / 2, b\}\).
+We can write
+\begin{align*}
+  L(P, f) \geq \delta \inf_{\alpha - \frac{\delta}{2} \leq x \leq \alpha + \frac{\delta}{2}} f(x) \geq \frac{\delta f(\alpha)}{2} > 0
+\end{align*}
+and it is a contradiction.
+
+\section{Section 6 \#3}
+\subsection{Proof for (a)}
+Suppose that \(f \in \mathscr{R}(\beta_1)\).
+Fix \(\epsilon > 0\).
+There exists some partition \(P = \{p_0, \dots, p_n\}\) of \([-1, 1]\) such that \(U(P, f, \beta_1) - L(P, f, \beta_1) < \epsilon\).
+Let \(P' = P \cup \{0\}\), then \(P'\) is a refinement of \(P\) so \(U(P, f, \beta_1) \geq U(P', f, \beta_1) \geq L(P', f, \beta_1) \geq L(P, f, \beta_1)\) and \(U(P', f, \beta_1) - L(P', f, \beta_1) < \epsilon\).
+Suppose that \(p_k \leq 0 < p_{k + 1}\), then
+\begin{align*}
+  L(P', f, \beta_1)
+  &= \sum^{k - 1}_{i = 0} (\beta_1(p_{i + 1}) - \beta_1(p_i)) \inf_{x \in [p_i, p_{i + 1}]} f(x) \\
+  &+ \sum^{n - 1}_{i = k + 1} (\beta_1(p_{i + 1}) - \beta_1(p_i)) \inf_{x \in [p_i, p_{i + 1}]} f(x) \\
+  &+ (\beta_1(0) - \beta_1(p_k)) \inf_{x \in [p_k, 0]} f(x)
+  + (\beta_1(p_{k + 1}) - \beta_1(0)) \inf_{x \in [0, p_{k + 1}]} f(x) \\
+  &= \inf_{x \in [0, p_{k + 1}]} f(x)
+\end{align*}
+and we can also write
+\begin{align*}
+  U(P', f, \beta_1)
+  &= \sum^{k - 1}_{i = 0} (\beta_1(p_{i + 1}) - \beta_1(p_i)) \sup_{x \in [p_i, p_{i + 1}]} f(x) \\
+  &+ \sum^{n - 1}_{i = k + 1} (\beta_1(p_{i + 1}) - \beta_1(p_i)) \sup_{x \in [p_i, p_{i + 1}]} f(x) \\
+  &+ (\beta_1(0) - \beta_1(p_k)) \sup_{x \in [p_k, 0]} f(x)
+  + (\beta_1(p_{k + 1}) - \beta_1(0)) \sup_{x \in [0, p_{k + 1}]} f(x) \\
+  &= \sup_{x \in [0, p_{k + 1}]} f(x) \\
+\end{align*}
+so
+\begin{align*}
+  U(P', f, \beta_1) - L(P', f, \beta_1)
+  = \sup_{x \in [0, p_{k + 1}]} f(x) - \inf_{x \in [0, p_{k + 1}]} f(x) < \epsilon
+\end{align*}
+From this, we know that \(0 < x < p_{k + 1}\) implies \(|f(x) - f(0)| < \epsilon\) so \(f(0+) = f(0)\).
+Also, we know that
+\begin{align*}
+  L(P, f, \beta_1) \leq L(P', f, \beta_1) \leq f(0) \leq U(P', f, \beta_1) \leq U(P, f, \beta_1)
+\end{align*}
+for all partition \(P\) of \([-1, 1]\) and \(P' = P \cup \{0\}\), so
+\begin{align*}
+  \underline{\int^1_{-1}} f d\beta_1 \leq f(0) \leq \overline{\int^1_{-1}} f d\beta_1
+\end{align*}
+and since \(f \in \mathscr{R}(\beta_1)\), \(\underline{\int^1_{-1}} f d\beta_1 = \overline{\int^1_{-1}} f d\beta_1 = \int^1_{-1} f d\beta_1 = f(0)\).
+
+Suppose that \(f(0+) = f(0)\).
+Fix \(\epsilon > 0\).
+There exists some \(\delta > 0\) such that \(0 < x < \delta\) implies \(|f(x) - f(0)| < \epsilon / 4\).
+Consider \(P = \{-1, 0, \delta / 2, 1\}\), a partition of \([-1, 1]\).
+Then we can write
+\begin{align*}
+  L(P, f, \beta_1) &= (\beta_1(0) - \beta_1(-1)) \inf_{x \in [-1, 0]} f(x) + (\beta_1(\delta / 2) - \beta_1(0)) \inf_{x \in [0, \delta / 2]} f(x) \\
+                   &+ (\beta_1(1) - \beta_1(\delta / 2)) \inf_{x \in [\delta / 2, 1]} f(x) \\
+                   &= (\beta_1(\delta / 2) - \beta_1(0)) \inf_{x \in [0, \delta / 2]} f(x) = \inf_{x \in [0, \delta / 2]} f(x) \\
+  U(P, f, \beta_1) &= (\beta_1(0) - \beta_1(-1)) \sup_{x \in [-1, 0]} f(x) + (\beta_1(\delta / 2) - \beta_1(0)) \sup_{x \in [0, \delta / 2]} f(x) \\
+                   &+ (\beta_1(1) - \beta_1(\delta / 2)) \sup_{x \in [\delta / 2, 1]} f(x) \\
+                   &= (\beta_1(\delta / 2) - \beta_1(0)) \sup_{x \in [0, \delta / 2]} f(x) = \sup_{x \in [0, \delta / 2]} f(x)
+\end{align*}
+and
+\begin{align*}
+  U(P, f, \beta_1) - L(P, f, \beta_1)
+  &= \sup_{x \in [0, \delta / 2]} f(x) - \inf_{x \in [0, \delta / 2]} f(x) \\
+  &\leq \left( f(0) + \frac{\epsilon}{4} \right) - \left( f(0) - \frac{\epsilon}{4} \right)
+  = \frac{\epsilon}{2}
+  < \epsilon
+\end{align*}
+Since the choice of \(\epsilon\) is arbitrary, we can conclude that \(f \in \mathscr{R}(\beta_1)\).
+
+\subsection{Proof for (b)}
+Let's prove that \(f \in \mathscr{R}(\beta_2)\) if and only if \(f(0-) = f(0)\).
+
+Suppose that \(f \in \mathscr{R}(\beta_2)\).
+Fix \(\epsilon > 0\).
+There exists some partition \(P = \{p_0, \dots, p_n\}\) of \([-1, 1]\) such that \(U(P, f, \beta_2) - L(P, f, \beta_2) < \epsilon\).
+Let \(P' = P \cup \{0\}\), then \(P'\) is a refinement of \(P\) so \(U(P, f, \beta_2) \geq U(P', f, \beta_2) \geq L(P', f, \beta_2) \geq L(P, f, \beta_2)\) and \(U(P', f, \beta_2) - L(P', f, \beta_2) < \epsilon\).
+Suppose that \(p_k < 0 \leq p_{k + 1}\), then
+\begin{align*}
+  L(P', f, \beta_2)
+  &= \sum^{k - 1}_{i = 0} (\beta_2(p_{i + 1}) - \beta_2(p_i)) \inf_{x \in [p_i, p_{i + 1}]} f(x) \\
+  &+ \sum^{n - 1}_{i = k + 1} (\beta_2(p_{i + 1}) - \beta_2(p_i)) \inf_{x \in [p_i, p_{i + 1}]} f(x) \\
+  &+ (\beta_2(0) - \beta_2(p_k)) \inf_{x \in [p_k, 0]} f(x)
+  + (\beta_2(p_{k + 1}) - \beta_2(0)) \inf_{x \in [0, p_{k + 1}]} f(x) \\
+  &= \inf_{x \in [p_k, 0]} f(x)
+\end{align*}
+and we can also write
+\begin{align*}
+  U(P', f, \beta_2)
+  &= \sum^{k - 1}_{i = 0} (\beta_2(p_{i + 1}) - \beta_2(p_i)) \sup_{x \in [p_i, p_{i + 1}]} f(x) \\
+  &+ \sum^{n - 1}_{i = k + 1} (\beta_2(p_{i + 1}) - \beta_2(p_i)) \sup_{x \in [p_i, p_{i + 1}]} f(x) \\
+  &+ (\beta_2(0) - \beta_2(p_k)) \sup_{x \in [p_k, 0]} f(x)
+  + (\beta_2(p_{k + 1}) - \beta_2(0)) \sup_{x \in [0, p_{k + 1}]} f(x) \\
+  &= \sup_{x \in [p_k, 0]} f(x)
+\end{align*}
+so
+\begin{align*}
+  U(P', f, \beta_2) - L(P', f, \beta_2)
+  = \sup_{x \in [p_k, 0]} f(x) - \inf_{x \in [p_k, 0]} f(x) < \epsilon
+\end{align*}
+From this, we know that \(p_k < x < 0\) implies \(|f(x) - f(0)| < \epsilon\) so \(f(0-) = f(0)\).
+Also, we know that
+\begin{align*}
+  L(P, f, \beta_2) \leq L(P', f, \beta_2) \leq f(0) \leq U(P', f, \beta_2) \leq U(P, f, \beta_2)
+\end{align*}
+for all partition \(P\) of \([-1, 1]\) and \(P' = P \cup \{0\}\), so
+\begin{align*}
+  \underline{\int^1_{-1}} f d\beta_2 \leq f(0) \leq \overline{\int^1_{-1}} f d\beta_2
+\end{align*}
+and since \(f \in \mathscr{R}(\beta_2)\), \(\underline{\int^1_{-1}} f d\beta_2 = \overline{\int^1_{-1}} f d\beta_2 = \int^1_{-1} f d\beta_2 = f(0)\).
+
+Suppose that \(f(0-) = f(0)\).
+Fix \(\epsilon > 0\).
+There exists some \(\delta > 0\) such that \(-\delta < x < 0\) implies \(|f(x) - f(0)| < \epsilon / 4\).
+Consider \(P = \{-1, -\delta / 2, 0, 1\}\), a partition of \([-1, 1]\).
+Then we can write
+\begin{align*}
+  L(P, f, \beta_2) &= (\beta_2(-\delta / 2) - \beta_2(-1)) \inf_{x \in [-1, -\delta / 2]} f(x) + (\beta_2(0) - \beta_2(-\delta / 2)) \inf_{x \in [-\delta / 2, 0]} f(x) \\
+                   &+ (\beta_2(1) - \beta_2(0)) \inf_{x \in [0, 1]} f(x) \\
+                   &= (\beta_2(0) - \beta_2(-\delta / 2)) \inf_{x \in [-\delta / 2, 0]} f(x) = \inf_{x \in [-\delta / 2, 0]} f(x) \\
+  U(P, f, \beta_2) &= (\beta_2(-\delta / 2) - \beta_2(-1)) \sup_{x \in [-1, -\delta / 2]} f(x) + (\beta_2(0) - \beta_2(-\delta / 2)) \sup_{x \in [-\delta / 2, 0]} f(x) \\
+                   &+ (\beta_2(1) - \beta_2(0)) \sup_{x \in [0, 1]} f(x) \\
+                   &= (\beta_2(0) - \beta_2(-\delta / 2)) \sup_{x \in [-\delta / 2, 0]} f(x) = \sup_{x \in [-\delta / 2, 0]} f(x) \\
+\end{align*}
+and
+\begin{align*}
+  U(P, f, \beta_2) - L(P, f, \beta_2)
+  &= \sup_{x \in [-\delta / 2, 0]} f(x) - \inf_{x \in [-\delta / 2, 0]} f(x) \\
+  &\leq \left( f(0) + \frac{\epsilon}{4} \right) - \left( f(0) - \frac{\epsilon}{4} \right)
+  = \frac{\epsilon}{2}
+  < \epsilon
+\end{align*}
+Since the choice of \(\epsilon\) is arbitrary, we can conclude that \(f \in \mathscr{R}(\beta_2)\).
+
+\subsection{Proof for (c)}
+Suppose that \(f \in \mathscr{R}(\beta_3)\).
+Fix \(\epsilon > 0\).
+There exists some partition \(P = \{p_0, \dots, p_{n - 1}\}\) of \([-1, 1]\) such that \(U(P, f, \beta_3) - L(P, f, \beta_3) < \epsilon / 2\).
+Let \(P' = P \cup \{0\} = \{p'_0, \dots, p'_n\}\), then \(P'\) is a refinement of \(P\) so \(U(P, f, \beta_3) \geq U(P', f, \beta_3) \geq L(P', f, \beta_3) \geq L(P, f, \beta_3)\) and \(U(P', f, \beta_3) - L(P', f, \beta_3) < \epsilon / 2\).
+Suppose that \(p'_k = 0\), then
+\begin{align*}
+  L(P', f, \beta_3)
+  &= \sum^{n - 1}_{i = 0} (\beta_3(p'_{i + 1}) - \beta_3(p'_i)) \inf_{x \in [p'_i, p'_{i + 1}]} f(x) \\
+  &= (\beta_3(0) - \beta_3(p'_{k - 1})) \inf_{x \in [p'_{k - 1}, 0]} f(x) + (\beta_3(p'_{k + 1}) - \beta_3(0)) \inf_{x \in [0, p'_{k + 1}]} f(x) \\
+  &= \frac{1}{2} \inf_{x \in [p'_{k - 1}, 0]} f(x) + \frac{1}{2} \inf_{x \in [0, p'_{k + 1}]} f(x)
+\end{align*}
+and we can also write
+\begin{align*}
+  U(P', f, \beta_3)
+  &= \sum^{n - 1}_{i = 0} (\beta_3(p'_{i + 1}) - \beta_3(p'_i)) \sup_{x \in [p'_i, p'_{i + 1}]} f(x) \\
+  &= (\beta_3(0) - \beta_3(p'_{k - 1})) \sup_{x \in [p'_{k - 1}, 0]} f(x) + (\beta_3(p'_{k + 1}) - \beta_3(0)) \sup_{x \in [0, p'_{k + 1}]} f(x) \\
+  &= \frac{1}{2} \sup_{x \in [p'_{k - 1}, 0]} f(x) + \frac{1}{2} \sup_{x \in [0, p'_{k + 1}]} f(x)
+\end{align*}
+so
+\begin{align*}
+  U(P', f, \beta_3) - L(P', f, \beta_3)
+  &= \frac{1}{2} \left( \sup_{x \in [p'_{k - 1}, 0]} f(x) - \inf_{x \in [p'_{k - 1}, 0]} f(x) \right) \\
+  &+ \frac{1}{2} \left( \sup_{x \in [0, p'_{k + 1}]} f(x) - \inf_{x \in [0, p'_{k + 1}]} f(x) \right) < \epsilon / 2
+\end{align*}
+then we can write
+\begin{align*}
+  \sup_{x \in [p'_{k - 1}, 0]} f(x) - \inf_{x \in [p'_{k - 1}, 0]} f(x) &< \epsilon \\
+  \sup_{x \in [0, p'_{k + 1}]} f(x) - \inf_{x \in [0, p'_{k + 1}]} f(x) &< \epsilon
+\end{align*}
+We can take \(\delta = \min \{|p'_{k - 1}|, |p'_{k + 1}|\}\) then \(0 < |x| < \delta\) implies \(|f(x) - f(0)| < \epsilon\) so \(\lim_{x \to 0} f(x) = f(0)\) and \(f\) is continuous at \(x = 0\).
+
+Suppose that \(f\) is continuous at \(x = 0\).
+Fix \(\epsilon > 0\).
+There exists some \(\delta > 0\) such that \(|x| < \delta\) implies \(|f(x) - f(0)| < \epsilon / 4\).
+Consider \(P = \{-1, -\delta / 2, 0, \delta / 2, 1\}\), a partition of \([-1, 1]\).
+Then we can write
+\begin{align*}
+  L(P, f, \beta_3) &= (\beta_3(-\delta / 2) - \beta_3(-1)) \inf_{x \in [-1, -\delta / 2]} f(x) + (\beta_3(0) - \beta_3(-\delta / 2)) \inf_{x \in [-\delta / 2, 0]} f(x) \\
+                   &+ (\beta_3(\delta / 2) - \beta_3(0)) \inf_{x \in [0, \delta / 2]} f(x) + (\beta_3(1) - \beta_3(\delta / 2)) \inf_{x \in [\delta / 2, 1]} f(x) \\
+                   &= \frac{1}{2} \inf_{x \in [-\delta / 2, 0]} f(x) + \frac{1}{2} \inf_{x \in [0, \delta / 2]} f(x) \\
+  U(P, f, \beta_3) &= (\beta_3(-\delta / 2) - \beta_3(-1)) \sup_{x \in [-1, -\delta / 2]} f(x) + (\beta_3(0) - \beta_3(-\delta / 2)) \sup_{x \in [-\delta / 2, 0]} f(x) \\
+                   &+ (\beta_3(\delta / 2) - \beta_3(0)) \sup_{x \in [0, \delta / 2]} f(x) + (\beta_3(1) - \beta_3(\delta / 2)) \sup_{x \in [\delta / 2, 1]} f(x) \\
+                   &= \frac{1}{2} \sup_{x \in [-\delta / 2, 0]} f(x) + \frac{1}{2} \sup_{x \in [0, \delta / 2]} f(x) \\
+\end{align*}
+and
+\begin{align*}
+  U(P, f, \beta_3) - L(P, f, \beta_3)
+  &= \frac{1}{2} \left( \sup_{x \in [-\delta / 2, 0]} f(x) - \inf_{x \in [-\delta / 2, 0]} f(x) \right) \\
+  &+ \frac{1}{2} \left( \sup_{x \in [0, \delta / 2]} f(x) - \inf_{x \in [0, \delta / 2]} f(x) \right) \\
+  &\leq 2 \cdot \frac{1}{2} \left[ \left( f(0) + \frac{\epsilon}{4} \right) - \left( f(0) - \frac{\epsilon}{4} \right) \right]
+  = \frac{\epsilon}{2}
+  < \epsilon
+\end{align*}
+Since the choice of \(\epsilon\) is arbitrary, we can conclude that \(f \in \mathscr{R}(\beta_3)\).
+
+\subsection{Proof for (d)}
+Since \(f\) is continuous at \(x = 0\), \(f(0-) = f(0) = f(0+)\) so by the result we have proven earlier,
+\begin{align*}
+  \int f d\beta_2 = f(0)
+\end{align*}
+Fix \(\epsilon > 0\).
+\(f \in \mathscr{R}(\beta_3)\) implies that there exists some partition \(P = \{p_0, \dots, p_{n - 1}\}\) of \([-1, 1]\) such that \(U(P, f, \beta_3) - L(P, f, \beta_3) < \epsilon / 2\). Let \(P' = P \cup \{0\} = \{p'_0, \dots, p'_n\}\) then \(P'\) is a refinement of \(P\) so \(U(P, f, \beta_3) \geq U(P', f, \beta_3) \geq L(P', f, \beta_3) \geq L(P, f, \beta_3)\) and \(U(P', f, \beta_3) - L(P', f, \beta_3) < \epsilon / 2\).
+From the proof for (c), we know that
+\begin{align*}
+  L(P, f, \beta_3) \leq L(P', f, \beta_3) \leq f(0) \leq U(P', f, \beta_3) \leq U(P, f, \beta_3)
+\end{align*}
+for all partition \(P\) of \([-1, 1]\) and \(P' = P \cup \{0\}\), so
+\begin{align*}
+  \underline{\int^1_{-1}} f d\beta_3 \leq f(0) \leq \overline{\int^1_{-1}} f d\beta_3
+\end{align*}
+and since \(f \in \mathscr{R}(\beta_3)\), \(\underline{\int^1_{-1}} f d\beta_3 = \overline{\int^1_{-1}} f d\beta_3 = \int^1_{-1} f d\beta_3 = f(0)\) and we get the desired result.
+
+\end{document}
